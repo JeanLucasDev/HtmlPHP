@@ -62,14 +62,14 @@
                         <img src="img/escola.png" width="100%" height=""alt="">
                     </div>
                     <div class="col-md-6">
-                        <div action= "listarEscola" class="text_informacao">
-                            <p>Nome: <?php echo $_SESSION["login"];?></p>
-                            <p>Email: </p>
-                            <p>Telefone: ?></p>
-                            <p>Localização:</p>
+                        <div class="text_informacao">
+                                <p>Nome: <?php $_SESSION['login'] ?></p>
+                                <p>Email: <?php $_SESSION['email'] ?> </p>
+                                <p>Telefone: <?php $_SESSION['phone'] ?></p>
+                                <p>Localização:</p>
                         </div>
                         <a href="editar_escola.php" style="color:#e1e1e1;font-size:1.5rem">Editar cadastro da escola</a>
-                    </div>                            
+                    </div>                      
                 </div>
             </div>
         </section>

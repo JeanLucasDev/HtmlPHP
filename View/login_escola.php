@@ -19,11 +19,12 @@
 </head>
 <body>
   <main>
-    <form name="login_escola" method="post" class="form-validation" action="loginEscola">
+    <form name="login_aluno" method="post" class="form-validation" action="loginUsuario">
       <p class="text-center"><a href="index.php"><img src="img/logo_menu.png" alt="" style="height: 100%; width: 100%; max-width: 200px; max-height: 200px; margin-left: auto; margin-right: auto;"></a></p>
       <h2 style="text-align: center;">
         Login Escola
       </h2>
+      <input id="type" name="type" type="hidden"  value="E" required/>
       <div class="input">
         <input id="login" name="name" type="text" data-rules="required" required/>
         <label for="login">Login</label>

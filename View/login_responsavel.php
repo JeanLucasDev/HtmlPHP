@@ -20,11 +20,12 @@
 </head>
 <body>
   <main>
-    <form name="login_responsavel" method="post" class="form-validation" action="loginResponsavel">
+    <form name="login_Usuario" method="post" class="form-validation" action="loginUsuario">
       <p class="text-center"><a href="index.php"><img src="img/logo_menu.png" alt="" style="height: 100%; width: 100%; max-width: 200px; max-height: 200px; margin-left: auto; margin-right: auto;"></a></p>
       <h2 style="text-align: center;">
         Login responsavel
       </h2>
+      <input id="type" name="type" type="hidden"  value="R" required/>
       <div class="input">
         <input id="name" name="name" type="text" data-rules="required" required/>
         <label for="name">Login</label>

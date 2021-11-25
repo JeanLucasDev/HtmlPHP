@@ -1,12 +1,16 @@
 <?php
-
+require "classUsuarioDAO.php";
 class classUsuario{
+    private $id;
     private $login;
     private $password;
     private $phone;
     private $email;
     private $type;
 
+    public function getId(){
+        return $this->id;
+    }
     public function getLogin(){
         return $this->login;
     }
@@ -23,6 +27,10 @@ class classUsuario{
 
     public function getType(){
         return $this->type;
+    }
+
+    public function setId($id){
+        $this->id = $id;
     }
 
     public function setLogin($login){
@@ -45,8 +53,11 @@ class classUsuario{
         $this->type = $type;
     }
 
-    
-
+    // Function DAO
+    public function loginUsuario(){
+        $UsuarioDAO = new classUsuarioDAO();
+        $UsuarioDAO->loginUsuario($this);
+    }
 }
 
 ?>

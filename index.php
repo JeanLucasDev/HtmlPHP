@@ -9,16 +9,20 @@
                 $controlador = new ControladorNovaEscola();
                 $controlador->processaRequisicao();
                 break;
-            case "VIEW/LOGINESCOLA":
-                require "Controller/ControladorLoginEscola.php";    
-                $controlador = new ControladorLoginEscola();
-                $controlador->processaRequisicao();
-                break;
             case "LISTARESCOLA":
                 require "Controller/ControladorListarEscola.php";
                 $controlador = new ControladorListarEscola();
                 $controlador->processaRequisicao();
                 break;
+
+            case "ADDITEMCARRINHO":
+				require "Controller/ControladorAddItemCarrinho.php";
+				require_once 'Model/EscolaSession.php';
+				$EscolaSession = new EscolaSession();
+				$controlador = new ControladorAddItemCarrinho($EscolaSession);
+				$controlador->processaRequisicao();
+				break;
+
             case "ADDFUNCIONARIOESCOLA":
 				require "Controller/ControladorAddFuncionarioEscola.php";
 				require_once 'Model/EscolaSession.php';
@@ -31,9 +35,9 @@
                 $controlador = new ControladorNovoAluno();
                 $controlador->processaRequisicao();
                 break;
-            case "VIEW/LOGINALUNO":
-                require "Controller/ControladorLoginAluno.php";    
-                $controlador = new ControladorLoginAluno();
+            case "VIEW/LOGINUSUARIO":
+                require "Controller/ControladorLogin.php";    
+                $controlador = new ControladorLogin();
                 $controlador->processaRequisicao();
                 break;
             case "VIEW/INCLUIRFUNCIONARIO":
@@ -41,19 +45,9 @@
                 $controlador = new ControladorNovoFuncionario();
                 $controlador->processaRequisicao();
                 break;
-            case "VIEW/LOGINFUNCIONARIO":
-                require "Controller/ControladorLoginFuncionario.php";    
-                $controlador = new ControladorLoginFuncionario();
-                $controlador->processaRequisicao();
-                break;
             case "VIEW/INCLUIRRESPONSAVEL":
                 require "Controller/ControladorNovoResponsavel.php";    
                 $controlador = new ControladorNovoResponsavel();
-                $controlador->processaRequisicao();
-                break;   
-            case "VIEW/LOGINRESPONSAVEL":
-                require "Controller/ControladorLoginResponsavel.php";    
-                $controlador = new ControladorLoginResponsavel();
                 $controlador->processaRequisicao();
                 break;   
             default:
