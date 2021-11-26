@@ -1,30 +1,32 @@
 <?php
-require "Conexao.php";
+require_once "Conexao.php";
 class classFuncionarioDAO{
-    public function listarTodos(){
+    public function listarFuncionarios(){
         //vai ao banco de dados e pega todos os livros
         try{
             $minhaConexao = Conexao::getConexao();
-            $sql = $minhaConexao->prepare("select * from bd_cantinaon.school ");
-        
-
-           $sql->execute();
-           $result = $sql->setFetchMode(PDO::FETCH_ASSOC);
-           
-           $listaSch=array();
-           $i=0;
-
-           while ($linha = $sql->fetch(PDO::FETCH_ASSOC)) {
-            $escola = new classEscola();
-            $escola->setCodigo($linha['codigo']);
-            $escola->setTitulo($linha['nome']);
-            $escola->setEdicao($linha['edicao']);
-            $escola->setAno($linha['ano']);
-            $listaLiv[$i] = $livro;
-            $i++;
-          }
-        return $listaLiv;
-       }
+            $sql = $minhaConexao->prepare("select employee.id, user.login, user.email, user.phone, employee.cpf FROM bd_cantinaon.employee INNER JOIN bd_cantinaon.user INNER JOIN bd_cantinaon.school on (school.idUser=:idUser) and (user.type=:type);");
+            $sql->bindParam("idUser",$idUser);
+            $sql->bindParam("type",$type);
+            $idUser = $_SESSION['id']; 
+            $type = 'F';
+            $sql->execute();
+            $result = $sql->setFetchMode(PDO::FETCH_ASSOC);
+            $listaFun=array();
+            $i=0;
+            while ($linha = $sql->fetch(PDO::FETCH_ASSOC) ) {
+                echo("entrou no loop");
+                $fun = new classFuncionario();
+                $fun->setId($linha['id']);
+                $fun->setLogin($linha['login']);
+                $fun->setEmail($linha['email']);
+                $fun->setPhone($linha['phone']);
+                $fun->setcpf($linha['cpf']);
+                $listaFun[$i] = $fun;
+                $i++;
+             }
+            return $listaFun;
+        }
        catch(PDOException $e){
         return array();
        }
@@ -79,6 +81,19 @@ class classFuncionarioDAO{
                 $type = 'F';
                 $sql->execute();
                 $last_id = $minhaConexao->lastInsertId();
+                $sql = $minhaConexao->prepare("select * from bd_cantinaon.school where idUser =:idUser ");
+                $sql->bindParam("idUser",$idUser);
+                $idUser = $_SESSION['id'];
+                $sql->execute();
+                $idSchool = $sql->fetch();
+                $sql2 = $minhaConexao->prepare("insert into bd_cantinaon.employee (cpf, idUser, idSchool) values (:cpf, :idUser, :idSchool)");
+                $sql2->bindParam("cpf",$cpf);
+                $sql2->bindParam("idUser",$idUser);
+                $sql2->bindParam("idSchool",$School);
+                $School = $idSchool['id'];
+                $idUser = $last_id;
+                $cpf = $fun->getcpf();
+                $sql2->execute();
                 return $last_id;
             }
          }
@@ -88,47 +103,35 @@ class classFuncionarioDAO{
          }
      }
 
-     public function loginFuncionario($fun){
+     public function editarFuncionario($fun){
         try{
             $minhaConexao = Conexao::getConexao();
-            $sql = $minhaConexao->prepare("select * from bd_cantinaon.user where login =:login and password =:password and type =:type ");
+            $sql = $minhaConexao->prepare("select * FROM bd_cantinaon.employee where employee.id=:id;");
+            $sql->bindParam("id",$id);
+            $id = $fun->getId();
+            $sql->execute(); 
+            while($user = $sql->fetch()){
+                echo "totototoott";
+                $idUser = $user['idUser'];
+            }
+            $sql = $minhaConexao->prepare("update bd_cantinaon.user INNER JOIN bd_cantinaon.employee ON user.id=idUser SET login=:login, email=:email, password=:password, phone=:phone, cpf=:cpf where employee.idUser=:idUser;
+            update bd_cantinaon.employee set cpf=:cpf where id=:id");
+            echo $idUser;
             $sql->bindParam("login",$login);
+            $sql->bindParam("email",$email);
             $sql->bindParam("password",$password);
-            $sql->bindParam("type",$type);
+            $sql->bindParam("phone",$phone);
+            $sql->bindParam("cpf",$cpf);
+            $sql->bindParam("idUser",$idUser);
+            $sql->bindParam("id",$id);
+            $sql->bindParam("Type",$Type);
+            $Type = 'F';
+            $id = $fun->getId();
             $login = $fun->getLogin();
+            $email = $fun->getEmail();
             $password = $fun->getPassword();
-            $type = 'F';
-            $sql->execute();
-            $res = $sql->rowcount();
-            if($res > 0){
-                $_SESSION['login'] = $login;
-                $_SESSION['password'] = $password;
-                header('location:tela_funcionario_principal.php');
-            }
-            else{
-                unset ($_SESSION['login']);
-                unset ($_SESSION['password']);
-                header('location:login.php');
-            }
-        }
-        catch(PDOException $e){
-          return 0;
-        }
- 
-    }
-
-    public function alterarLivro($liv){
-        try{
-            $minhaConexao = Conexao::getConexao();
-            $sql = $minhaConexao->prepare("update bd_livraria.livro set nome=:nome, edicao=:edicao, ano=:ano where codigo=:codigo");
-            $sql->bindParam("codigo",$codigo);
-            $sql->bindParam("nome",$nome);
-            $sql->bindParam("edicao",$edicao);
-            $sql->bindParam("ano",$ano);
-            $codigo = $liv->getCodigo();
-            $nome = $liv->getTitulo();
-            $edicao = $liv->getEdicao();
-            $ano = $liv->getAno();
+            $phone = $fun->getPhone();
+            $cpf = $fun->getcpf();
             $sql->execute();
             
          }
@@ -137,6 +140,7 @@ class classFuncionarioDAO{
             
          }
      }
+
 
     public function excluirLivro($liv){
         try{

@@ -1,3 +1,17 @@
+<?php
+session_start();
+if($_SESSION['logged'] == false || $_SESSION['type'] != 'E'){
+    header('Location: Restrict');
+}
+else{
+    if (isset($_GET['logout']) && $_GET['logout'] == 1){
+        $_SESSION = array();
+        $_SESSION['logged'] = false;
+        session_destroy();
+        header('Location: index.php');
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -22,6 +36,9 @@
         <h2 style="text-align: center;">
            Cadastro funcionario
         </h2>
+      <div class="input">
+        <input type="hidden" name="id" value= <?php echo $_SESSION['id'];?> required>
+      </div>
       <div class="input">
         <input id="name" name="name" type="text" data-rules="required" required/>
         <label for="name">Nome</label>

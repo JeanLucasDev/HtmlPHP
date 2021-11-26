@@ -1,3 +1,8 @@
+<?php
+if($_SESSION['logged'] == false || $_SESSION['type'] != 'E'){
+    header('Location: Restrict');
+}
+?>
 <!doctype html>
 <html lang="pt-br">
 
@@ -28,8 +33,8 @@
             <ul>
                 <li><a href="tela_escola_principal.php">Inicio</a></li>
                 <li><a href="tela_escola_principal.php">Informações</a></li>
-                <li><a href="tela_escola_funcionario.php">Meus funcionarios</a></li>
-                <li><a href="login.php">Sair</a>
+                <li><a href="listarFuncionarios">Meus funcionarios</a></li>
+                <li><a href="logout" >Sair</a>
             </ul>
         </div>
         <div class="menu_mobile">
@@ -42,8 +47,8 @@
                 <ul>
                     <li><a href="tela_escola_principal.php">Inicio</a></li>
                     <li><a href="tela_escola_principal.php">Informações</a></li>
-                    <li><a href="tela_escola_funcionario.php">Meus funcionarios</a></li>
-                    <li><a href="login.php">Sair</a>     
+                    <li><a href="listarFuncionarios">Meus funcionarios</a></li>
+                    <li><a href="logout" >Sair</a>    
                     </li>
                 </ul>
             </div>
@@ -63,40 +68,31 @@
                 </tr>
                 </thead>
                 <tbody>
-                <?php for($i=0;$i<count($listaFuncionarios);$i++){ ?>
-                    <tr>
+                    <?php for($i=0;$i<count($listaFuncionarios);$i++){ ?>
+                    <td>   
                         <div class="container">
                         <div class="row" style="margin:10vh 0;">
                             <div class="col-md-3">
                                 <div class="card" style="width:18rem;">
                                 <img src="img/Funcionario.png" class="card-img-top" alt="...">
                                     <div class="card-body">
-                                        <h5 class="card-title">Nome</h5>
-                                        <h6 class="card-subtitle mb-2 text-muted ">CPF: </h6>
+                                        <h5 class="card-title"><?php echo $listaFuncionarios[$i]->getLogin(); ?></h5>
+                                        <h6 class="card-subtitle mb-2 text-muted ">CPF: <?php echo $listaFuncionarios[$i]->getcpf(); ?></h6>
                                         <p class="card-text">
-                                            <p>Email:</p>
-                                            <p>Telefone:</p>
+                                            <p>Email:<?php echo $listaFuncionarios[$i]->getEmail(); ?></p>
+                                            <p>Telefone:<?php echo $listaFuncionarios[$i]->getPhone(); ?></p>
                                         </p>
-                                        <form action="">
-                                            <button class="btn btn-light" formaction="editar_funcionario.php">Editar</button>
+                                        <form method="post" action="editarFuncionario">
+                                            <input type="hidden" name="id" value= <?php echo $listaFuncionarios[$i]->getId();?>>
+                                            <button type="submit" class="btn btn-light" formaction="editar_funcionario.php">Editar</button>
                                         </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         </div>
-                    <td><?php echo $listaFuncionarios[$i]->getLogin(); ?></td>
-                    <td><?php echo $listaFuncionarios[$i]->getcpf(); ?></td>
-                    <td><?php echo $listaFuncionarios[$i]->getEmail(); ?></td>
-                    <td><?php echo $listaFuncionarios[$i]->getEmail(); ?></td>
-                    <td>
-                    <form method="post" action="AddFuncionarioEscola" >
-                        <input type="hidden" name="id" value="<?php echo $listaFuncionarios[$i]->getCodigo();?>">
-                        <input type="submit" class="btn btn-primary btn-sm" value= "Add funcionario">
-                    </form>
-                    </td>
-                    </tr>   
-                <?php } ?>
+                    </td> 
+                    <?php } ?>
                 </tbody>
             </table>
                 <div class="row">

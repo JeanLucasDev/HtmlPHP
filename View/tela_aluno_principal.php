@@ -1,3 +1,18 @@
+<?php
+session_start();
+if($_SESSION['logged'] == false || $_SESSION['type'] != 'A'){
+    header('Location: Restrict');
+}
+else{
+    if (isset($_GET['logout']) && $_GET['logout'] == 1){
+        $_SESSION = array();
+        $_SESSIONG['logged'] = false;
+        session_destroy();
+        header('Location: index.php');
+    }
+}
+?>
+
 <!doctype html>
 <html lang="pt-br">
   <head>
@@ -29,7 +44,7 @@
                 <li><a href="tela_aluno_loja.php">Loja</a></li>
                 <li><a href="tela_aluno_historico.php">Historicos</a></li>
                 <li><a href="tela_aluno_carrinho.php"><i class="fas fa-shopping-cart"></i></a></li>
-                <li><a href="login.php">Sair</a></li>
+                <li><a href="logout" >Sair</a>
             </ul>
         </div>
         <div class="menu_mobile">
@@ -45,7 +60,7 @@
                     <li><a href="tela_aluno_loja.php">Loja</a></li>
                     <li><a href="tela_aluno_historico.php">Historicos</a></li>
                     <li><a href="tela_aluno_carrinho.php"><i class="fas fa-shopping-cart"></i></a></li>
-                    <li><a href="login.php">Sair</a></li>
+                    <li><a href="logout" >Sair</a>
                 </ul>
             </div>
         </div>
@@ -62,12 +77,12 @@
                     </div>
                     <div class="col-md-6">
                         <div class="text_informacao">
-                            <p>Nome:</p>
+                            <p>Nome: <?php echo $_SESSION['login'] ?></p>
                             <p>Saldo: R$ 0.00</p>
                             <p>N° Matricula: </p>
                             <p>Turno: </p>
-                            <p>Email: </p>
-                            <p>Telefone: </p>
+                            <p>Email: <?php echo $_SESSION['type'] ?></p>
+                            <p>Telefone: <?php echo $_SESSION['phone'] ?></p>
                             <h4 class="text-center" style="margin-top:2vh;">Escola filiada</h4>
                             <p>Nome: </p>
                             <p>Email: </p>

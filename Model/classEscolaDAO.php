@@ -64,22 +64,26 @@ class classEscolaDAO{
             }
             else{
                 $minhaConexao = Conexao::getConexao();
-                $sql = $minhaConexao->prepare("insert into bd_cantinaon.user (email, password, login, phone, type) values (:email, :password, :login, :phone, :type);
-                insert into bd_cantinaon.school (location) values (:location)" );
+                $sql = $minhaConexao->prepare("insert into bd_cantinaon.user (email, password, login, phone, type) values (:email, :password, :login, :phone, :type)");
                 $sql->bindParam("email",$email);
                 $sql->bindParam("password",$password);
                 $sql->bindParam("login",$login);
                 $sql->bindParam("phone",$phone);
-                $sql->bindParam("location",$location);
                 $sql->bindParam("type",$type);
                 $email = $sch->getEmail();
                 $login = $sch->getLogin();
                 $password = $sch->getPassword();
                 $phone = $sch->getPhone(); 
-                $location = $sch->getendereco();
                 $type = 'E';
                 $sql->execute();
                 $last_id = $minhaConexao->lastInsertId();
+                $sql2 = $minhaConexao->prepare("insert into bd_cantinaon.school (location, idUser) values (:location, :idUser)");
+                $sql2->bindParam("location",$location);
+                $sql2->bindParam("idUser",$idUser);
+                $location = $sch->getendereco();
+                $idUser = $last_id;
+                echo "aqui".$last_id;
+                $sql2->execute();
                 return $last_id;
             }          
         }
@@ -89,56 +93,36 @@ class classEscolaDAO{
         }
     }
 
-    public function alterarLivro($liv){
+
+     public function editarEscola($sch){
         try{
             $minhaConexao = Conexao::getConexao();
-            $sql = $minhaConexao->prepare("update bd_cantinaon.user set login=:login, password=:password, ano=:ano where codigo=:codigo");
-            $sql->bindParam("codigo",$codigo);
-            $sql->bindParam("nome",$nome);
-            $sql->bindParam("edicao",$edicao);
-            $sql->bindParam("ano",$ano);
-            $codigo = $liv->getCodigo();
-            $nome = $liv->getTitulo();
-            $edicao = $liv->getEdicao();
-            $ano = $liv->getAno();
+            $sql = $minhaConexao->prepare("update bd_cantinaon.user set login=:login, email=:email,  password=:password, phone=:phone where id=:id;
+            update bd_cantinaon.school set location=:location where idUser=:id");
+            $sql->bindParam("login",$login);
+            $sql->bindParam("email",$email);
+            $sql->bindParam("password",$password);
+            $sql->bindParam("phone",$phone);
+            $sql->bindParam("location",$location);
+            $sql->bindParam("id",$id);
+            $id = $_SESSION['id'];
+            $login = $sch->getLogin();
+            $email = $sch->getEmail();
+            $password = $sch->getPassword();
+            $phone = $sch->getPhone();
+            $location = $sch->getendereco();
             $sql->execute();
-               
+            $_SESSION['login'] = $login;
+            $_SESSION['email'] = $email;
+            $_SESSION['phone'] = $phone;
+            $_SESSION['password'] = $password;
+            $_SESSION['location'] = $location;
          }
          catch(PDOException $e){
              echo "entrou no catch".$e->getmessage();
             
          }
      }
-
-    public function loginEscola($sch){
-        try{
-            $minhaConexao = Conexao::getConexao();
-            $sql = $minhaConexao->prepare("select * from bd_cantinaon.user where login =:login and password =:password and type =:type ");
-            $sql->bindParam("login",$login);
-            $sql->bindParam("password",$password);
-            $sql->bindParam("type",$type);
-            $login = $sch->getLogin();
-            $password = $sch->getPassword();
-            $type = 'E';
-            $sql->execute();
-            $res = $sql->rowcount();
-            if($res > 0){
-                $_SESSION['login'] = $login;
-                $_SESSION['password'] = $password;
-                header('location:tela_escola_principal.php');
-            }
-            else{
-                unset ($_SESSION['login']);
-                unset ($_SESSION['password']);
-                header('location:login.php');
-            }
-        }
-        catch(PDOException $e){
-          return 0;
-        }
- 
-    }
-
 
 
     public function excluirLivro($liv){

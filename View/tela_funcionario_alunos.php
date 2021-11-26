@@ -1,3 +1,17 @@
+<?php
+session_start();
+if($_SESSION['logged'] == false || $_SESSION['type'] != 'F'){
+    header('Location: Restrict');
+}
+else{
+    if (isset($_GET['logout']) && $_GET['logout'] == 1){
+        $_SESSION = array();
+        $_SESSIONG['logged'] = false;
+        session_destroy();
+        header('Location: index.php');
+    }
+}
+?>
 <!doctype html>
 <html lang="pt-br">
 
@@ -31,7 +45,7 @@
                 <li><a href="tela_funcionario_produtos.php">Produtos</a></li>
                 <li><a href="tela_funcionario_responsaveis.php">Responsaveis</a></li>
                 <li><a href="tela_funcionario_alunos.php">Aluno</a></li>
-                <li><a href="login.php">Sair</a></li>
+                <li><a href="logout" >Sair</a>
             </ul>
         </div>
         <div class="menu_mobile">
@@ -47,7 +61,7 @@
                     <li><a href="tela_funcionario_produtos.php">Produtos</a></li>
                     <li><a href="tela_funcionario_responsaveis.php">Responsaveis</a></li>
                     <li><a href="tela_funcionario_alunos.php">Aluno</a></li>
-                    <li><a href="login.php">Sair</a></li>
+                    <li><a href="logout" >Sair</a>
                 </ul>
             </div>
         </div>

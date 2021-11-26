@@ -1,5 +1,8 @@
 <?php
-  session_start();
+session_start();
+if($_SESSION['logged'] == false || $_SESSION['type'] != 'E'){
+    header('Location: Restrict');
+}
 ?>
 <!doctype html>
 <html lang="pt-br">
@@ -21,7 +24,6 @@
     
   </head>
   <body style="background: #101010;">
-     
      <header>
         <div class="menu_desktop">
             <a href="tela_escola_principal.php">
@@ -30,9 +32,8 @@
             <ul>
                 <li><a href="tela_escola_principal.php">Inicio</a></li>
                 <li><a href="tela_escola_principal.php">Informações</a></li>
-                <li><a href="tela_escola_funcionario.php">Meus funcionarios</a></li>
-                <li><a href="login.php" action="logout">Sair</a>
-            
+                <li><a href="listarFuncionarios">Meus funcionarios</a></li>
+                <li><a href="logout" >Sair</a>
             </ul>
         </div>
         <div class="menu_mobile">
@@ -45,8 +46,8 @@
                 <ul>
                     <li><a href="tela_escola_principal.php">Inicio</a></li>
                     <li><a href="tela_escola_principal.php">Informações</a></li>
-                    <li><a href="tela_escola_funcionario.php">Meus funcionarios</a></li>
-                    <li><a href="login.php" action="logout">Sair</a></li>
+                    <li><a href="tela_escola_funcionario">Meus funcionarios</a></li>
+                    <li><a href="logout" >Sair</a>
                 </ul>
             </div>
         </div>
@@ -63,10 +64,10 @@
                     </div>
                     <div class="col-md-6">
                         <div class="text_informacao">
-                                <p>Nome: <?php $_SESSION['login'] ?></p>
-                                <p>Email: <?php $_SESSION['email'] ?> </p>
-                                <p>Telefone: <?php $_SESSION['phone'] ?></p>
-                                <p>Localização:</p>
+                            <p>Nome: <?php echo $_SESSION['login'] ?></p>
+                            <p>Email: <?php echo $_SESSION['email'] ?> </p>
+                            <p>Telefone: <?php echo $_SESSION['phone']?></p>
+                            <p>Localização: <?php echo $_SESSION['location']?></p>
                         </div>
                         <a href="editar_escola.php" style="color:#e1e1e1;font-size:1.5rem">Editar cadastro da escola</a>
                     </div>                      

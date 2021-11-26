@@ -1,3 +1,9 @@
+<?php
+session_start();
+if($_SESSION['logged'] == false || $_SESSION['type'] != 'R'){
+    header('Location: Restrict');
+}
+?>
 <!doctype html>
 <html lang="pt-br">
 
@@ -29,7 +35,7 @@
                 <li><a href="tela_responsavel_principal.php">Informações</a></li>
                 <li><a href="tela_responsavel_meus_filhos.php">Filhos</a></li>
                 <li><a href="tela_responsavel_historico.php">Historicos</a></li>
-                <li><a href="login.php">Sair</a></li>
+                <li><a href="logout" >Sair</a>
             </ul>
         </div>
         <div class="menu_mobile">
@@ -44,7 +50,7 @@
                     <li><a href="tela_responsavel_principal.php">Informações</a></li>
                     <li><a href="tela_responsavel_meus_filhos.php">Filhos</a></li>
                     <li><a href="tela_responsavel_historico.php">Historicos</a></li>
-                    <li><a href="login.php">Sair</a></li>
+                    <li><a href="logout" >Sair</a>
                 </ul>
             </div>
         </div>

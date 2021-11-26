@@ -32,6 +32,16 @@ class classFuncionario extends classUsuario{
         $FuncionarioDAO->loginFuncionario($this);
     }
 
+    public function editarFuncionario(){
+        $FuncionarioDAO = new classFuncionarioDAO();
+        $FuncionarioDAO->editarFuncionario($this);
+    }
+
+    public function listarFuncionarios(){
+        $FuncionarioDAO = new classFuncionarioDAO();
+        return $FuncionarioDAO->listarFuncionarios();
+    }
+
 
 
 }

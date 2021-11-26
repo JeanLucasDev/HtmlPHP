@@ -1,3 +1,17 @@
+<?php
+session_start();
+if($_SESSION['logged'] == false || $_SESSION['type'] != 'E'){
+    header('Location: Restrict');
+}
+else{
+    if (isset($_GET['logout']) && $_GET['logout'] == 1){
+        $_SESSION = array();
+        $_SESSIONG['logged'] = false;
+        session_destroy();
+        header('Location: index.php');
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -17,31 +31,30 @@
 
 <body>
   <main>
-    <form action="login_escola.php"class="form-validation">
+    <form action="editarEscola" method="post" class="form-validation">
       <p class="text-center"><a href="index.php"><img src="img/logo_menu.png" alt="" style="height: 100%; width: 100%; max-width: 200px; max-height: 200px; margin-left: auto; margin-right: auto;"></a></p>
         <h2 style="text-align: center;">
         Editar escola
       </h2>
       <div class="input">
-        <input id="name" name="name" type="text" data-rules="required"/>
-        <label for="name">Nome</label>
-        <span class="error"></span>
+        <input id="login" name="name" type="text" data-rules="required" required/>
+        <label for="login">Login</label>
       </div>
       <div class="input">
-        <input id="email" name="email" type="text" data-rules="required|email"/>
+        <input id="email" name="email" type="text" data-rules="required|email" required/>
         <label for="email">Email</label>
       </div>
       <div class="input">
-        <input  type="password"id="senha"data-rules="required|min=5"/>
-        <label for="senha">Senha</label>
+        <input  type="password"id="senha" name="password" data-rules="required|min=5" required/>
+        <label for="password">Senha</label>
       </div>
       <div class="input">
-        <input type="text" id="localizacao"name="localizacao"data-rules="required|min=15"/>
-        <label for="localizacao">Localização</label>
+        <input type="text" id="location"name="location"data-rules="required|min=15" required/>
+        <label for="location">Localização</label>
       </div>
       
       <div class="input">
-        <input type="phone" id="phone"name="phone"data-rules="required|phone" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"/>
+        <input type="phone" id="phone"name="phone"data-rules="required|phone" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" required/>
         <label for="phone">Telefone</label>
       </div>
       <button type="submit">Editar</button>

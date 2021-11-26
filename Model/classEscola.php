@@ -4,6 +4,7 @@ require "classUsuario.php";
 class classEscola extends classUsuario{
     private $endereco;
 
+    
     public function getendereco(){
         return $this->endereco;
     }
@@ -25,6 +26,11 @@ class classEscola extends classUsuario{
     public function listarEscola(){
         $EscolaDAO = new classEscolaDAO();
         $EscolaDAO->listarEscola($this);
+    }
+
+    public function editarEscola(){
+        $EscolaDAO = new classEscolaDAO();
+        $EscolaDAO->editarEscola($this);
     }
 }
 ?>

@@ -1,3 +1,17 @@
+<?php
+session_start();
+if($_SESSION['logged'] == false || $_SESSION['type'] != 'E'){
+    header('Location: Restrict');
+}
+else{
+    if (isset($_GET['logout']) && $_GET['logout'] == 1){
+        $_SESSION = array();
+        $_SESSIONG['logged'] = false;
+        session_destroy();
+        header('Location: index.php');
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -17,11 +31,15 @@
 
 <body>
   <main>
-    <form action="tela_escola_principal.php"class="form-validation">
+    <form method="post" action="editarFuncionario" class="form-validation">
       <p class="text-center"><a href="index.php"><img src="img/logo_menu.png" alt="" style="height: 100%; width: 100%; max-width: 200px; max-height: 200px; margin-left: auto; margin-right: auto;"></a></p>
         <h2 style="text-align: center;">
         Editar funcionario
       </h2>
+      <p><?php echo $_POST['id'] ?></p>
+      <div class="input">
+        <input type="hidden" name="id" value= <?php echo $_POST['id'] ?> required>
+      </div>
       <div class="input">
         <input id="name" name="name" type="text" data-rules="required"/>
         <label for="name">Nome</label>
@@ -31,7 +49,7 @@
         <label for="email">Email</label>
       </div>
       <div class="input">
-        <input  type="password" id="senha" data-rules="required|min=5"/>
+        <input  name="password" type="password" id="senha" data-rules="required|min=5"/>
         <label for="senha">Senha</label>
       </div>
       <div class="input">

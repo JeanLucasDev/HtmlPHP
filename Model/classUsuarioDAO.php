@@ -30,27 +30,23 @@ class classUsuarioDAO{
        }
     }
 
-    public function pesquisaLivro($liv){
+    public function pesquisarUsuario($usr){
         //vai ao banco de dados e pega todos os livros
         try{
             $minhaConexao = Conexao::getConexao();
-            $sql = $minhaConexao->prepare("select * from bd_livraria.livro where codigo=:codigo");
-            $sql->bindParam("codigo",$codigo);
-            $codigo = $liv->getCodigo();
-                
-           $sql->execute();
-           $result = $sql->setFetchMode(PDO::FETCH_ASSOC);
-           
-           while ($linha = $sql->fetch(PDO::FETCH_ASSOC)) {
-            $liv->setTitulo($linha['nome']);
-            $liv->setEdicao($linha['edicao']);
-            $liv->setAno($linha['ano']);
-          }
-        
-       }
-       catch(PDOException $e){
-        
-       }
+            $sql = $minhaConexao->prepare("select * from bd_cantinaon.user where login=:login");
+            $sql->bindParam("login",$login);
+            $login = $usr->getLogin();  
+            $sql->execute();
+            while($escola = $sql->fetch()){
+                 $_SESSION['login'] = $escola['login'];
+                 $_SESSION['phone'] = $escola['phone'];
+                 $_SESSION['email'] = $escola['email'];
+            }
+        }
+        catch(PDOException $e){
+            echo "entrou no catch".$e->getmessage();
+        }
     }
 
     public function incluirResponsavel($rsp){
@@ -91,7 +87,7 @@ class classUsuarioDAO{
      public function loginUsuario($usr){
         try{
             $minhaConexao = Conexao::getConexao();
-            $sql = $minhaConexao->prepare("select * from bd_cantinaon.user where login =:login and password =:password and type =:type");
+            $sql = $minhaConexao->prepare("select * from bd_cantinaon.user where login =:login and password =:password and type =:type;");
             $sql->bindParam("login",$login);
             $sql->bindParam("password",$password);
             $sql->bindParam("type",$type);
@@ -102,24 +98,65 @@ class classUsuarioDAO{
             $res = $sql->rowcount();
             if($res > 0){
                 if($type == 'E'){
-                    $_SESSION['login'] = $login;
-                    $_SESSION['password'] = $password;
-                    header('location:tela_escola_principal.php');
+                    while($user = $sql->fetch()){
+                        $sql2 = $minhaConexao->prepare("select * from bd_cantinaon.school where idUser=:idUser");
+                        $sql2->bindParam('idUser',$idUser);
+                        $idUser = $user['id'];
+                        $sql2->execute();
+                        while($escola = $sql2->fetch()){
+                            $_SESSION['location'] = $escola['location'];
+                        }
+                        $_SESSION['id'] = $user['id'];
+                        $_SESSION['login'] = $user['login'];
+                        $_SESSION['email'] = $user['email'];
+                        $_SESSION['phone'] = $user['phone'];
+                        $_SESSION['password'] = $user['password'];
+                        $_SESSION['type'] = $user['type'];
+                        $_SESSION['logged'] = true;
+                        header('location:tela_escola_principal.php');
+                   }
                 }
                 else if ($type == 'A'){
-                    $_SESSION['login'] = $login;
-                    $_SESSION['password'] = $password;
-                    header('location:tela_aluno_principal.php');
+                    while($user = $sql->fetch()){
+                        $_SESSION['login'] = $user['login'];
+                        $_SESSION['email'] = $user['email'];
+                        $_SESSION['phone'] = $user['phone'];
+                        $_SESSION['password'] = $user['password'];
+                        $_SESSION['type'] = $user['type'];
+                        $_SESSION['logged'] = true;
+                        header('location:tela_aluno_principal.php');
+                    }
                 }
                 else if ($type == 'R'){
-                    $_SESSION['login'] = $login;
-                    $_SESSION['password'] = $password;
-                    header('location:tela_responsavel_principal.php');
+                    while($user = $sql->fetch()){
+                        $_SESSION['login'] = $user['login'];
+                        $_SESSION['email'] = $user['email'];
+                        $_SESSION['phone'] = $user['phone'];
+                        $_SESSION['password'] = $user['password'];
+                        $_SESSION['type'] = $user['type'];
+                        $_SESSION['logged'] = true;
+                        header('location:tela_responsavel_principal.php');
+                    }
                 }
-                else{
-                    $_SESSION['login'] = $login;
-                    $_SESSION['password'] = $password;
-                    header('location:tela_funcionario_principal.php');
+                else if ($type == 'F') {
+                    while($user = $sql->fetch()){
+                        $sql2 = $minhaConexao->prepare("select * from bd_cantinaon.employee inner join bd_cantinaon.user on (user.id=:idUser) = (employee.idUser=:idUser) and type=:type inner join bd_cantinaon.school;");
+                        $sql2->bindParam('idUser',$idUser);
+                        $sql2->bindParam('type',$type);
+                        $idUser = $user['id'];
+                        $type = 'F';
+                        $sql2->execute();
+                        while($escola = $sql2->fetch()){
+                            $_SESSION['cpf'] = $escola['cpf'];
+                        }
+                        $_SESSION['login'] = $user['login'];
+                        $_SESSION['email'] = $user['email'];
+                        $_SESSION['phone'] = $user['phone'];
+                        $_SESSION['password'] = $user['password'];
+                        $_SESSION['type'] = $user['type'];
+                        $_SESSION['logged'] = true;
+                        header('location:tela_funcionario_principal.php');
+                    }
                 }
             }
             else{
@@ -129,31 +166,20 @@ class classUsuarioDAO{
             }
         }
         catch(PDOException $e){
+          echo "entrou no catch".$e->getmessage();
           return 0;
         }
  
     }
 
-    public function alterarLivro($liv){
-        try{
-            $minhaConexao = Conexao::getConexao();
-            $sql = $minhaConexao->prepare("update bd_livraria.livro set nome=:nome, edicao=:edicao, ano=:ano where codigo=:codigo");
-            $sql->bindParam("codigo",$codigo);
-            $sql->bindParam("nome",$nome);
-            $sql->bindParam("edicao",$edicao);
-            $sql->bindParam("ano",$ano);
-            $codigo = $liv->getCodigo();
-            $nome = $liv->getTitulo();
-            $edicao = $liv->getEdicao();
-            $ano = $liv->getAno();
-            $sql->execute();
-            
-         }
-         catch(PDOException $e){
-             echo "entrou no catch".$e->getmessage();
-            
-         }
+    public function logout(){
+            $_SESSION = array();
+            $_SESSION['logged'] = false;
+            session_destroy();
+            header('Location: index.php');
      }
+    
+
 
     public function excluirLivro($liv){
         try{

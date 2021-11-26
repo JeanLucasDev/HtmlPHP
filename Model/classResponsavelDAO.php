@@ -88,36 +88,6 @@ class classResponsavelDAO{
          }
      }
 
-     public function loginResponsavel($rsp){
-        try{
-            $minhaConexao = Conexao::getConexao();
-            $sql = $minhaConexao->prepare("select * from bd_cantinaon.user where login =:login and password =:password and type =:type ");
-            $sql->bindParam("login",$login);
-            $sql->bindParam("password",$password);
-            $sql->bindParam("type",$type);
-            $login = $rsp->getLogin();
-            $password = $rsp->getPassword();
-            $type = 'R';
-            $sql->execute();
-            $res = $sql->rowcount();
-            if($res > 0){
-                $_SESSION['login'] = $login;
-                $_SESSION['password'] = $password;
-                header('location:tela_responsavel_principal.php');
-            }
-            else{
-                echo "error".$rsp->getLogin();
-                echo "erro".$rsp->getPassword();
-                unset ($_SESSION['login']);
-                unset ($_SESSION['password']);
-                header('location:login.php');
-            }
-        }
-        catch(PDOException $e){
-          return 0;
-        }
- 
-    }
 
     public function alterarLivro($liv){
         try{

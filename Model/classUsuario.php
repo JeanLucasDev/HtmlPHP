@@ -58,6 +58,16 @@ class classUsuario{
         $UsuarioDAO = new classUsuarioDAO();
         $UsuarioDAO->loginUsuario($this);
     }
+
+    public function logout(){
+        $UsuarioDAO = new classUsuarioDAO();
+        $UsuarioDAO->logout();
+    }
+
+    public function pesquisarUsuario(){
+        $UsuarioDAO = new classUsuarioDAO();
+        $UsuarioDAO->pesquisarUsuario($this);
+    }
 }
 
 ?>

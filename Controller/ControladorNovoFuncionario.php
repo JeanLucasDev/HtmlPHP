@@ -8,13 +8,14 @@
             $this->funcionario = new classFuncionario();
         }
 
-        public function processaRequisicao(){    
+        public function processaRequisicao(){   
             $this->funcionario->setLogin($_POST['name']);
             $this->funcionario->setPassword($_POST['password']);
             $this->funcionario->setEmail($_POST['email']);
             $this->funcionario->setPhone($_POST['phone']);
+            $this->funcionario->setcpf($_POST['cpf']);
             $this->funcionario->incluirFuncionario();
-            header('Location: tela_escola_principal.php');
+            header('Location: tela_escola_principal.php',true,301);
         }
         
     }
