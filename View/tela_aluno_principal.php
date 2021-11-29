@@ -78,16 +78,15 @@ else{
                     <div class="col-md-6">
                         <div class="text_informacao">
                             <p>Nome: <?php echo $_SESSION['login'] ?></p>
-                            <p>Saldo: R$ 0.00</p>
-                            <p>N° Matricula: </p>
-                            <p>Turno: </p>
-                            <p>Email: <?php echo $_SESSION['type'] ?></p>
+                            <p>Saldo: <?php echo $_SESSION['balance'] ?> </p>
+                            <p>N° Matricula: <?php echo $_SESSION['registration'] ?></p>
+                            <p>Turma: <?php echo $_SESSION['class'] ?></p>
+                            <p>Email: <?php echo $_SESSION['email'] ?></p>
                             <p>Telefone: <?php echo $_SESSION['phone'] ?></p>
                             <h4 class="text-center" style="margin-top:2vh;">Escola filiada</h4>
-                            <p>Nome: </p>
-                            <p>Email: </p>
-                            <p>Telefone: </p>
-                            <p>Localização: </p>
+                            <p>Email: <?php echo $_SESSION['sch_email'] ?> </p> 
+                            <p>Telefone: <?php echo $_SESSION['sch_phone'] ?> </p>
+                            <p>Localização: <?php echo $_SESSION['sch_location'] ?> </p>
                         </div>
                     </div>                     
                 </div>

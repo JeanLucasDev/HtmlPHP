@@ -79,6 +79,21 @@ class classResponsavelDAO{
                 $type = 'R';
                 $sql->execute();
                 $last_id = $minhaConexao->lastInsertId();
+
+                echo "IDUSER: ".$_SESSION['id'];
+                $sql = $minhaConexao->prepare("select * from bd_cantinaon.user inner join bd_cantinaon.employee on employee.idUser = user.id  where user.id=:idUser;");
+                $sql->bindParam("idUser",$idUser);
+                $idUser = $_SESSION['id'];
+                $sql->execute();
+                $idSchool = $sql->fetch();
+                $sql2 = $minhaConexao->prepare("insert into bd_cantinaon.parents (cpf, idUser, idSchool) values (:cpf, :idUser, :idSchool)");
+                $sql2->bindParam("cpf",$cpf);
+                $sql2->bindParam("idUser",$idUser);
+                $sql2->bindParam("idSchool",$idEscola);
+                $idEscola = $idSchool['idSchool'];
+                $idUser = $last_id;
+                $cpf = $rsp->getcpf();
+                $sql2->execute();
                 return $last_id;
             }
          }

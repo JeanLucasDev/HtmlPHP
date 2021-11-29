@@ -42,7 +42,7 @@ else{
             <ul>
                 <li><a href="tela_funcionario_principal.php">Inicio</a></li>
                 <li><a href="tela_funcionario_principal.php">Informações</a></li>
-                <li><a href="tela_funcionario_produtos.php">Produtos</a></li>
+                <li><a href="listarprodutos">Produtos</a></li>
                 <li><a href="tela_funcionario_responsaveis.php">Responsaveis</a></li>
                 <li><a href="tela_funcionario_alunos.php">Aluno</a></li>
                 <li><a href="logout" >Sair</a>
@@ -58,7 +58,7 @@ else{
                 <ul>
                     <li><a href="tela_funcionario_principal.php">Inicio</a></li>
                     <li><a href="tela_funcionario_principal.php">Informações</a></li>
-                    <li><a href="tela_funcionario_produtos.php">Produtos</a></li>
+                    <li><a href="listarprodutos">Produtos</a></li>
                     <li><a href="tela_funcionario_responsaveis.php">Responsaveis</a></li>
                     <li><a href="tela_funcionario_alunos.php">Aluno</a></li>
                     <li><a href="logout" >Sair</a>

@@ -1,5 +1,4 @@
 <?php
-session_start();
 if($_SESSION['logged'] == false || $_SESSION['type'] != 'R'){
     header('Location: Restrict');
 }
@@ -32,7 +31,7 @@ if($_SESSION['logged'] == false || $_SESSION['type'] != 'R'){
             <ul>
                 <li><a href="tela_responsavel_principal.php">Inicio</a></li>
                 <li><a href="tela_responsavel_principal.php">Informações</a></li>
-                <li><a href="tela_responsavel_meus_filhos.php">Filhos</a></li>
+                <li><a href="listarAlunos">Filhos</a></li>
                 <li><a href="tela_responsavel_historico.php">Historicos</a></li>
                 <li><a href="logout" >Sair</a>
             </ul>
@@ -47,7 +46,7 @@ if($_SESSION['logged'] == false || $_SESSION['type'] != 'R'){
                 <ul>
                     <li><a href="tela_responsavel_principal.php">Inicio</a></li>
                     <li><a href="tela_responsavel_principal.php">Informações</a></li>
-                    <li><a href="tela_responsavel_meus_filhos.php">Filhos</a></li>
+                    <li><a href="listarAlunos">Filhos</a></li>
                     <li><a href="tela_responsavel_historico.php">Historicos</a></li>
                     <li><a href="logout" >Sair</a>
                 </ul>
@@ -62,10 +61,13 @@ if($_SESSION['logged'] == false || $_SESSION['type'] != 'R'){
             <div class="container">
                 <div class="row">
                     <div class="col-md-6" style="margin: 0 auto;">
-                            <label  for="number">Quanto você deseja adicionar</label>
-                            <input name="number" id="number"type="number">
-                            <button onclick="addSaldo();" class="btn btn-light">Adicionar saldo</button>
-                        <p>Saldo atual: R$ <span id="saldo">0.00</span></p>
+                        <label  for="number">Quanto você deseja adicionar</label>
+                        <form method="post" action="AddSaldo">         
+                                <input name="id" id="id"type="hidden" value= <?php $_POST['id']?>>
+                                <input name="qtd" id="number"type="number">
+                                <button type="submit" class="btn btn-light">Editar</button>
+                        </form>
+                        <p>Saldo atual: R$ <?php echo $Saldo ?></p>
                     </div>
                 </div>
             </div>
@@ -100,15 +102,15 @@ if($_SESSION['logged'] == false || $_SESSION['type'] != 'R'){
                     <div class="locale">
                         <div class="item_locale">
                             <i class="fas fa-phone-alt"></i>
-                            <p><?php echo $escola->gettelefone()?></p>
+                            <p>71 3254 - 3274</p>
                         </div>
                         <div class="item_locale">
                             <i class="fas fa-envelope"></i>
-                            <p><?php echo $escola->getemail()?></p>
+                            <p>teste@gmail.com</p>
                         </div>
                         <div class="item_locale">
                             <i class="fas fa-map-marker-alt"></i>
-                            <p><?php echo $escola->getendereco();?></p>
+                            <p>Rua teste, Bairro teste, Numero teste</p>
                         </div>
                     </div>
                 </div>

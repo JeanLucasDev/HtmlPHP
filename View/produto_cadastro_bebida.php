@@ -17,7 +17,7 @@
 
 <body>
   <main>
-    <form action="cadastro.php" method="GET" class="form-validation" id="form-validation">
+    <form action="incluirBebida" method="POST" class="form-validation" id="form-validation">
       <p class="text-center"><a href="tela_funcionario_principal.php"><img src="img/logo_menu.png" alt="" style="height: 100%; width: 100%; max-width: 200px; max-height: 200px; margin-left: auto; margin-right: auto;"></a></p>
         <h2 style="text-align: center;">
         Cadastro bebida
@@ -39,8 +39,8 @@
         <label for="fornecedor">Fornecedor</label>
       </div>
       <div class="input">
-        <label for="Foto">Foto</label>  
-        <input  name="Foto" id="Foto"type="file" data-rules="required"/>
+        <label for="arquivo">Arquivo</label>  
+        <input name="foto" id="foto"type="file" data-rules="required" required/>
       </div>
       <button type="submit">Adicionar</button>
       <div class="social_icon" style="margin-top:1vh">

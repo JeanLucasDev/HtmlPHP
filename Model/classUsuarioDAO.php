@@ -118,23 +118,60 @@ class classUsuarioDAO{
                 }
                 else if ($type == 'A'){
                     while($user = $sql->fetch()){
+                        $sql = $minhaConexao->prepare("select student.id, student.registration, student.class, student.balance from bd_cantinaon.student inner join bd_cantinaon.user on student.idUser = user.id where user.id = :idUser;");
+                        $sql->bindParam('idUser',$idUser);
+                        $idUser = $user['id'];
+                        $sql->execute();
+                        $Student = $sql->fetch(); 
                         $_SESSION['login'] = $user['login'];
                         $_SESSION['email'] = $user['email'];
                         $_SESSION['phone'] = $user['phone'];
                         $_SESSION['password'] = $user['password'];
                         $_SESSION['type'] = $user['type'];
                         $_SESSION['logged'] = true;
+                        $_SESSION['registration'] = $Student['registration'];
+                        $_SESSION['class'] = $Student['class'];
+                        $_SESSION['balance'] = $Student['balance'];
+                        $sql3 = $minhaConexao->prepare("select user.email, user.phone, school.location from bd_cantinaon.user inner join bd_cantinaon.school on user.id = school.idUser inner join bd_cantinaon.student on school.id = student.idSchool WHERE student.idUser =:idUser ;");
+                        $sql3->bindParam('idUser',$idUser);
+                        $idUser = $user['id'];
+                        $sql3->execute();
+                        $info = $sql3->fetch();
+                        echo $info['email'];
+                        $_SESSION['sch_location'] = $info['location'];
+                        $_SESSION['sch_phone'] = $info['phone'];
+                        $_SESSION['sch_email'] = $info['email'];
                         header('location:tela_aluno_principal.php');
                     }
                 }
                 else if ($type == 'R'){
                     while($user = $sql->fetch()){
+                        $sql2 = $minhaConexao->prepare("select * from bd_cantinaon.parents inner join bd_cantinaon.user on (user.id=:idUser) = (parents.idUser=:idUser) and type=:type inner join bd_cantinaon.school;");
+                        $sql2->bindParam('idUser',$idUser);
+                        $sql2->bindParam('type',$type);
+                        $idUser = $user['id'];
+                        $type = 'R';
+                        $sql2->execute();
+                        while($escola = $sql2->fetch()){
+                            echo "ENTROU NO LOOP: ".$escola['cpf'];
+                            $_SESSION['cpf'] = $escola['cpf'];
+                        }
+                        $sql3 = $minhaConexao->prepare("select user.email, user.phone, school.location from bd_cantinaon.user inner join bd_cantinaon.school on user.id = school.idUser inner join bd_cantinaon.parents on school.id = parents.idSchool WHERE parents.idUser =:idUser ;");
+                        $sql3->bindParam('idUser',$idUser);
+                        $idUser = $user['id'];
+                        $sql3->execute();
+                        $info = $sql3->fetch();
+                        echo $info['email'];
+                        $_SESSION['id'] = $user['id'];
                         $_SESSION['login'] = $user['login'];
                         $_SESSION['email'] = $user['email'];
                         $_SESSION['phone'] = $user['phone'];
                         $_SESSION['password'] = $user['password'];
                         $_SESSION['type'] = $user['type'];
                         $_SESSION['logged'] = true;
+                        $_SESSION['sch_location'] = $info['location'];
+                        $_SESSION['sch_phone'] = $info['phone'];
+                        $_SESSION['sch_email'] = $info['email'];
                         header('location:tela_responsavel_principal.php');
                     }
                 }
@@ -149,12 +186,22 @@ class classUsuarioDAO{
                         while($escola = $sql2->fetch()){
                             $_SESSION['cpf'] = $escola['cpf'];
                         }
+                        $sql3 = $minhaConexao->prepare("select user.email, user.phone, school.location from bd_cantinaon.user inner join bd_cantinaon.school on user.id = school.idUser inner join bd_cantinaon.employee on school.id = employee.idSchool WHERE employee.idUser =:idUser ;");
+                        $sql3->bindParam('idUser',$idUser);
+                        $idUser = $user['id'];
+                        $sql3->execute();
+                        $info = $sql3->fetch();
+                        echo $info['email'];
+                        $_SESSION['id'] = $user['id'];
                         $_SESSION['login'] = $user['login'];
                         $_SESSION['email'] = $user['email'];
                         $_SESSION['phone'] = $user['phone'];
                         $_SESSION['password'] = $user['password'];
                         $_SESSION['type'] = $user['type'];
                         $_SESSION['logged'] = true;
+                        $_SESSION['sch_location'] = $info['location'];
+                        $_SESSION['sch_phone'] = $info['phone'];
+                        $_SESSION['sch_email'] = $info['email'];
                         header('location:tela_funcionario_principal.php');
                     }
                 }

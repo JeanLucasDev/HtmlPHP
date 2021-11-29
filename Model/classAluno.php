@@ -3,15 +3,21 @@ require "classAlunoDAO.php";
 require "classUsuario.php";
 class classAluno extends classUsuario{
     private $matricula;
+    private $turma;
     private $saldo;
+
+    public function __contruct(){
+        if($this->saldo != 0){
+            $this->saldo = 0;
+        }
+    }
 
     public function getmatricula(){
         return $this->matricula;
     }
 
-
-    public function gettelefone(){
-        return $this->telefone;
+    public function getturma(){
+        return $this->turma;
     }
 
     public function getsaldo(){
@@ -26,10 +32,15 @@ class classAluno extends classUsuario{
         $this->saldo = $saldo;
     }
 
+    public function setturma($turma){
+        $this->turma = $turma;
+    }
+
 
     //Functions DAO 
 
 
+    
     public function incluirAluno(){
         $AlunoDAO = new classAlunoDAO();
         $AlunoDAO->incluirAluno($this);
@@ -50,10 +61,16 @@ class classAluno extends classUsuario{
         $AlunoDAO->alterarAluno($this);
     }
 
-    public function listarTodos(){
+    public function listarAlunos(){
         $AlunoDAO = new classAlunoDAO();
-        return $AlunoDAO->listarTodos();
+        return $AlunoDAO->listarAlunos();
     }
+
+    public function AddSaldo(){
+        $AlunoDAO = new ClassAlunoDAO();
+        return $AlunoDAO->AddSaldo($this);
+    }
+
 
     public function loginAluno(){
         $AlunoDAO = new classAlunoDAO();

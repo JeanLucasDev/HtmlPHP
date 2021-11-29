@@ -10,6 +10,7 @@
 
         public function processaRequisicao(){ 
             $this->responsavel->setLogin($_POST['name']);
+            $this->responsavel->setcpf($_POST['cpf']);
             $this->responsavel->setPassword($_POST['password']);
             $this->responsavel->setEmail($_POST['email']);
             $this->responsavel->setPhone($_POST['phone']);

@@ -9,13 +9,23 @@
                 $controlador = new ControladorNovaEscola();
                 $controlador->processaRequisicao();
                 break;
+            case "VIEW/LISTARALUNOS":
+                require "Controller/ControladorListarAlunos.php";
+                $controlador = new ControladorListarAlunos();
+                $controlador->processaRequisicao();
+				break;
+            
 
             case "LISTARESCOLA":
                 require "Controller/ControladorListarEscola.php";
                 $controlador = new ControladorListarEscola();
                 $controlador->processaRequisicao();
                 break;
-            
+            case "VIEW/schoolinfo":
+                require "Controller/ControladorPesquisarEscola.php";
+                $controlador = new ControladorPesquisarEscola();
+                $controlador->processaRequisicao();
+                break;  
             case "VIEW/EDITARESCOLA":
                 require "Controller/ControladorEditarEscola.php";
                 $controlador = new ControladorEditarEscola();
@@ -80,6 +90,35 @@
             case "RESTRICT":
                 require "View/Restrict";
                 break;
+
+            case "VIEW/ADDSALDO":
+                require "Controller/ControladorAddSaldo.php";
+                $controlador = new ControladorAddSaldo();
+                $controlador->processaRequisicao();
+                break; 
+
+            
+
+            case "VIEW/LISTARPRODUTOS":
+                require "Controller/ControladorListarProdutos.php";    
+                $controlador = new ControladorListarProdutos();
+                $controlador->processaRequisicao();
+                break;
+
+
+            case "VIEW/INCLUIRCOMIDA":
+                require "Controller/ControladorNovaComida.php";    
+                $controlador = new ControladorNovaComida();
+                $controlador->processaRequisicao();
+                break;
+
+            case "VIEW/INCLUIRBEBIDA":
+                require "Controller/ControladorNovaBebida.php";    
+                $controlador = new ControladorNovaBebida();
+                $controlador->processaRequisicao();
+                break;
+            
+
             default:
                 require "Controller/index.php";
                 $controlador = new ControladorNovaEscola();

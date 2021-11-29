@@ -69,12 +69,8 @@ if($_SESSION['logged'] == false || $_SESSION['type'] != 'A'){
                         <h3>Salgados</h3>
                     </div>
                     <div class="col-md-12">
-                        <h4 class="text-end" style="margin:5vh;color:#e1e1e1;"><?php echo "Saldo: "?></h4>
+                        <h4 class="text-end" style="margin:5vh;color:#e1e1e1;">Saldo:</h4>
                     </div>
-                    <?php
-                        
-
-                    ?>
                     <div class="col-md-3">
                         <div class="card">
                             <img src="img/Food/Salgados/cachorro-quente.jpg"height="200px" class="card-img-top" alt="...">
@@ -87,45 +83,7 @@ if($_SESSION['logged'] == false || $_SESSION['type'] != 'A'){
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
-                        <div class="card">
-                            <img src="img/Food/Salgados/coxinha.jpg" height="200px" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Coxinha</h5>
-                                <h6 class="card-subtitle mb-2 text-muted ">R$ 5.00</h6>
-                                <p class="card-text">
-                                </p>
-                                <button class="btn btn-light">Comprar</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card">
-                            <img src="img/Food/Salgados/pastel.jpg" height="200px" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Pastel</h5>
-                                <h6 class="card-subtitle mb-2 text-muted ">R$ 5.00</h6>
-                                <p class="card-text">
-                                </p>
-                                <button class="btn btn-light">Comprar</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card">
-                            <img src="img/Food/Salgados/risoles.jpg" height="200px" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Risole</h5>
-                                <h6 class="card-subtitle mb-2 text-muted ">R$ 5.00</h6>
-                                <p class="card-text">
-                                </p>
-                                <button class="btn btn-light">Comprar</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12" id="btn-final">
-                        <button  class="btn btn-light">Conheça mais mais produtos</button>
-                    </div>
+                    
                 </div>
                 <div class="row">
                     <div class="col-md-12">
@@ -144,49 +102,6 @@ if($_SESSION['logged'] == false || $_SESSION['type'] != 'A'){
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
-                        <div class="card">
-                            <img src="img/Food/Bebidas/coca.jpg"height="200px" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Coca Cola</h5>
-                                <h6 class="card-subtitle mb-2 text-muted ">R$ 5.00</h6>
-                                <p class="card-text">
-                                    
-                                </p>
-                                <button class="btn btn-light">Comprar</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card">
-                            <img src="img/Food/Bebidas/guaraná.jpg"height="200px" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Guaraná antartica</h5>
-                                <h6 class="card-subtitle mb-2 text-muted ">R$ 5.00</h6>
-                                <p class="card-text">
-                                    
-                                </p>
-                                <button class="btn btn-light">Comprar</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card">
-                            <img src="img/Food/Bebidas/h2oh.jpg" height="200px" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">H2O</h5>
-                                <h6 class="card-subtitle mb-2 text-muted ">R$ 5.00</h6>
-                                <p class="card-text">
-                                    
-                                </p>
-                                <button class="btn btn-light">Comprar</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12" id="btn-final">
-                        <button  class="btn btn-light">Conheça mais mais produtos</button>
-                    </div>
-                </div>
                 <div class="row">
                     <div class="col-md-12">
                         <h3>Doces</h3>
@@ -204,52 +119,9 @@ if($_SESSION['logged'] == false || $_SESSION['type'] != 'A'){
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
-                        <div class="card">
-                            <img src="img/Food/Doces/Donut.jpg"height="200px" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Donut</h5>
-                                <h6 class="card-subtitle mb-2 text-muted ">R$ 3.00</h6>
-                                <p class="card-text">
-                                    
-                                </p>
-                                <button class="btn btn-light">Comprar</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card">
-                            <img src="img/Food/Doces/Dpnilik.jpg"height="200px" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Dpnilik</h5>
-                                <h6 class="card-subtitle mb-2 text-muted ">R$ 0.50</h6>
-                                <p class="card-text">
-                                    
-                                </p>
-                                <button class="btn btn-light">Comprar</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card">
-                            <img src="img/Food/Doces/palha-italiana.jpg" height="200px" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Palha italiana</h5>
-                                <h6 class="card-subtitle mb-2 text-muted ">R$ 6.50</h6>
-                                <p class="card-text">
-                                    
-                                </p>
-                                <button class="btn btn-light">Comprar</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12" id="btn-final">
-                        <button  class="btn btn-light">Conheça mais mais produtos</button>
-                    </div>
                 </div>
             </div>
             </div>
-
             </div>
         </section>
         <footer>

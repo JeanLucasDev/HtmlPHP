@@ -1,5 +1,4 @@
 <?php
-session_start();
 if($_SESSION['logged'] == false || $_SESSION['type'] != 'F'){
     header('Location: Restrict');
 }
@@ -42,7 +41,7 @@ else{
             <ul>
                 <li><a href="tela_funcionario_principal.php">Inicio</a></li>
                 <li><a href="tela_funcionario_principal.php">Informações</a></li>
-                <li><a href="tela_funcionario_produtos.php">Produtos</a></li>
+                <li><a href="listarprodutos">Produtos</a></li>
                 <li><a href="tela_funcionario_responsaveis.php">Responsaveis</a></li>
                 <li><a href="tela_funcionario_alunos.php">Aluno</a></li>
                 <li><a href="logout" >Sair</a>
@@ -58,7 +57,7 @@ else{
                 <ul>
                     <li><a href="tela_funcionario_principal.php">Inicio</a></li>
                     <li><a href="tela_funcionario_principal.php">Informações</a></li>
-                    <li><a href="tela_funcionario_produtos.php">Produtos</a></li>
+                    <li><a href="listarprodutos">Produtos</a></li>
                     <li><a href="tela_funcionario_responsaveis.php">Responsaveis</a></li>
                     <li><a href="tela_funcionario_alunos.php">Aluno</a></li>
                     <li><a href="logout" >Sair</a>
@@ -73,64 +72,23 @@ else{
             </div>
             <div class="container">
                 <div class="row" style="margin:10vh 0;">
+                    <?php for($i=0;$i<count($listaPrdt);$i++){ ?>
                     <div class="col-md-3">
                         <div class="card">
-                            <img src="img/Food/Salgados/cachorro-quente.jpg"height="200px" class="card-img-top" alt="...">
+                            <img src="..\Sources\Coquin.JPG" height="200px" class="card-img-top" alt="...">
                             <div class="card-body">
-                                <h5 class="card-title">Cachorro Quente</h5>
-                                <h6 class="card-subtitle mb-2 text-muted ">R$ 5.00</h6>
+                                <h5 class="card-title"><?php echo $listaPrdt[$i]->getnome(); ?></h5>
+                                <h6 class="card-subtitle mb-2 text-muted ">R$ <?php echo $listaPrdt[$i]->getpreco(); ?></h6>
                                 <p class="card-text">
                                 </p>
-                                <form>
+                                <form method="post" action="editarProduto">
+                                    <input type="hidden" name="id" value= <?php echo $listaPrdt[$i]->getId();?>>
                                     <button class="btn btn-light"formaction='produto_editar_comida.php'>Editar</button>
-                                </form>                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card">
-                            <img src="img/Food/Salgados/coxinha.jpg" height="200px" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Coxinha</h5>
-                                <h6 class="card-subtitle mb-2 text-muted ">R$ 5.00</h6>
-                                <p class="card-text">
-                                </p>
-                                <form>
-                                    <button class="btn btn-light"formaction='produto_editar_comida.php'>Editar</button>
-                                </form>                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card">
-                            <img src="img/Food/Bebidas/coca.jpg"height="200px" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Coca cola</h5>
-                                <h6 class="card-subtitle mb-2 text-muted ">R$ 5.00</h6>
-                                <p class="card-text">
-                                </p>
-                                <form>
-                                    <button class="btn btn-light"formaction='produto_editar_bebida.php'>Editar</button>
-                                </form>
+                                </form>                            
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
-                        <div class="card">
-                            <img src="img/Food/Salgados/risoles.jpg" height="200px" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Risole</h5>
-                                <h6 class="card-subtitle mb-2 text-muted ">R$ 5.00</h6>
-                                <p class="card-text">
-                                </p>
-                                <form>
-                                    <button class="btn btn-light"formaction='produto_editar_comida.php'>Editar</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12" id="btn-final">
-                        <button  class="btn btn-light">Todos os produtos</button>
-                    </div>
-                </div>
+                    <?php } ?>
                 <div class="row">
                     <div style="margin: 0 auto;" class="col-md-3">
                         <a style="color: #e1e1e1;" href="produto_remove.php">

@@ -1,13 +1,8 @@
 <?php
-
-class bebida extends produto{
+require "classBebidaDAO.php";
+require "classProduto.php";
+class classBebida extends classProduto{
     private $fornecedor;
-
-
-
-    function __construct($fornecedor){
-        $this->fornecedor = $fornecedor;
-    }
 
     public function getfornecedor(){
         return $this->fornecedor;
@@ -16,6 +11,14 @@ class bebida extends produto{
     public function setfornecedor($fornecedor){
         $this->fornecedor = $fornecedor;
     }
+
+
+//function DAO 
+
+public function incluirBebida(){
+    $BebidaDAO = new classBebidaDAO();
+    $BebidaDAO->incluirBebida($this);
+}
 }
 
 ?>

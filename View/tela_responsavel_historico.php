@@ -34,7 +34,7 @@ if($_SESSION['logged'] == false || $_SESSION['type'] != 'R'){
             <ul>
                 <li><a href="tela_responsavel_principal.php">Inicio</a></li>
                 <li><a href="tela_responsavel_principal.php">Informações</a></li>
-                <li><a href="tela_responsavel_meus_filhos.php">Filhos</a></li>
+                <li><a href="listarAlunos">Filhos</a></li>
                 <li><a href="tela_responsavel_historico.php">Historicos</a></li>
                 <li><a href="logout" >Sair</a>
             </ul>
@@ -49,7 +49,7 @@ if($_SESSION['logged'] == false || $_SESSION['type'] != 'R'){
                 <ul>
                     <li><a href="tela_responsavel_principal.php">Inicio</a></li>
                     <li><a href="tela_responsavel_principal.php">Informações</a></li>
-                    <li><a href="tela_responsavel_meus_filhos.php">Meus filhos</a></li>
+                    <li><a href="listarAlunos">Filhos</a></li>
                     <li><a href="logout" >Sair</a>
                 </ul>
             </div>

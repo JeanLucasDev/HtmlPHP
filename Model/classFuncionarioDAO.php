@@ -4,18 +4,18 @@ class classFuncionarioDAO{
     public function listarFuncionarios(){
         //vai ao banco de dados e pega todos os livros
         try{
+            echo $_SESSION['id'];
             $minhaConexao = Conexao::getConexao();
-            $sql = $minhaConexao->prepare("select employee.id, user.login, user.email, user.phone, employee.cpf FROM bd_cantinaon.employee INNER JOIN bd_cantinaon.user INNER JOIN bd_cantinaon.school on (school.idUser=:idUser) and (user.type=:type);");
+            $sql = $minhaConexao->prepare("select employee.id, employee.cpf, user.login, user.phone, user.email from bd_cantinaon.employee right join bd_cantinaon.school on employee.idSchool = school.id inner join bd_cantinaon.user on user.id = employee.idUser where school.idUser = :idUser ;");
             $sql->bindParam("idUser",$idUser);
-            $sql->bindParam("type",$type);
             $idUser = $_SESSION['id']; 
-            $type = 'F';
             $sql->execute();
+            echo $_SESSION['id'];
             $result = $sql->setFetchMode(PDO::FETCH_ASSOC);
             $listaFun=array();
             $i=0;
             while ($linha = $sql->fetch(PDO::FETCH_ASSOC) ) {
-                echo("entrou no loop");
+                echo "Echo aqui aqui aqui".$linha['id'];
                 $fun = new classFuncionario();
                 $fun->setId($linha['id']);
                 $fun->setLogin($linha['login']);
@@ -24,7 +24,7 @@ class classFuncionarioDAO{
                 $fun->setcpf($linha['cpf']);
                 $listaFun[$i] = $fun;
                 $i++;
-             }
+            }
             return $listaFun;
         }
        catch(PDOException $e){

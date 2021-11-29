@@ -28,7 +28,7 @@ class classEscolaDAO{
        }
     }
 
-    public function pesquisaLivro($liv){
+    public function pesquisaEscola($sch){
         //vai ao banco de dados e pega todos os livros
         try{
             $minhaConexao = Conexao::getConexao();

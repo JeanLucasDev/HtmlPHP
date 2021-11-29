@@ -42,7 +42,7 @@ else{
             <ul>
                 <li><a href="tela_funcionario_principal.php">Inicio</a></li>
                 <li><a href="tela_funcionario_principal.php">Informações</a></li>
-                <li><a href="tela_funcionario_produtos.php">Produtos</a></li>
+                <li><a href="listarprodutos">Produtos</a></li>
                 <li><a href="tela_funcionario_responsaveis.php">Responsaveis</a></li>
                 <li><a href="tela_funcionario_alunos.php">Aluno</a></li>
                 <li><a href="logout" >Sair</a>
@@ -58,7 +58,7 @@ else{
                 <ul>
                     <li><a href="tela_funcionario_principal.php">Inicio</a></li>
                     <li><a href="tela_funcionario_principal.php">Informações</a></li>
-                    <li><a href="tela_funcionario_produtos.php">Produtos</a></li>
+                    <li><a href="listarprodutos">Produtos</a></li>
                     <li><a href="tela_funcionario_responsaveis.php">Responsaveis</a></li>
                     <li><a href="tela_funcionario_alunos.php">Aluno</a></li>
                     <li><a href="logout" >Sair</a>
@@ -74,6 +74,7 @@ else{
             <div class="container">
                 <div class="row" style="margin:0 auto;">
                     <div class="col-md-6" style="margin: 0 auto;">
+                     
                         <label style="width:100%;color: #e1e1e1 ;" for="id">Consultar saldo</label>
                         <input style="width:100%" name="matricula" class="form-control"
                             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"

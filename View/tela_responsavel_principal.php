@@ -32,7 +32,7 @@ if($_SESSION['logged'] == false || $_SESSION['type'] != 'R'){
             <ul>
                 <li><a href="tela_responsavel_principal.php">Inicio</a></li>
                 <li><a href="tela_responsavel_principal.php">Informações</a></li>
-                <li><a href="tela_responsavel_meus_filhos.php">Filhos</a></li>
+                <li><a href="listarAlunos">Filhos</a></li>
                 <li><a href="logout" >Sair</a>
             </ul>
         </div>
@@ -46,7 +46,7 @@ if($_SESSION['logged'] == false || $_SESSION['type'] != 'R'){
                 <ul>
                     <li><a href="tela_responsavel_principal.php">Inicio</a></li>
                     <li><a href="tela_responsavel_principal.php">Informações</a></li>
-                    <li><a href="tela_responsavel_meus_filhos.php">Filhos</a></li>
+                    <li><a href="listarAlunos">Filhos</a></li>
                     <li><a href="logout" >Sair</a>
                 </ul>
             </div>
@@ -66,13 +66,12 @@ if($_SESSION['logged'] == false || $_SESSION['type'] != 'R'){
                         <div class="text_informacao">
                             <p>Nome: <?php echo $_SESSION['login'] ?></p>
                             <p>Email: <?php echo $_SESSION['email'] ?></p>
-                            <p>CPF: </p>
+                            <p>CPF: <?php echo $_SESSION['cpf'] ?> </p>
                             <p>Telefone: <?php echo $_SESSION['phone'] ?></p>
                             <h4 class="text-center" style="margin-top:2vh;">Escola filiada</h4>
-                            <p>Nome: </p>
-                            <p>Email: </p>
-                            <p>Telefone: </p>
-                            <p>Localização: </p>                        
+                            <p>Email: <?php echo $_SESSION['sch_email'] ?> </p> 
+                            <p>Telefone: <?php echo $_SESSION['sch_phone'] ?> </p>
+                            <p>Localização: <?php echo $_SESSION['sch_location'] ?> </p>                    
                         </div>
                     </div>                     
                 </div>

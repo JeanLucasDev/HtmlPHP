@@ -1,21 +1,17 @@
 <?php
-
-class produto {
+require "classProdutoDAO.php";
+class classProduto {
+    private $id;
     private $codigo;
     private $nome;
     private $foto;
     private $preco;
     private $blocked;
 
-    function __construct($codigo,$nome,$foto,$preco,$blocked){
-        $this->codigo = $codigo;
-        $this->nome = $nome;
-        $this->foto = $foto;
-        $this->preco = $preco;
-        $this->blocked = false;
+
+    public function getid(){
+        return $this->id;
     }
-
-
     public function getcodigo(){
         return $this->codigo;
     }
@@ -30,6 +26,10 @@ class produto {
     }
     public function getblocked(){
         return $this->blocked;
+    }
+
+    public function setid($id){
+        $this->id = $id;
     }
 
 
@@ -47,6 +47,15 @@ class produto {
     }
     public function setblocked($blocked){
         $this->blocked = $blocked;
+    }
+
+
+    //function DAO 
+
+    
+    public function listarProdutos(){
+        $ProdutoDAO = new classProdutoDAO();
+        return $ProdutoDAO->listarProdutos();
     }
 
 }

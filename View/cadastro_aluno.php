@@ -1,6 +1,6 @@
 <?php
 session_start();
-if($_SESSION['logged'] == false || $_SESSION['type'] != 'F'){
+if($_SESSION['logged'] == false || $_SESSION['type'] != 'R'){
     header('Location: Restrict');
 }
 else{
@@ -50,7 +50,7 @@ else{
       </div>
       <div class="input">
         <input id="turma" name="turma" type="text" data-rules="required" required/>
-        <label for="turma">Turno</label>
+        <label for="turma">Turma</label>
       </div>
       <div class="input">
         <input id="email" name="email" type="text" data-rules="required|email" required/>

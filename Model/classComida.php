@@ -1,12 +1,10 @@
 <?php
-
-class comida extends produto{
+require "classComidaDAO.php";
+require "classProduto.php";
+class classComida extends classProduto{
     private $ingredientes;
 
 
-    function __construct($ingredientes){
-        $this->ingredientes = $ingredientes;
-    }
     
     public function getingredientes(){
         return $this->ingredientes;
@@ -15,6 +13,18 @@ class comida extends produto{
     public function setingredientes($ingredientes){
         $this->ingredientes = $ingredientes;
     }
-}
 
+
+    //function DAO 
+    public function incluirComida(){
+        $ComidaDAO = new classComidaDAO();
+        $ComidaDAO->incluirComida($this);
+    }
+
+    public function excluirComida(){
+        $AlunoDAO = new classComidaDAO();
+        $AlunoDAO->excluirComida($this);
+    }
+
+}
 ?>

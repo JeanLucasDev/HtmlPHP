@@ -1,5 +1,4 @@
 <?php
-session_start();
 if($_SESSION['logged'] == false || $_SESSION['type'] != 'R'){
     header('Location: Restrict');
 }
@@ -34,7 +33,7 @@ if($_SESSION['logged'] == false || $_SESSION['type'] != 'R'){
             <ul>
                 <li><a href="tela_responsavel_principal.php">Inicio</a></li>
                 <li><a href="tela_responsavel_principal.php">Informações</a></li>
-                <li><a href="tela_responsavel_meus_filhos.php">Filhos</a></li>
+                <li><a href="listarAlunos">Filhos</a></li>
                 <li><a href="logout" >Sair</a>
             </ul>
         </div>
@@ -48,7 +47,7 @@ if($_SESSION['logged'] == false || $_SESSION['type'] != 'R'){
                 <ul>
                     <li><a href="tela_responsavel_principal.php">Inicio</a></li>
                     <li><a href="tela_responsavel_principal.php">Informações</a></li>
-                    <li><a href="tela_responsavel_meus_filhos.php">Filhos</a></li>
+                    <li><a href="listarAlunos">Filhos</a></li>
                     <li><a href="logout" >Sair</a>
                 </ul>
             </div>
@@ -62,64 +61,24 @@ if($_SESSION['logged'] == false || $_SESSION['type'] != 'R'){
             <div class="container">
                 <div class="row" style="margin:10vh 0;">
                     <div class="col-md-3">
+                        <?php for($i=0;$i<count($listaAlunos);$i++){ ?>
                         <div class="card">
                             <img src="img/Aluno.png" class="card-img-top" alt="...">
                             <div class="card-body">
-                                <h5 class="card-title">Nome exemplo</h5>
-                                <h6 class="card-subtitle mb-2 text-muted ">N° matricula exemplo</h6>
-                                <form action="">
+                                <h5 class="card-title"><?php echo $listaAlunos[$i]->getLogin(); ?></h5>
+                                <h6 class="card-subtitle mb-2 text-muted "><?php echo "Matricula: ".$listaAlunos[$i]->getmatricula(); ?></h6>
+                                <form method="post" action="">
+                                     <p><?php echo $listaAlunos[$i]->getId() ?></p>
+                                    <input type="hidden" name="id" value= <?php echo $listaAlunos[$i]->getId()?> /> 
+                                    <input type="hidden" name="qtd" value= <?php echo $listaAlunos[$i]->getsaldo()?> /> 
                                     <button class="btn btn-light" formaction="tela_responsavel_controle.php">Restringir produtos</button>
-                                    <button class="btn btn-light"formaction='tela_responsavel_add_saldo.php'>Adicionar saldo</button>
+                                    <button class="btn btn-light" formaction="AddSaldo">Adicionar saldo</button>
                                     <button class="btn btn-light"formaction="tela_responsavel_historico.php">Historicos</button>
                                     <button class="btn btn-light"formaction="editar_aluno.php">Editar aluno</button>
                                 </form>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card" >
-                            <img src="img/Aluno.png" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Nome exemplo</h5>
-                                <h6 class="card-subtitle mb-2 text-muted ">N° matricula exemplo</h6>
-                                <form action="">
-                                    <button class="btn btn-light" formaction="tela_responsavel_controle.php">Restringir produtos</button>
-                                    <button class="btn btn-light"formaction='tela_responsavel_add_saldo.php'>Adicionar saldo</button>
-                                    <button class="btn btn-light"formaction="tela_responsavel_historico.php">Historicos</button>
-                                    <button class="btn btn-light"formaction="editar_aluno.php">Editar aluno</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card">
-                            <img src="img/Aluno.png" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Nome exemplo</h5>
-                                <h6 class="card-subtitle mb-2 text-muted ">N° matricula exemplo</h6>
-                                <form action="">
-                                    <button class="btn btn-light" formaction="tela_responsavel_controle.php">Restringir produtos</button>
-                                    <button class="btn btn-light"formaction='tela_responsavel_add_saldo.php'>Adicionar saldo</button>
-                                    <button class="btn btn-light"formaction="tela_responsavel_historico.php">Historicos</button>
-                                    <button class="btn btn-light"formaction="editar_aluno.php">Editar aluno</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card">
-                            <img src="img/Aluno.png" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Nome exemplo</h5>
-                                <h6 class="card-subtitle mb-2 text-muted ">N° matricula exemplo</h6>
-                                <form action="">
-                                    <button class="btn btn-light" formaction="tela_responsavel_controle.php">Restringir produtos</button>
-                                    <button class="btn btn-light"formaction='tela_responsavel_add_saldo.php'>Adicionar saldo</button>
-                                    <button class="btn btn-light"formaction="tela_responsavel_historico.php">Historicos</button>
-                                    <button class="btn btn-light"formaction="editar_aluno.php">Editar aluno</button>   
-                                </form>
-                            </div>
-                        </div>
+                        <?php } ?>
                     </div>
                 </div>
                 <div class="row">

@@ -1,5 +1,4 @@
 <?php
-session_start();
 if($_SESSION['logged'] == false || $_SESSION['type'] != 'R'){
     header('Location: Restrict');
 }
@@ -33,7 +32,7 @@ if($_SESSION['logged'] == false || $_SESSION['type'] != 'R'){
             <ul>
                 <li><a href="tela_responsavel_principal.php">Inicio</a></li>
                 <li><a href="tela_responsavel_principal.php">Informações</a></li>
-                <li><a href="tela_responsavel_meus_filhos.php">Filhos</a></li>
+                <li><a href="listarAlunos">Filhos</a></li>
                 <li><a href="tela_responsavel_historico.php">Historicos</a></li>
                 <li><a href="logout" >Sair</a>
             </ul>
@@ -48,7 +47,7 @@ if($_SESSION['logged'] == false || $_SESSION['type'] != 'R'){
                 <ul>
                     <li><a href="tela_responsavel_principal.php">Inicio</a></li>
                     <li><a href="tela_responsavel_principal.php">Informações</a></li>
-                    <li><a href="tela_responsavel_meus_filhos.php">Filhos</a></li>
+                    <li><a href="listarAlunos">Filhos</a></li>
                     <li><a href="tela_responsavel_historico.php">Historicos</a></li>
                     <li><a href="logout" >Sair</a>
                 </ul>
@@ -268,22 +267,22 @@ if($_SESSION['logged'] == false || $_SESSION['type'] != 'R'){
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <h4 class="text-center">Contato</h4>
-                        <div class="locale">
-                            <div class="item_locale">
-                                <i class="fas fa-phone-alt"></i>
-                                <p><?php echo $escola->gettelefone()?></p>
-                            </div>
-                            <div class="item_locale">
-                                <i class="fas fa-envelope"></i>
-                                <p><?php echo $escola->getemail()?></p>
-                            </div>
-                            <div class="item_locale">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <p><?php echo $escola->getendereco();?></p>
-                            </div>
+                    <h4 class="text-center">Contato</h4>
+                    <div class="locale">
+                        <div class="item_locale">
+                            <i class="fas fa-phone-alt"></i>
+                            <p>71 3254 - 3274</p>
+                        </div>
+                        <div class="item_locale">
+                            <i class="fas fa-envelope"></i>
+                            <p>teste@gmail.com</p>
+                        </div>
+                        <div class="item_locale">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <p>Rua teste, Bairro teste, Numero teste</p>
                         </div>
                     </div>
+                </div>
                 </div>
             </div>
         </footer>
