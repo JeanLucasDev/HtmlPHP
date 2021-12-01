@@ -222,6 +222,10 @@ class classUsuarioDAO{
     public function logout(){
             $_SESSION = array();
             $_SESSION['logged'] = false;
+            unset ($_SESSION['login']);
+            unset ($_SESSION['password']);
+            unset ($_SESSION['cpf']);
+            unset ($_SESSION['email']);
             session_destroy();
             header('Location: index.php');
      }

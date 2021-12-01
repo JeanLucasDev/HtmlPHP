@@ -146,20 +146,24 @@ class classBebidaDAO{
  
     }    
 
-    public function alterarLivro($aln){
+    public function editarComida($cmd){
         try{
             $minhaConexao = Conexao::getConexao();
-            $sql = $minhaConexao->prepare("update bd_cantinaon.student set nome=:nome, edicao=:edicao, ano=:ano where codigo=:codigo");
-            $sql->bindParam("codigo",$codigo);
-            $sql->bindParam("nome",$nome);
-            $sql->bindParam("edicao",$edicao);
-            $sql->bindParam("ano",$ano);
-            $codigo = $aln->getCodigo();
-            $nome = $aln->getTitulo();
-            $edicao = $aln->getEdicao();
-            $ano = $aln->getAno();
+            $sql = $minhaConexao->prepare("update bd_cantinaon.product set name=:name,code=:code, price=:price, photo=:photo where product.id=:id;
+            update bd_cantinaon.food set provider=:provider where food.idProduct =: id;");
+            $sql->bindParam("id",$id);
+            $sql->bindParam("name",$name);
+            $sql->bindParam("code",$codigo);
+            $sql->bindParam("price",$preco);
+            $sql->bindParam("provider",$fornecedor);
+            $sql->bindParam("photo",$arquivo);
+            $id =  $cmd->getId();
+            $name = $cmd->getnome();
+            $codigo = $cmd->getcodigo();
+            $preco = $cmd->getpreco();
+            $fornecedor = $cmd->getfornecedor();
+            $arquivo = $cmd->getfoto();
             $sql->execute();
-            
          }
          catch(PDOException $e){
              //echo "entrou no catch".$e->getmessage();

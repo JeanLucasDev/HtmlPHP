@@ -32,7 +32,6 @@ class classProduto {
         $this->id = $id;
     }
 
-
     public function setcodigo($codigo){
         $this->codigo = $codigo;
     }
@@ -56,6 +55,16 @@ class classProduto {
     public function listarProdutos(){
         $ProdutoDAO = new classProdutoDAO();
         return $ProdutoDAO->listarProdutos();
+    }
+
+    public function editarProdutos(){
+        $ProdutoDAO = new classProdutoDAO();
+        return $ProdutoDAO->editarProdutos($this);
+    }
+
+    public function removerProduto(){
+        $ProdutoDAO = new classProdutoDAO();
+        $ProdutoDAO->removerProduto($this);
     }
 
 }

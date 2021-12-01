@@ -17,25 +17,22 @@
 
 <body>
   <main>
-    <form action="tela_funcionario_principal.php"class="form-validation">
-      <p class="text-center"><a href="index.php"><img src="img/logo_menu.png" alt="" style="height: 100%; width: 100%; max-width: 200px; max-height: 200px; margin-left: auto; margin-right: auto;"></a></p>
+    <form method="POST" action="editarResponsavel" class="form-validation">
+      <p class="text-center"><a href="tela_funcionario_principal.php"><img src="img/logo_menu.png" alt="" style="height: 100%; width: 100%; max-width: 200px; max-height: 200px; margin-left: auto; margin-right: auto;"></a></p>
         <h2 style="text-align: center;">
         Editar Responsavel
       </h2>
+      <input type="hidden" name="id" value= <?php echo $_POST['id'] ?>>
       <div class="input">
         <input id="name" name="name" type="text" data-rules="required"/>
         <label for="name">Nome</label>
-      </div>
-      <div class="input">
-        <input id="login" name="login" type="text" data-rules="required"/>
-        <label for="login">Login</label>
       </div>
       <div class="input">
         <input id="email" name="email" type="text" data-rules="required|email"/>
         <label for="email">Email</label>
       </div>
       <div class="input">
-        <input  type="password" id="senha" data-rules="required|min=5"/>
+        <input  type="password" name="password" id="senha"data-rules="required|min=5" required/>
         <label for="senha">Senha</label>
       </div>
       <div class="input">
@@ -47,7 +44,7 @@
         <label for="phone">Telefone</label>
       </div>
 
-      <button type="submit">Cadastrar</button>
+      <button type="submit">Editar</button>
       <div class="social_icon" style="margin-top:1vh">
         <h6> Voltar a tela do funcionario?<a href="tela_funcionario_principal.php">Clique aqui</a></h6>
       </div>  

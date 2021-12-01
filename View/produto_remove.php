@@ -26,8 +26,8 @@
             <ul>
                 <li><a href="tela_funcionario_principal.php">Inicio</a></li>
                 <li><a href="tela_funcionario_principal.php">Informações</a></li>
-                <li><a href="tela_funcionario_produtos.php">Produtos</a></li>
-                <li><a href="tela_funcionario_responsaveis.php">Responsaveis</a></li>
+                <li><a href="listarprodutos">Produtos</a></li>
+                <li><a href="pageResp">Responsaveis</a></li>
                 <li><a href="tela_funcionario_alunos.php">Aluno</a></li>
                 <li><a href="login.php">Sair</a></li>
             </ul>
@@ -42,7 +42,7 @@
                 <ul>
                     <li><a href="tela_funcionario_principal.php">Inicio</a></li>
                     <li><a href="tela_funcionario_principal.php">Informações</a></li>
-                    <li><a href="tela_funcionario_produtos.php">Produtos</a></li>
+                    <li><a href="listarprodutos">Produtos</a></li>
                     <li><a href="tela_funcionario_responsaveis.php">Responsaveis</a></li>
                     <li><a href="tela_funcionario_alunos.php">Aluno</a></li>
                     <li><a href="login.php">Sair</a></li>
@@ -58,10 +58,10 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6" style="margin: 0 auto;">
-                            <label  for="id">Qual item você deseja remover?(busque pelo ID)</label>
-                            <input  class="form-control" name="text"oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"id="id"type="id">
-                            <form  action="tela_funcionario_principal.php">
-                                <button style="width:100%;padding: 1vh;" class="btn btn-light">Remover produto</button>
+                            <form  method="post" action="">
+                                <label  for="id">Qual item você deseja remover?(busque pelo Codigo)</label>
+                                <input  class="form-control" name="codigo" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" id="id" type="text">
+                                <button style="width:100%;padding: 1vh;" class="btn btn-light" formaction="removerproduto">Remover produto</button>
                             </form>
                     </div>
                 </div>

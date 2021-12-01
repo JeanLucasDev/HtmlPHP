@@ -58,7 +58,7 @@ else{
                     <li><a href="tela_funcionario_principal.php">Inicio</a></li>
                     <li><a href="tela_funcionario_principal.php">Informações</a></li>
                     <li><a href="listarprodutos">Produtos</a></li>
-                    <li><a href="tela_funcionario_responsaveis.php">Responsaveis</a></li>
+                    <li><a href="pageResp">Responsaveis</a></li>
                     <li><a href="tela_funcionario_alunos.php">Aluno</a></li>
                     <li><a href="logout" >Sair</a>
                 </ul>
@@ -75,15 +75,16 @@ else{
                     <?php for($i=0;$i<count($listaPrdt);$i++){ ?>
                     <div class="col-md-3">
                         <div class="card">
-                            <img src="..\Sources\Coquin.JPG" height="200px" class="card-img-top" alt="...">
+                            <img src="<?php echo $listaPrdt[$i]->getfoto(); ?>" height="200px" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title"><?php echo $listaPrdt[$i]->getnome(); ?></h5>
                                 <h6 class="card-subtitle mb-2 text-muted ">R$ <?php echo $listaPrdt[$i]->getpreco(); ?></h6>
+                                <h6 class="card-subtitle mb-2 text-muted ">Codigo: <?php echo $listaPrdt[$i]->getcodigo(); ?></h6>
                                 <p class="card-text">
                                 </p>
-                                <form method="post" action="editarProduto">
+                                <form method="POST" action="">
                                     <input type="hidden" name="id" value= <?php echo $listaPrdt[$i]->getId();?>>
-                                    <button class="btn btn-light"formaction='produto_editar_comida.php'>Editar</button>
+                                    <button class="btn btn-light" formaction='editarProdutos'>Editar</button>
                                 </form>                            
                             </div>
                         </div>

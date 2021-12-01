@@ -17,26 +17,27 @@
 
 <body>
   <main>
-    <form action="tela_responsavel_principal.php" method="GET" class="form-validation" id="form-validation">
-      <p class="text-center"><a href="index.php"><img src="img/logo_menu.png" alt="" style="height: 100%; width: 100%; max-width: 200px; max-height: 200px; margin-left: auto; margin-right: auto;"></a></p>
+    <form action="editarAluno" method="POST" class="form-validation" id="form-validation">
+      <p class="text-center"><a href="tela_responsavel_principal.php"><img src="img/logo_menu.png" alt="" style="height: 100%; width: 100%; max-width: 200px; max-height: 200px; margin-left: auto; margin-right: auto;"></a></p>
         <h2 style="text-align: center;">
         Editar aluno
       </h2>
+      <input type="hidden" name="id" value= <?php echo $_POST['id'] ?> /> 
       <div class="input">
-        <input id="login" name="login" type="text" data-rules="required"/>
-        <label for="login">Login</label>
+        <input id="name" name="name" type="text" data-rules="required"/>
+        <label for="name">Nome</label>
       </div>
       <div class="input">
         <input  name="matricula" id="matricula"type="text" data-rules="required|min=5" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"/>
         <label for="matricula">N° da Matricula</label>
       </div>
       <div class="input">
-        <input  type="password" id="senha" data-rules="required|min=5"/>
+        <input  name= "password" type="password" id="senha" data-rules="required|min=5"/>
         <label for="senha">Senha</label>
       </div>
       <div class="input">
         <input id="turma" name="turma" type="text" data-rules="required"/>
-        <label for="turma">Turno</label>
+        <label for="turma">Turma</label>
       </div>
       <div class="input">
         <input id="email" name="email" type="text" data-rules="required|email"/>

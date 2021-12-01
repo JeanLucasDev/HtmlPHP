@@ -7,7 +7,7 @@ class classProdutoDAO{
             echo "entoru aqui";
             echo $_SESSION['id'];
             $minhaConexao = Conexao::getConexao();
-            $sql = $minhaConexao->prepare("select product.id, product.name, product.photo, product.price from bd_cantinaon.product inner join bd_cantinaon.school inner join bd_cantinaon.employee on employee.idSchool = school.id where employee.idUser = :idUser;");
+            $sql = $minhaConexao->prepare("select product.id, product.name, product.photo, product.price,product.code from bd_cantinaon.product inner join bd_cantinaon.school inner join bd_cantinaon.employee on employee.idSchool = school.id where employee.idUser = :idUser;");
             $sql->bindParam("idUser",$idUser);
             $idUser = $_SESSION['id']; 
             $sql->execute();
@@ -23,6 +23,7 @@ class classProdutoDAO{
                 $prdt->setnome($linha['name']);
                 $prdt->setfoto($linha['photo']);
                 $prdt->setpreco($linha['price']);
+                $prdt->setcodigo($linha['code']);
                 echo $prdt->getfoto();
                 $listaPrdt[$i] = $prdt;
                 $i++;
@@ -105,37 +106,22 @@ class classProdutoDAO{
          }
      }
 
-     public function editarFuncionario($fun){
+     public function editarProdutos($prdt){
         try{
             $minhaConexao = Conexao::getConexao();
-            $sql = $minhaConexao->prepare("select * FROM bd_cantinaon.employee where employee.id=:id;");
+            $sql = $minhaConexao->prepare("select * from bd_cantinaon.food inner join bd_cantinaon.product on food.idProduct = product.id where product.id=:id;");
             $sql->bindParam("id",$id);
-            $id = $fun->getId();
+            $id = $prdt->getId();
             $sql->execute(); 
-            while($user = $sql->fetch()){
-                echo "totototoott";
-                $idUser = $user['idUser'];
+            $res = $sql->rowcount();
+            if($res > 0){
+                echo "entrou comida";
+                return 1;
             }
-            $sql = $minhaConexao->prepare("update bd_cantinaon.user INNER JOIN bd_cantinaon.employee ON user.id=idUser SET login=:login, email=:email, password=:password, phone=:phone, cpf=:cpf where employee.idUser=:idUser;
-            update bd_cantinaon.employee set cpf=:cpf where id=:id");
-            echo $idUser;
-            $sql->bindParam("login",$login);
-            $sql->bindParam("email",$email);
-            $sql->bindParam("password",$password);
-            $sql->bindParam("phone",$phone);
-            $sql->bindParam("cpf",$cpf);
-            $sql->bindParam("idUser",$idUser);
-            $sql->bindParam("id",$id);
-            $sql->bindParam("Type",$Type);
-            $Type = 'F';
-            $id = $fun->getId();
-            $login = $fun->getLogin();
-            $email = $fun->getEmail();
-            $password = $fun->getPassword();
-            $phone = $fun->getPhone();
-            $cpf = $fun->getcpf();
-            $sql->execute();
-            
+            else{
+                echo "entrou bebida";
+                return 0;
+            }            
          }
          catch(PDOException $e){
              echo "entrou no catch".$e->getmessage();
@@ -144,15 +130,47 @@ class classProdutoDAO{
      }
 
 
-    public function excluirLivro($liv){
+
+    public function removerProduto($prdt){
         try{
+            echo "CODIGO: ".$prdt->getcodigo();
             $minhaConexao = Conexao::getConexao();
-            $sql = $minhaConexao->prepare("delete from bd_livraria.livro where codigo=:codigo");
-            $sql->bindParam("codigo",$codigo);
-            $codigo = $liv->getCodigo();
-            
+            $sql = $minhaConexao->prepare("select food.id from bd_cantinaon.food inner join bd_cantinaon.product on food.idProduct = product.id where product.code=:code");
+            $sql->bindParam("code",$codigo);
+            $codigo = $prdt->getcodigo();
             $sql->execute();
-            
+            $res = $sql->rowcount();
+            echo "CHEGOU AQUI".$res; 
+
+            if($res > 0){
+                echo "CHEGOU AQUI 2";
+                $idComida = $sql->fetch();
+                echo "ID DA COMIDA: ".$idComida['id'];
+                $sql = $minhaConexao->prepare("delete from bd_cantinaon.product where code=:code; 
+                delete from bd_cantinaon.food where id=:id;
+                ");
+                $sql->bindParam("code",$codigo);
+                $sql->bindParam("id",$id);
+                $codigo = $prdt->getcodigo();
+                echo "ID DA COMIDA: ".$idComida['id'];
+                $id = $idComida['id'];
+                $sql->execute();
+            }
+            else{
+                $sql = $minhaConexao->prepare("select drink.id from bd_cantinaon.drink inner join bd_cantinaon.product on drink.idProduct = product.id where product.code=:code");
+                $sql->bindParam("code",$codigo);
+                $codigo = $prdt->getcodigo();
+                $sql->execute();
+                $idBebida = $sql->fetch();
+                $sql = $minhaConexao->prepare("delete from bd_cantinaon.product where code=:code; 
+                delete from bd_cantinaon.drink where id=:id;
+                ");
+                $sql->bindParam("code",$codigo);
+                $sql->bindParam("id",$id);
+                $codigo = $prdt->getcodigo();
+                $id = $idBebida['id'];
+                $sql->execute();
+            }
          }
          catch(PDOException $e){
              echo "entrou no catch".$e->getmessage();

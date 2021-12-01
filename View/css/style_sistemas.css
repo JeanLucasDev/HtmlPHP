@@ -149,6 +149,20 @@ header .menu_mobile{
     width:100%;
     margin: 1vh 0;
 }
+
+
+.add_saldo_section .card{
+    background-color: #101010;
+    color: #e1e1e1;
+    border: 1px solid #e1e1e1;
+    padding:1vh;
+}
+
+.add_saldo_section .card button{
+    width:100%;
+    margin: 1vh 0;
+}
+
 .add_saldo_section input{
     width:100%;
     padding: 1vh;

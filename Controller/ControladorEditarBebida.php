@@ -1,7 +1,7 @@
 <?php
     require_once "Model/classBebida.php";
     require_once "IControlador.php";
-    class ControladorNovaBebida implements IControlador{
+    class ControladorEditarBebida implements IControlador{
         private $drink;
 
         public function __construct(){
@@ -9,13 +9,13 @@
         }
 
         public function processaRequisicao(){   
+            $this->drink->setId($_POST['id']);
             $this->drink->setnome($_POST['name']);
             $this->drink->setcodigo($_POST['codigo']);
             $this->drink->setpreco($_POST['preco']);
             $this->drink->setfornecedor($_POST['fornecedor']);
-            $this->drink->setfoto($_POST['foto']);
-            echo "AQUIIII".$this->drink->getfoto();
-            $this->drink->incluirBebida();
+            $this->drink->setfoto($_POST['arquivo']);
+            $this->drink->editarBebida();
             require "View/tela_funcionario_principal.php";
         }
     }

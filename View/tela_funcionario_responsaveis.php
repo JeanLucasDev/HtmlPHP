@@ -74,26 +74,58 @@ else{
             <div class="container">
                 <div class="row" style="margin:0 auto;">
                     <div class="col-md-6" style="margin: 0 auto;">
+                    <form method="POST" action="">
                         <label style="width:100%;color: #e1e1e1 ;" for="id">Buscar o cpf do responsavel?</label>
                         <input style="width:100%" name="cpf" class="form-control"
                             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
                             id="cpf" type="text">
-                        <button style="width:100%;padding: 1vh;" class="btn btn-light">Buscar</button>
+                        <button style="width:100%;padding: 1vh;" formaction='pesquisarResponsavel' class="btn btn-light">Buscar</button>
                     </div>
                 </div>
-                <p class="text-center">Os dados do responsavel aparecera aqui</p>
-                <div class="row" >
-                    <div style="margin: 0 auto;" class="col-md-3">
-                        <p class="text-center" style="font-size:1.5rem">Remove responsavel</p>
-                        <button style="width:100%" onclick="alert('Responsavel removido')">
-                            <img src="img/sub.png" class="card-img-top" alt="...">
-                        </button>
+                    <div class="col-md-3">
+                        <?php if(!isset($responsavel)){ ?>
+                        <div class="row" >
+                        <div  style="margin: auto 570px" class="col-md-6">
+                        <p class="text-center" style="font-size: auto">Adicionar responsavel</p>
+                        <form action="">
+                            <button formaction="cadastro_responsavel.php" style="width:100%">
+                                <img src="img/add.png" class="card-img-top" alt="...">
+                            </button>
+                        </form> 
+                        </div>
+                        <?php } ?>
+                        <?php if(isset($responsavel)){ ?>
+                        <div class="row" >
+                        <div class="card">
+                            <img src="img/Responsavel.png" height="200px" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title"><?php echo $responsavel->getLogin(); ?></h5>
+                                <h6 class="card-subtitle mb-2 text-muted ">Email: <?php echo $responsavel->getEmail(); ?></h6>
+                                <h6 class="card-subtitle mb-2 text-muted ">Telefone: <?php echo $responsavel->getPhone(); ?></h6>
+                                <p class="card-text">
+                                </p>                         
+                            </div>
+                        </div>
+                        </div>
                     </div>
+                    <div class="row" >
+                        <div style="margin: 0 auto;" class="col-md-3">
+                            <p class="text-center" style="font-size:1.5rem">Remove responsavel</p>
+                            <form method="POST" action="">
+                            <input type="hidden" name="id" value= <?php echo $responsavel->getid();?>>
+                            <button type="submit" style="width:100%" formaction="removerResponsavel">
+                                <img src="img/sub.png" class="card-img-top" alt="...">
+                            </button>
+                            </form>
+                        </div>
                     <div style="margin: 0 auto;" class="col-md-3">
                         <p class="text-center" style="font-size:1.5rem">Editar responsavel</p>
-                        <button style="width:100%" onclick="alert('Responsavel removido')">
-                            <img src="img/editar.png" class="card-img-top" alt="...">
+                        <form method="POST" action="">
+                        <button formaction="editar_responsavel.php" type="submit" style="width:100%">
+                            <input type="hidden" name="id" value= <?php echo $responsavel->getid();?>>  
+                            <img type="submit" src="img/editar.png" class="card-img-top" alt="...">
                         </button>
+                        </form>
                     </div>
                     <div style="margin: 0 auto;" class="col-md-3">
                         <p class="text-center" style="font-size:1.5rem">Adicionar responsavel</p>
@@ -109,6 +141,7 @@ else{
                             <img src="img/desbloquear.png" class="card-img-top" alt="...">
                         </button>
                     </div>
+                    <?php } ?>
                 </div>
             </div>
         </section>

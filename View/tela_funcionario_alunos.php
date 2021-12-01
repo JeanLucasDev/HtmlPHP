@@ -59,7 +59,7 @@ else{
                     <li><a href="tela_funcionario_principal.php">Inicio</a></li>
                     <li><a href="tela_funcionario_principal.php">Informações</a></li>
                     <li><a href="listarprodutos">Produtos</a></li>
-                    <li><a href="tela_funcionario_responsaveis.php">Responsaveis</a></li>
+                    <li><a href="pesquisarResponsavel">Responsaveis</a></li>
                     <li><a href="tela_funcionario_alunos.php">Aluno</a></li>
                     <li><a href="logout" >Sair</a>
                 </ul>
@@ -73,17 +73,32 @@ else{
             </div>
             <div class="container">
                 <div class="row" style="margin:0 auto;">
-                    <div class="col-md-6" style="margin: 0 auto;">
-                     
+                    <div class="col-md-6" style="margin: 0 auto;">        
                         <label style="width:100%;color: #e1e1e1 ;" for="id">Consultar saldo</label>
-                        <input style="width:100%" name="matricula" class="form-control"
-                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
-                            id="matricula" type="text" placeholder="Matricula">
-                        <button style="width:100%;padding: 1vh;" class="btn btn-light">Buscar</button>
+                        <form method="POST" action="">
+                            <input style="width:100%" name="matricula" class="form-control"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
+                                id="matricula" name="matricula" type="text" placeholder="Matricula">
+                            <button formaction="pesquisarAluno" type="submit" style="width:100%;padding: 1vh;" class="btn btn-light">Buscar</button>
+                        </form>
                     </div>
                 </div>
-                <p class="text-center">Os dados do aluno aparecera aqui</p>
-            </div>
+                <div class="container">
+                <div class="row" style="margin:10vh 0;">
+                <?php if(isset($aluno)){ ?>
+                    <div class="col-md-3">
+                        <div class="card">
+                            <img src="img/Aluno.png" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Nome: <?php echo $aluno->getLogin(); ?> </h5>
+                                <h6 class="card-subtitle mb-2 text-muted ">Matricula: <?php echo $aluno->getmatricula(); ?></h6>
+                                <h6 class="card-subtitle mb-2 text-muted ">Saldo: <?php echo $aluno->getsaldo(); ?></h6>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
+                </div>
+                </div>
         </section>
     </main>
     <footer>

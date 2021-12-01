@@ -1,22 +1,24 @@
 <?php
-    require_once "Model/classFuncionario.php";
+    require_once "Model/classProduto.php";
     require_once "IControlador.php";
-    class ControladorEditarFuncionario implements IControlador{
-        private $func;
+    class ControladorEditarProduto implements IControlador{
+        private $prdt;
 
         public function __construct(){
-            $this->func = new classFuncionario();
+            $this->prdt = new classProduto();
         }
 
         public function processaRequisicao(){
-            $this->func->setId($_POST['id']);
-            $this->func->setLogin($_POST['name']);
-            $this->func->setPassword($_POST['password']);
-            $this->func->setEmail($_POST['email']);
-            $this->func->setPhone($_POST['phone']);
-            $this->func->setcpf($_POST['cpf']);
-            $this->func->editarFuncionario();
-            header('Location: tela_escola_principal.php');
+            $this->prdt->setId($_POST['id']);
+            $typ = $this->prdt->editarProdutos();
+            if($typ == 1){
+                $idProduto = $_POST['id'];
+                require "View/produto_editar_comida.php";
+            }
+            else{
+                $idProduto = $_POST['id'];
+                require "View/produto_editar_bebida.php";
+            }
         }
     }
 ?>

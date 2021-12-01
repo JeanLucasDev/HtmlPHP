@@ -14,8 +14,7 @@
                 $controlador = new ControladorListarAlunos();
                 $controlador->processaRequisicao();
 				break;
-            
-
+    
             case "LISTARESCOLA":
                 require "Controller/ControladorListarEscola.php";
                 $controlador = new ControladorListarEscola();
@@ -72,6 +71,13 @@
                 $controlador = new ControladorEditarFuncionario();
                 $controlador->processaRequisicao();
                 break;
+
+            case "VIEW/EDITARALUNO":
+                require "Controller/ControladorEditarAluno.php";
+                $controlador = new ControladorEditarAluno();
+                $controlador->processaRequisicao();
+                break;
+
             case "VIEW/INCLUIRRESPONSAVEL":
                 require "Controller/ControladorNovoResponsavel.php";    
                 $controlador = new ControladorNovoResponsavel();
@@ -117,7 +123,67 @@
                 $controlador = new ControladorNovaBebida();
                 $controlador->processaRequisicao();
                 break;
+
+            case "VIEW/EDITARRESPONSAVEL":
+                require "Controller/ControladorEditarResponsavel.php";    
+                $controlador = new ControladorEditarResponsavel();
+                $controlador->processaRequisicao();
+                break;
+
+            case "VIEW/EDITARPRODUTOS":
+                require "Controller/ControladorEditarProduto.php";    
+                $controlador = new ControladorEditarProduto();
+                $controlador->processaRequisicao();
+                break;
+
+
+            case "VIEW/EDITARBEBIDA":
+                require "Controller/ControladorEditarBebida.php";    
+                $controlador = new ControladorEditarBebida();
+                $controlador->processaRequisicao();
+                break;
+
+            case "VIEW/EDITARCOMIDA":
+                require "Controller/ControladorEditarComida.php";    
+                $controlador = new ControladorEditarComida();
+                $controlador->processaRequisicao();
+                break;
             
+            case "VIEW/REMOVERPRODUTO":
+                require "Controller/ControladorRemoverProduto.php";    
+                $controlador = new ControladorRemoverProduto();
+                $controlador->processaRequisicao();
+                break;
+            case "VIEW/REMOVERRESPONSAVEL":
+                require "Controller/ControladorRemoverResponsavel.php";    
+                $controlador = new ControladorRemoverResponsavel();
+                $controlador->processaRequisicao();
+                break; 
+
+            case "VIEW/REMOVERALUNO":
+                require "Controller/ControladorRemoverAluno.php";    
+                $controlador = new ControladorRemoverAluno();
+                $controlador->processaRequisicao();
+                break; 
+
+            case "VIEW/PESQUISARRESPONSAVEL":
+                require "Controller/ControladorPesquisarResponsavel.php";    
+                $controlador = new ControladorPesquisarResponsavel();
+                $controlador->processaRequisicao();
+                break;
+
+            case "VIEW/PESQUISARALUNO":
+                require "Controller/ControladorPesquisarAluno.php";    
+                $controlador = new ControladorPesquisarAluno();
+                $controlador->processaRequisicao();
+                break;
+
+            case "VIEW/PAGERESP":
+                require "Controller/pageResp.php";    
+                $controlador = new pageResp();
+                $controlador->processaRequisicao();
+                break;
+
 
             default:
                 require "Controller/index.php";

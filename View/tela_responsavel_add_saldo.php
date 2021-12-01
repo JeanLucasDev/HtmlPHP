@@ -63,11 +63,18 @@ if($_SESSION['logged'] == false || $_SESSION['type'] != 'R'){
                     <div class="col-md-6" style="margin: 0 auto;">
                         <label  for="number">Quanto você deseja adicionar</label>
                         <form method="post" action="AddSaldo">         
-                                <input name="id" id="id"type="hidden" value= <?php $_POST['id']?>>
+                                <input name="id" id="id"type="hidden" value= <?php echo $_POST['id']?>>
                                 <input name="qtd" id="number"type="number">
                                 <button type="submit" class="btn btn-light">Editar</button>
                         </form>
-                        <p>Saldo atual: R$ <?php echo $Saldo ?></p>
+                        <?php if(isset($Saldo)){ ?>
+                            <p>Saldo atual: R$ <?php echo $Saldo ?></p>
+                        <?php } ?>
+                        <?php if(!isset($Saldo)){ ?>
+                        <p>Saldo atual: R$ <?php echo $_POST['qtd'] ?></p>
+                        <?php } ?>
+                        
+
                     </div>
                 </div>
             </div>

@@ -65,16 +65,17 @@ if($_SESSION['logged'] == false || $_SESSION['type'] != 'R'){
                         <div class="card">
                             <img src="img/Aluno.png" class="card-img-top" alt="...">
                             <div class="card-body">
-                                <h5 class="card-title"><?php echo $listaAlunos[$i]->getLogin(); ?></h5>
-                                <h6 class="card-subtitle mb-2 text-muted "><?php echo "Matricula: ".$listaAlunos[$i]->getmatricula(); ?></h6>
+                                <h5 class="card-title">Nome: <?php echo $listaAlunos[$i]->getLogin(); ?></h5>
+                                <h6 class="card-subtitle mb-2 text-muted ">Matricula: <?php echo "Matricula: ".$listaAlunos[$i]->getmatricula(); ?></h6>
                                 <form method="post" action="">
                                      <p><?php echo $listaAlunos[$i]->getId() ?></p>
                                     <input type="hidden" name="id" value= <?php echo $listaAlunos[$i]->getId()?> /> 
                                     <input type="hidden" name="qtd" value= <?php echo $listaAlunos[$i]->getsaldo()?> /> 
                                     <button class="btn btn-light" formaction="tela_responsavel_controle.php">Restringir produtos</button>
-                                    <button class="btn btn-light" formaction="AddSaldo">Adicionar saldo</button>
+                                    <button class="btn btn-light" formaction="tela_responsavel_add_saldo.php">Adicionar saldo</button>
                                     <button class="btn btn-light"formaction="tela_responsavel_historico.php">Historicos</button>
                                     <button class="btn btn-light"formaction="editar_aluno.php">Editar aluno</button>
+                                    <button class="btn btn-light"formaction="removerAluno">Remover aluno</button>
                                 </form>
                             </div>
                         </div>

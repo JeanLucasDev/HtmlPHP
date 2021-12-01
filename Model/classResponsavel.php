@@ -2,6 +2,7 @@
 require "classResponsavelDAO.php";
 require_once "classUsuario.php";
 class classResponsavel extends classUsuario{
+    private $id;
     private $cpf;
 
     public function getcpf(){
@@ -9,6 +10,13 @@ class classResponsavel extends classUsuario{
     }
     public function setcpf($cpf){
         $this->cpf = $cpf;
+    }
+
+    public function getid(){
+        return $this->id;
+    }
+    public function setid($id){
+        $this->id = $id;
     }
     
     //Function DAO
@@ -22,9 +30,24 @@ class classResponsavel extends classUsuario{
         $ResponsavelDAO->loginResponsavel($this);
     }
 
+    public function editarResponsavel(){
+        $ResponsavelDAO = new classResponsavelDAO();
+        return $ResponsavelDAO->editarResponsavel($this);
+    }
+
     public function listarResponsavel(){
         $ResponsavelDAO = new classResponsavelDAO();
         $ResponsavelDAO->listarResponsavel($this);
+    }
+
+    public function pesquisarResponsavel(){
+        $ResponsavelDAO = new classResponsavelDAO();
+        return $ResponsavelDAO->pesquisarResponsavel($this);
+    }
+
+    public function removerResponsavel(){
+        $ResponsavelDAO = new classResponsavelDAO();
+        $ResponsavelDAO->removerResponsavel($this);
     }
 }
 

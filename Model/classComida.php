@@ -2,9 +2,12 @@
 require "classComidaDAO.php";
 require "classProduto.php";
 class classComida extends classProduto{
+    private $id;
     private $ingredientes;
 
-
+    public function getid(){
+        return $this->id;
+    }
     
     public function getingredientes(){
         return $this->ingredientes;
@@ -12,6 +15,10 @@ class classComida extends classProduto{
 
     public function setingredientes($ingredientes){
         $this->ingredientes = $ingredientes;
+    }
+
+    public function setid ($id){
+        $this->id = $id;
     }
 
 
@@ -24,6 +31,11 @@ class classComida extends classProduto{
     public function excluirComida(){
         $AlunoDAO = new classComidaDAO();
         $AlunoDAO->excluirComida($this);
+    }
+
+    public function editarComida(){
+        $AlunoDAO = new classComidaDAO();
+        $AlunoDAO->editarComida($this);
     }
 
 }

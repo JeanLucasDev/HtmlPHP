@@ -8,7 +8,7 @@ class classAluno extends classUsuario{
 
     public function __contruct(){
         if($this->saldo != 0){
-            $this->saldo = 0;
+             $this->saldo = 0;
         }
     }
 
@@ -46,14 +46,14 @@ class classAluno extends classUsuario{
         $AlunoDAO->incluirAluno($this);
     }
 
-    public function excluirAluno(){
+    public function removerAluno(){
         $AlunoDAO = new classAlunoDAO();
-        $AlunoDAO->excluirAluno($this);
+        $AlunoDAO-> removerAluno($this);
     }
 
-    public function pesquisaAluno(){
+    public function pesquisarAluno(){
         $AlunoDAO = new classAlunoDAO();
-        $AlunoDAO->pesquisarAluno($this);
+        return $AlunoDAO->pesquisarAluno($this);
     }
 
     public function alterarAluno(){
@@ -69,6 +69,11 @@ class classAluno extends classUsuario{
     public function AddSaldo(){
         $AlunoDAO = new ClassAlunoDAO();
         return $AlunoDAO->AddSaldo($this);
+    }
+
+    public function editarAluno(){
+        $AlunoDAO = new classAlunoDAO();
+        return $AlunoDAO->editarAluno($this);
     }
 
 

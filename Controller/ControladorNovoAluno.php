@@ -19,9 +19,6 @@
             $this->aluno->setsaldo(0);
             $this->aluno->incluirAluno();
             $id = $this->aluno->incluirAluno();
-            echo "SALDO: ".$this->aluno->getsaldo();
-            echo "ID returned: ".$id;
-            echo "ID: ".$this->aluno->getId();
             header('Location: tela_responsavel_principal.php');
         }
         
