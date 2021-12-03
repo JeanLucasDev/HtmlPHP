@@ -17,7 +17,7 @@ class CarrinhoSession implements ICarrinho{
 
    public function adicionar($item){
     //adiciona um novo item no carrinho
-       $id = $item->getProduto()->getCodigo();
+       $id = $item->getProduto()->getid();
        if (!$this->estaNoCarrinho($id))
            $this->itens[$id] = $item;
        else
@@ -27,7 +27,7 @@ class CarrinhoSession implements ICarrinho{
 
    public function atualizar($item){
     //altera um item do carrinho quando a quandidade é alterada
-    $id = $item->getProduto()->getCodigo();
+    $id = $item->getProduto()->getid();
     if ($this->estaNoCarrinho($id)){
        if ($item->getquantidade()==0){
            $this->apagar($id);

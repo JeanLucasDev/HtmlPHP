@@ -1,5 +1,4 @@
 <?php
-session_start();
 if($_SESSION['logged'] == false || $_SESSION['type'] != 'A'){
     header('Location: Restrict');
 }
@@ -33,9 +32,9 @@ if($_SESSION['logged'] == false || $_SESSION['type'] != 'A'){
             <ul>
                 <li><a href="tela_aluno_principal.php">Inicio</a></li>
                 <li><a href="tela_aluno_principal.php">Informações</a></li>
-                <li><a href="tela_aluno_loja.php">Loja</a></li>
+                <li><a href="listarLoja">Loja</a></li>
                 <li><a href="tela_aluno_historico.php">Historicos</a></li>
-                <li><a href="tela_aluno_carrinho.php"><i class="fas fa-shopping-cart"></i></a></li>
+                <li><a href="carrinho"><i class="fas fa-shopping-cart"></i></a></li>
                 <li><a href="logout" >Sair</a>
             </ul>
         </div>
@@ -49,9 +48,9 @@ if($_SESSION['logged'] == false || $_SESSION['type'] != 'A'){
                 <ul>
                     <li><a href="index.php">Inicio</a></li>
                     <li><a href="tela_aluno_principal.php">Informações</a></li>
-                    <li><a href="tela_aluno_loja.php">Loja</a></li>
+                    <li><a href="listarLoja">Loja</a></li>
                     <li><a href="tela_aluno_historico.php">Historicos</a></li>
-                    <li><a href="tela_aluno_carrinho.php"><i class="fas fa-shopping-cart"></i></a></li>
+                    <li><a href="carrinho"><i class="fas fa-shopping-cart"></i></a></li>
                     <li><a href="logout" >Sair</a>
                 </ul>
             </div>
@@ -64,62 +63,53 @@ if($_SESSION['logged'] == false || $_SESSION['type'] != 'A'){
                 <h2>Loja</h2>
             </div>
             <div class="container">
-                <div class="row">
                     <div class="col-md-12">
-                        <h3>Salgados</h3>
+                        <h4 class="text-end" style="margin:5vh;color:#e1e1e1;">Saldo: R$ <?php echo $_SESSION['balance']?></h4>
                     </div>
                     <div class="col-md-12">
-                        <h4 class="text-end" style="margin:5vh;color:#e1e1e1;">Saldo:</h4>
+                        <h3>Comidas</h3>
                     </div>
-                    <div class="col-md-3">
-                        <div class="card">
-                            <img src="img/Food/Salgados/cachorro-quente.jpg"height="200px" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Cachorro Quente</h5>
-                                <h6 class="card-subtitle mb-2 text-muted ">R$ 5.00</h6>
-                                <p class="card-text">
-                                </p>
-                                <button class="btn btn-light">Comprar</button>
+                    <div class="row" style="margin:10vh 0;">
+                    <?php if(isset($listaComida)){ ?>
+                        <?php for($i=0;$i<count($listaComida);$i++){ ?>
+                            <div class="col-md-3">
+                                <div class="card">
+                                    <img src="<?php echo "../".$listaComida[$i]->getfoto()?>" height="200px" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><?php echo $listaComida[$i]->getnome();?></h5>
+                                        <h6 class="card-subtitle mb-2 text-muted ">R$ <?php echo $listaComida[$i]->getpreco(); ?></h6>
+                                        <p class="card-text"></p>
+                                    </div>
+                                    <form method="post" action="AddItemCarrinho" >
+                                        <input type="hidden" name="id" value="<?php echo $listaComida[$i]->getid();?>">
+                                        <button type="submit" class="btn btn-light">Comprar</button>
+                                    </form>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    
+                        <?php } ?>
+                    <?php } ?>
                 </div>
-                <div class="row">
                     <div class="col-md-12">
                         <h3>Bebidas</h3>
                     </div>
-                    <div class="col-md-3">
-                        <div class="card">
-                            <img src="img/Food/Bebidas/Agua.jpg" height="200px" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Água</h5>
-                                <h6 class="card-subtitle mb-2 text-muted ">R$ 3.00</h6>
-                                <p class="card-text">
-                                    
-                                </p>
-                                <button class="btn btn-light">Comprar</button>
+                    <div class="row" style="margin:10vh 0;">
+                    <?php if(isset($listaBebida)){ ?>
+                        <?php for($i=0;$i<count($listaBebida);$i++){ ?>
+                            <div class="col-md-3">
+                                <div class="card">
+                                    <img src="<?php echo "../".$listaBebida[$i]->getfoto()?>" height="200px" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><?php echo $listaBebida[$i]->getnome()?></h5>
+                                        <h6 class="card-subtitle mb-2 text-muted ">R$ <?php echo $listaBebida[$i]->getpreco()?></h6>
+                                    </div>
+                                    <form method="post" action="AddItemCarrinho" >
+                                        <input type="hidden" name="id" value="<?php echo $listaBebida[$i]->getid();?>">
+                                        <button type="submit" class="btn btn-light">Comprar</button>
+                                    </form>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <h3>Doces</h3>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card">
-                            <img src="img/Food/Doces/Brigadeiro.jpg" height="200px" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Brigadeiro</h5>
-                                <h6 class="card-subtitle mb-2 text-muted ">R$ 1.50</h6>
-                                <p class="card-text">
-                                    
-                                </p>
-                                <button class="btn btn-light">Comprar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                        <?php } ?>
+                    <?php } ?>
             </div>
             </div>
             </div>

@@ -2,56 +2,7 @@
 require_once "Conexao.php";
 class classComidaDAO{
 
-    public function listarAlunos(){
-        //vai ao banco de dados e pega todos os livros
-        try{
-            $minhaConexao = Conexao::getConexao();
-            $sql = $minhaConexao->prepare("select student.id, user.login, student.class,student.registration, student.balance from bd_cantinaon.student inner join bd_cantinaon.user on user.id = student.idUser inner join bd_cantinaon.parents on parents.id = student.idParents where parents.idUser = :idUser;");
-            $sql->bindParam("idUser",$idUser);
-            $idUser = $_SESSION['id']; 
-            $sql->execute();
-            $result = $sql->setFetchMode(PDO::FETCH_ASSOC);
-            $listaAln=array();
-            $i=0;
-            while ($linha = $sql->fetch(PDO::FETCH_ASSOC) ) {
-                $aln = new classAluno();
-                $aln->setId($linha['id']);
-                $aln->setLogin($linha['login']);
-                $aln->setmatricula($linha['registration']);
-                $aln->setturma($linha['class']);
-                $aln->setsaldo($linha['balance']);
-                $listaAln[$i] = $aln;
-                $i++;
-            }
-            return $listaAln;
-        }
-       catch(PDOException $e){
-        return array();
-       }
-    }
 
-    public function pesquisaLivro($aln){
-        //vai ao banco de dados e pega todos os livros
-        try{
-            $minhaConexao = Conexao::getConexao();
-            $sql = $minhaConexao->prepare("select * from bd_cantinaon.student where codigo=:codigo");
-            $sql->bindParam("codigo",$codigo);
-            $codigo = $aln->getCodigo();
-                
-           $sql->execute();
-           $result = $sql->setFetchMode(PDO::FETCH_ASSOC);
-           
-           while ($linha = $sql->fetch(PDO::FETCH_ASSOC)) {
-            $aln->setTitulo($linha['nome']);
-            $aln->setEdicao($linha['edicao']);
-            $aln->setAno($linha['ano']);
-          }
-        
-       }
-       catch(PDOException $e){
-        
-       }
-    }
 
     public function incluirComida($cmd){
         echo "Testando".$_SESSION['id'];
@@ -79,22 +30,43 @@ class classComidaDAO{
                 echo "CHEGOU ATE AQUI 0";
                 $idEscola = $sql2->fetch();
                 echo "ID DA ESCOLA: ".$idEscola['idSchool'];
-                $sql3 = $minhaConexao->prepare("insert into bd_cantinaon.product (name, code, price, photo, blocked, idSchool) values (:name, :code, :price, :photo, :blocked, :idSchool);");
+                $sql3 = $minhaConexao->prepare("insert into bd_cantinaon.product (name, code, price, blocked, idSchool) values (:name, :code, :price, :blocked, :idSchool);");
                 $sql3->bindParam("name",$name);
                 $sql3->bindParam("code",$code);
                 $sql3->bindParam("price",$price);
-                $sql3->bindParam("photo",$photo);
                 $sql3->bindParam("blocked",$blocked);
                 $sql3->bindParam("idSchool",$idSchool);
                 $name = $cmd->getnome();
                 $code = $cmd->getcodigo();
                 $price = $cmd->getpreco();
-                $photo = $cmd->getfoto(); 
                 $blocked = true;
                 $idSchool = $idEscola['idSchool'];
                 echo "ID ESCOLA: ".$idSchool;
                 $sql3->execute();
                 $last_id = $minhaConexao->lastInsertId();
+                echo "Aaaaaaaaaaaaaaa ".$idSchool;
+                $imagem = $cmd->getfoto();  
+                if($imagem != NULL) {
+                  echo "entrou no if da imagem !=null";
+                 //defini o nome do novo arquivo, que será o id gerado para o livro
+                 $nomeFinal = $last_id.'.jpg';
+                 //move o arquivo para a pasta atual com esse novo nome
+                 if (move_uploaded_file($imagem['tmp_name'], $nomeFinal)) {
+                     echo "Copiou a imagem";
+                     echo "Nome final: ".$nomeFinal;
+                     echo "ID PRODUTO: ".$last_id;
+                     echo "NOME: ".$imagem['tmp_name'];
+
+                   //atualiza o banco de dados para guardar o nome do arquivo gerado.
+                    $sql = $minhaConexao->prepare("update bd_cantinaon.product set photo = :photo where id=:id");
+                    $sql->bindParam("photo",$nomeFinal);
+                    $sql->bindParam("id",$last_id);
+                    $sql->execute();
+                    echo "atulizou o nome da imagem no bd";
+                    
+                  }
+                }
+
                 echo "Last id: ".$last_id;
                 echo "CHEGOU ATE AQUI 2";
                 $sql4 = $minhaConexao->prepare(" select product.id from bd_cantinaon.school inner join bd_cantinaon.user inner join bd_cantinaon.parents inner join bd_cantinaon.product on parents.idUser = user.id where product.id = :idUser;");

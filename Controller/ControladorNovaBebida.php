@@ -13,8 +13,7 @@
             $this->drink->setcodigo($_POST['codigo']);
             $this->drink->setpreco($_POST['preco']);
             $this->drink->setfornecedor($_POST['fornecedor']);
-            $this->drink->setfoto($_POST['foto']);
-            echo "AQUIIII".$this->drink->getfoto();
+            $this->drink->setfoto($_FILES['imagem']);
             $this->drink->incluirBebida();
             require "View/tela_funcionario_principal.php";
         }

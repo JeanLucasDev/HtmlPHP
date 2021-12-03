@@ -41,9 +41,9 @@ else{
             <ul>
                 <li><a href="tela_aluno_principal.php">Inicio</a></li>
                 <li><a href="tela_aluno_principal.php">Informações</a></li>
-                <li><a href="tela_aluno_loja.php">Loja</a></li>
+                <li><a href="listarLoja">Loja</a></li>
                 <li><a href="tela_aluno_historico.php">Historicos</a></li>
-                <li><a href="tela_aluno_carrinho.php"><i class="fas fa-shopping-cart"></i></a></li>
+                <li><a href="carrinho"><i class="fas fa-shopping-cart"></i></a></li>
                 <li><a href="logout" >Sair</a>
             </ul>
         </div>
@@ -57,9 +57,9 @@ else{
                 <ul>
                     <li><a href="tela_aluno_principal.php">Inicio</a></li>
                     <li><a href="tela_aluno_principal.php">Informações</a></li>
-                    <li><a href="tela_aluno_loja.php">Loja</a></li>
+                    <li><a href="listarLoja">Loja</a></li>
                     <li><a href="tela_aluno_historico.php">Historicos</a></li>
-                    <li><a href="tela_aluno_carrinho.php"><i class="fas fa-shopping-cart"></i></a></li>
+                    <li><a href="carrinho"><i class="fas fa-shopping-cart"></i></a></li>
                     <li><a href="logout" >Sair</a>
                 </ul>
             </div>
@@ -78,7 +78,7 @@ else{
                     <div class="col-md-6">
                         <div class="text_informacao">
                             <p>Nome: <?php echo $_SESSION['login'] ?></p>
-                            <p>Saldo: <?php echo $_SESSION['balance'] ?> </p>
+                            <p>Saldo: <?php echo $_SESSION['balance'] ?> R$ </p>
                             <p>N° Matricula: <?php echo $_SESSION['registration'] ?></p>
                             <p>Turma: <?php echo $_SESSION['class'] ?></p>
                             <p>Email: <?php echo $_SESSION['email'] ?></p>

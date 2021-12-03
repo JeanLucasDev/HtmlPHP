@@ -75,7 +75,7 @@ else{
                     <?php for($i=0;$i<count($listaPrdt);$i++){ ?>
                     <div class="col-md-3">
                         <div class="card">
-                            <img src="<?php echo $listaPrdt[$i]->getfoto(); ?>" height="200px" class="card-img-top" alt="...">
+                            <img src='<?php echo "../".$listaPrdt[$i]->getfoto(); ?>' height="200px" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title"><?php echo $listaPrdt[$i]->getnome(); ?></h5>
                                 <h6 class="card-subtitle mb-2 text-muted ">R$ <?php echo $listaPrdt[$i]->getpreco(); ?></h6>

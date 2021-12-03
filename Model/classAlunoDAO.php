@@ -240,6 +240,35 @@ class classAlunoDAO{
           return 0;
         }
     }
+
+    public function removeSaldo($aln, $valor){
+        try{
+            echo "VALOR: ".$valor;
+            echo "ID ALUNO: ".$aln->getId();
+            $minhaConexao = Conexao::getConexao();
+            $sql = $minhaConexao->prepare("select student.balance from bd_cantinaon.student where idUser=:id;");
+            $sql->bindParam("id",$id);
+            $id = $aln->getId(); 
+            $sql->execute();
+            echo "ENTROU AQUI 2";
+            $saldoAtual = $sql->fetch();
+            echo "O saldo atual é: ".$saldoAtual['balance'];
+            if($valor < $saldoAtual['balance']){
+                echo "VALOR É MENOR QUE O SALDO";
+                $balance = $saldoAtual['balance'] - $valor;
+                $_SESSION['balance'] = $balance;
+                $sql = $minhaConexao->prepare("update bd_cantinaon.student set balance=:balance where student.idUser=:id;");
+                $sql->bindParam("id",$id);
+                $sql->bindParam("balance",$balance);
+                $id = $aln->getId();
+                $sql->execute();
+            }
+        }
+        catch(PDOException $e){
+          return 0;
+        }
+    }
+     
      
 
 

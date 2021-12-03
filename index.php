@@ -184,6 +184,48 @@
                 $controlador->processaRequisicao();
                 break;
 
+            case "VIEW/LISTARLOJA":
+                require_once "Controller/ControladorListarLoja.php";    
+                $controlador = new ControladorListarLoja();
+                $controlador->processaRequisicao();
+                break;
+
+            case "VIEW/CARRINHO":
+				require "Controller/ControladorListaCarrinho.php";
+				$controlador = new ControladorListaCarrinho();
+				$controlador->processaRequisicao();
+				break;
+            
+            case "VIEW/ADDITEMCARRINHO":
+				require "Controller/ControladorAddItemCarrinho.php";
+				require_once 'Model/CarrinhoSession.php';
+				$carrinhoSession = new CarrinhoSession();
+				$controlador = new ControladorAddItemCarrinho($carrinhoSession);
+				$controlador->processaRequisicao();
+				break;
+
+            case "VIEW/CARRINHOALTQUANT":
+				require "Controller/ControladorAlteraQuantCarrinho.php";
+				require_once 'Model/CarrinhoSession.php';
+				$carrinhoSession = new CarrinhoSession();
+				$controlador = new ControladorAlteraQuantCarrinho($carrinhoSession);
+				$controlador->processaRequisicao();
+				break;
+
+            case "VIEW/APAGAITEMCARRINHO":
+				require "Controller/ControladorApagaItemCarrinho.php";
+				require_once 'Model/CarrinhoSession.php';
+				$carrinhoSession = new CarrinhoSession();
+				$controlador = new ControladorApagaItemCarrinho($carrinhoSession);
+				$controlador->processaRequisicao();
+				break;
+
+            case "VIEW/REMOVESALDO":
+				require "Controller/ControladorRemoveSaldo.php";
+				$controlador = new ControladorRemoveSaldo();
+				$controlador->processaRequisicao();
+				break;
+
 
             default:
                 require "Controller/index.php";

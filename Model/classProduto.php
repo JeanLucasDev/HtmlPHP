@@ -1,10 +1,12 @@
 <?php
 require "classProdutoDAO.php";
+
 class classProduto {
     private $id;
     private $codigo;
     private $nome;
     private $foto;
+    private $nomefoto;
     private $preco;
     private $blocked;
 
@@ -20,6 +22,9 @@ class classProduto {
     }
     public function getfoto(){
         return $this->foto;
+    }
+    public function getnomefoto(){
+        return $this->nomefoto;
     }
     public function getpreco(){
         return $this->preco;
@@ -41,6 +46,9 @@ class classProduto {
     public function setfoto($foto){
         $this->foto = $foto;
     }
+    public function setnomefoto($nomefoto){
+        $this->nomefoto = $nomefoto;
+    }
     public function setpreco($preco){
         $this->preco = $preco;
     }
@@ -55,6 +63,21 @@ class classProduto {
     public function listarProdutos(){
         $ProdutoDAO = new classProdutoDAO();
         return $ProdutoDAO->listarProdutos();
+    }
+
+    public function listarComidas(){
+        $ProdutoDAO = new  classProdutoDAO();
+        return $ProdutoDAO->listarComidas();
+    }
+
+    public function listarBebidas(){
+        $ProdutoDAO = new  classProdutoDAO();
+        return $ProdutoDAO->listarBebidas();
+    }
+
+    public function pesquisarProduto(){
+        $ProdutoDAO = new classProdutoDAO();
+        $ProdutoDAO->pesquisarProduto($this);
     }
 
     public function editarProdutos(){

@@ -1,5 +1,4 @@
 <?php
-session_start();
 if($_SESSION['logged'] == false || $_SESSION['type'] != 'A'){
     header('Location: Restrict');
 }
@@ -32,9 +31,9 @@ if($_SESSION['logged'] == false || $_SESSION['type'] != 'A'){
             <ul>
                 <li><a href="tela_aluno_principal.php">Inicio</a></li>
                 <li><a href="tela_aluno_principal.php">Informações</a></li>
-                <li><a href="tela_aluno_loja.php">Loja</a></li>
+                <li><a href="listarLoja">Loja</a></li>
                 <li><a href="tela_aluno_historico.php">Historicos</a></li>
-                <li><a href="tela_aluno_carrinho.php"><i class="fas fa-shopping-cart"></i></a></li>
+                <li><a href="carrinho"><i class="fas fa-shopping-cart"></i></a></li>
                 <li><a href="logout" >Sair</a>
             </ul>
         </div>
@@ -48,68 +47,61 @@ if($_SESSION['logged'] == false || $_SESSION['type'] != 'A'){
                 <ul>
                     <li><a href="tela_aluno_principal.php">Inicio</a></li>
                     <li><a href="tela_aluno_principal.php">Informações</a></li>
-                    <li><a href="tela_aluno_loja.php">Loja</a></li>
+                    <li><a href="listarLoja">Loja</a></li>
                     <li><a href="tela_aluno_historico.php">Historicos</a></li>
-                    <li><a href="tela_aluno_carrinho.php"><i class="fas fa-shopping-cart"></i></a></li>
+                    <li><a href="carrinho"><i class="fas fa-shopping-cart"></i></a></li>
                     <li><a href="logout" >Sair</a>
                 </ul>
             </div>
         </div>
     </header>
     <main>
-        <section class="informações_section">
+        <section class="func_produtos_section">
             <div class="title">
                 <h2>Carrinho</h2>
             </div>
-            <div class="container" style="margin-top:10vh;">
-                <div class="row" style="text-align:center;align-items: center;justify-content:center;">
-                    <div class="col-md-3"   >
-                        <div class="media">
-                            <div class="media-left media-middle">
-                                <img src="img/Food/Salgados/cachorro-quente.jpg" height="250px" width="100%" class="media-object">
-                            </div>
-                            <div class="media-body" style="width:100%;color:#e1e1e1; margin:2vh auto;text-align:center;">
-                                <h4 class="media-heading">Cachorro Quente</h4>
-                                <form action=""style="margin-top:2vh;">
-                                    <label for="quantidade">Quantidade</label>
-                                    <input value="1" style="width:50%;margin:0 1vh;" type="number">
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3"   >
-                        <div class="media">
-                            <div class="media-left media-middle">
-                                <img src="img/Food/Bebidas/coca.jpg" width="100%" height="250px" class="media-object">
-                            </div>
-                            <div class="media-body" style="width:100%;color:#e1e1e1; margin:2vh auto;text-align:center;">
-                                <h4 class="media-heading">Coca cola</h4>
-                                <form action="" style="margin-top:2vh;">
-                                    <label for="quantidade">Quantidade</label>
-                                    <input value="1" style="width:50%;margin:0 1vh;" type="number">
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3"   >
-                        <div class="media">
-                            <div class="media-left media-middle">
-                                <img src="img/Food/Doces/Brigadeiro.jpg" height="250px" width="100%" class="media-object">
-                            </div>
-                            <div class="media-body" style="width:100%;color:#e1e1e1; margin:2vh auto;text-align:center;">
-                                <h4 class="media-heading">Brigadeiro</h4>
-                                <form action="" style="margin-top:2vh;">
-                                    <label for="quantidade">Quantidade</label>
-                                    <input value="1" style="width:50%;margin:0 1vh;" type="number">
-                                </form>
+                <?php if(isset($itensCarrinho)) { ?>
+                <? } else { ?>
+                <div class ="container">
+                <div class="row" style="padding:5vh 2vh;">
+                <?php foreach($itensCarrinho as $item): ?>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3"   >
+                            <div class="media">
+                                <div class="card">
+                                    <img src="../<?php echo $item->getProduto()->getfoto(); ?>" height="200px" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><?php echo $item->getProduto()->getnome()?></h5>
+                                        <h6 class="card-subtitle mb-2 text-muted ">R$ <?php echo $item->getProduto()->getpreco()?></h6>
+                                        <h6>Subtotal: <?php echo number_format($item->getSubTotal(),2,',','.'); ?> R$</h6>
+                                    </div> 
+                                    <form action="CarrinhoAltQuant" method="post">
+                                        <input type="hidden" name="id" value="<?php echo $item->getProduto()->getid(); ?>">
+                                        <input type="text" name="quantidade" value="<?php echo $item->getQuantidade(); ?>" style="margin-bottom:4px;" >
+                                        <button type="submit" class="btn btn-warning" style="margin:4px">Alterar quantidade</button>
+                                    </form>
+                                    <form method="post" action="ApagaItemCarrinho" >
+                                        <input type="hidden" name="id" value="<?php echo $item->getProduto()->getid(); ?>">
+                                        <button type="submit" class="btn btn-danger" style="margin:4px">Remover produto</button>
+                                    </form>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-4">
-                        <button style="width:100%;padding: 1vh;margin-top: 5vh;" onclick="alert('Compra confirmada')" class="btn btn-light">Confirmar compra</button>
                     </div>
                 </div>
-            </div>
+                <?php endforeach; ?>
+                <div style="margin-left:70vh"> 
+                    <form method="post" action="removeSaldo" >
+                        <input type="hidden" name="qtd" value="<?php echo $carrinho->getTotal(); ?>">
+                        <h4> Total: <?php echo number_format($carrinho->getTotal(),2,',','.'); ?> </h4>
+                        <button type="submit" class="btn btn-success" style="margin:4px">Confirmar compra</button>
+                    </form>
+                </div>
+                </div>
+                <?php } ?>
+                </div>
         </section>
     </main>
     <footer>

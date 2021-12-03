@@ -35,9 +35,9 @@ if($_SESSION['logged'] == false || $_SESSION['type'] != 'A'){
             <ul>
                 <li><a href="tela_aluno_principal.php">Inicio</a></li>
                 <li><a href="tela_aluno_principal.php">Informações</a></li>
-                <li><a href="tela_aluno_loja.php">Loja</a></li>
+                <li><a href="listarLoja">Loja</a></li>
                 <li><a href="tela_aluno_historico.php">Historicos</a></li>
-                <li><a href="tela_aluno_carrinho.php"><i class="fas fa-shopping-cart"></i></a></li>
+                <li><a href="carrinho"><i class="fas fa-shopping-cart"></i></a></li>
                 <li><a href="logout" >Sair</a>
             </ul>
         </div>
@@ -51,9 +51,9 @@ if($_SESSION['logged'] == false || $_SESSION['type'] != 'A'){
                 <ul>
                     <li><a href="tela_aluno_principal.php">Inicio</a></li>
                     <li><a href="tela_aluno_principal.php">Informações</a></li>
-                    <li><a href="tela_aluno_loja.php">Loja</a></li>
+                    <li><a href="listarLoja">Loja</a></li>
                     <li><a href="tela_aluno_historico.php">Historicos</a></li>
-                    <li><a href="tela_aluno_carrinho.php"><i class="fas fa-shopping-cart"></i></a></li>
+                    <li><a href="carrinho"><i class="fas fa-shopping-cart"></i></a></li>
                     <li><a href="logout" >Sair</a>
                 </ul>
             </div>

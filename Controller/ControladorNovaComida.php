@@ -13,7 +13,7 @@
             $this->food->setcodigo($_POST['codigo']);
             $this->food->setpreco($_POST['preco']);
             $this->food->setingredientes($_POST['ingredientes']);
-            $this->food->setfoto($_POST['arquivo']);
+            $this->food->setfoto($_FILES["imagem"]);
             $this->food->incluirComida();
             require "View/tela_funcionario_principal.php";
         }

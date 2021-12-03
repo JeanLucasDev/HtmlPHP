@@ -1,5 +1,9 @@
 <?php
+require_once "Model/classComida.php";
+require_once "Model/classBebida.php";
+require_once "Model/itemCarrinho.php";
 require_once "Conexao.php";
+
 class classProdutoDAO{
     public function listarProdutos(){
         //vai ao banco de dados e pega todos os livros
@@ -35,23 +39,82 @@ class classProdutoDAO{
        }
     }
 
-    public function pesquisaLivro($liv){
+
+    public function listarComidas(){
+        //vai ao banco de dados e pega todos os livros
+        try{
+            echo "entoru aqui";
+            echo "ID DO USUARIO LOGADO: ".$_SESSION['id'];
+            $minhaConexao = Conexao::getConexao();
+            $sql = $minhaConexao->prepare("select product.id, food.ingredients, product.name, product.photo, product.code, product.price from bd_cantinaon.food inner join bd_cantinaon.product on food.idProduct = product.id inner join bd_cantinaon.student inner join bd_cantinaon.user on student.idUser = user.id inner join bd_cantinaon.school on student.idSchool = school.id where user.id = :id;");
+            $sql->bindParam("id",$idUser);
+            $idUser = $_SESSION['id']; 
+            $sql->execute();
+            $listaComida=array();
+            $i=0;
+            while ($Produto = $sql->fetch(PDO::FETCH_ASSOC) ) {
+                $food = new classComida();
+                $food->setid($Produto['id']);
+                $food->setnome($Produto['name']);
+                $food->setfoto($Produto['photo']);
+                $food->setpreco($Produto['price']);
+                $food->setcodigo($Produto['code']);
+                $food->setingredientes($Produto['ingredients']);
+                $listaComida[$i] = $food;
+                $i++;
+            }
+            return $listaComida;
+        }
+       catch(PDOException $e){
+        return array();
+       }
+    }
+
+    public function listarBebidas(){
+        //vai ao banco de dados e pega todos os livros
+        try{
+            echo "entoru aqui";
+            echo "ID DO USUARIO LOGADO: ".$_SESSION['id'];
+            $minhaConexao = Conexao::getConexao();
+            $sql = $minhaConexao->prepare("select product.id, drink.provider, product.name, product.photo, product.code, product.price from bd_cantinaon.drink inner join bd_cantinaon.product on drink.idProduct = product.id inner join bd_cantinaon.student inner join bd_cantinaon.user on student.idUser = user.id inner join bd_cantinaon.school on student.idSchool = school.id where user.id = :id;");
+            $sql->bindParam("id",$idUser);
+            $idUser = $_SESSION['id']; 
+            $sql->execute();
+            $listaBebida=array();
+            $i=0;
+            while ($Produto = $sql->fetch(PDO::FETCH_ASSOC) ) {
+                $bebida = new classBebida();
+                $bebida->setid($Produto['id']);
+                $bebida->setnome($Produto['name']);
+                $bebida->setfoto($Produto['photo']);
+                $bebida->setpreco($Produto['price']);
+                $bebida->setcodigo($Produto['code']);
+                $bebida->setfornecedor($Produto['provider']);
+                $listaBebida[$i] = $bebida;
+                $i++;
+            }
+            return $listaBebida;
+        }
+       catch(PDOException $e){
+        return array();
+       }
+    }
+
+    public function pesquisarProduto($prdt){
         //vai ao banco de dados e pega todos os livros
         try{
             $minhaConexao = Conexao::getConexao();
-            $sql = $minhaConexao->prepare("select * from bd_livraria.livro where codigo=:codigo");
-            $sql->bindParam("codigo",$codigo);
-            $codigo = $liv->getCodigo();
-                
-           $sql->execute();
-           $result = $sql->setFetchMode(PDO::FETCH_ASSOC);
-           
-           while ($linha = $sql->fetch(PDO::FETCH_ASSOC)) {
-            $liv->setTitulo($linha['nome']);
-            $liv->setEdicao($linha['edicao']);
-            $liv->setAno($linha['ano']);
-          }
-        
+            $sql = $minhaConexao->prepare("select * from bd_cantinaon.product where id=:id");
+            $sql->bindParam("id",$id);
+            $id = $prdt->getid();
+            $sql->execute();
+            $result = $sql->setFetchMode(PDO::FETCH_ASSOC);
+            while ($linha = $sql->fetch(PDO::FETCH_ASSOC)) {
+                $prdt->setnome($linha['name']);
+                $prdt->setfoto($linha['photo']);
+                $prdt->setpreco($linha['price']);
+            }
+            
        }
        catch(PDOException $e){
         

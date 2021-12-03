@@ -123,6 +123,7 @@ class classUsuarioDAO{
                         $idUser = $user['id'];
                         $sql->execute();
                         $Student = $sql->fetch(); 
+                        $_SESSION['id'] = $user['id'];
                         $_SESSION['login'] = $user['login'];
                         $_SESSION['email'] = $user['email'];
                         $_SESSION['phone'] = $user['phone'];

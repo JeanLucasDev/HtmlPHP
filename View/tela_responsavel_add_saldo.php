@@ -1,4 +1,5 @@
 <?php
+session_start();
 if($_SESSION['logged'] == false || $_SESSION['type'] != 'R'){
     header('Location: Restrict');
 }
@@ -68,13 +69,12 @@ if($_SESSION['logged'] == false || $_SESSION['type'] != 'R'){
                                 <button type="submit" class="btn btn-light">Editar</button>
                         </form>
                         <?php if(isset($Saldo)){ ?>
-                            <p>Saldo atual: R$ <?php echo $Saldo ?></p>
+                            <p>Saldo atual: <?php echo $Saldo ?></p>
                         <?php } ?>
                         <?php if(!isset($Saldo)){ ?>
-                        <p>Saldo atual: R$ <?php echo $_POST['qtd'] ?></p>
+                        <p>Saldo atual: <?php echo $_POST['qtd'] ?></p>
                         <?php } ?>
                         
-
                     </div>
                 </div>
             </div>

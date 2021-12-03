@@ -71,6 +71,11 @@ class classAluno extends classUsuario{
         return $AlunoDAO->AddSaldo($this);
     }
 
+    public function removeSaldo($int){
+        $AlunoDAO = new ClassAlunoDAO();
+        return $AlunoDAO->removeSaldo($this, $int);
+    }
+
     public function editarAluno(){
         $AlunoDAO = new classAlunoDAO();
         return $AlunoDAO->editarAluno($this);

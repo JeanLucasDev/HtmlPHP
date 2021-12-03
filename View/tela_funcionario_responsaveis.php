@@ -96,7 +96,7 @@ else{
                         <?php } ?>
                         <?php if(isset($responsavel)){ ?>
                         <div class="row" >
-                        <div class="card">
+                        <div class="card" style="margin: auto 480px; position:relative;margin-top:5vh;">
                             <img src="img/Responsavel.png" height="200px" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title"><?php echo $responsavel->getLogin(); ?></h5>

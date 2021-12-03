@@ -7,6 +7,8 @@
     border: 0;
     box-sizing: border-box;
 }
+
+
 /*body*/
 body{
     min-height:100vh;
@@ -109,6 +111,8 @@ header .menu_mobile{
     padding: .5vh;
     font-size: 1.2rem;
 }
+
+
 .loja_section .card{
     background-color: #10101011;
     border:1px solid #e1e1e1;
@@ -131,6 +135,15 @@ header .menu_mobile{
     padding: 1.5vh;
     font-size: 1.3rem;
 }
+
+.informações_section .container .media .card{
+    background-color: #101010;
+    color: #e1e1e1;
+    border: 1px solid #e1e1e1;
+    padding:1vh;
+}
+
+
 .informações_section .col-md-6{
     margin-top:5vh;
     padding: 2vh;

@@ -84,20 +84,20 @@ else{
                     </div>
                 </div>
                 <div class="container">
-                <div class="row" style="margin:10vh 0;">
-                <?php if(isset($aluno)){ ?>
+                <?php if (isset($aluno)) { ?>
+                    <div class="row" style=" margin:10vh 0; position:relative; left:57vh;">
                     <div class="col-md-3">
                         <div class="card">
                             <img src="img/Aluno.png" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">Nome: <?php echo $aluno->getLogin(); ?> </h5>
                                 <h6 class="card-subtitle mb-2 text-muted ">Matricula: <?php echo $aluno->getmatricula(); ?></h6>
-                                <h6 class="card-subtitle mb-2 text-muted ">Saldo: <?php echo $aluno->getsaldo(); ?></h6>
+                                <h6 class="card-subtitle mb-2 text-muted ">Saldo: R$ <?php echo $aluno->getsaldo(); ?></h6>
                             </div>
                         </div>
                     </div>
-                <?php } ?>
-                </div>
+                    </div>
+                <?php }  ?>
                 </div>
         </section>
     </main>

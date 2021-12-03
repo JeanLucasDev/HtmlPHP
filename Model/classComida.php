@@ -1,6 +1,6 @@
 <?php
 require "classComidaDAO.php";
-require "classProduto.php";
+require_once "classProduto.php";
 class classComida extends classProduto{
     private $id;
     private $ingredientes;
