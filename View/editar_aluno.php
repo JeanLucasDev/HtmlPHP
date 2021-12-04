@@ -1,3 +1,17 @@
+<?php
+session_start();
+if($_SESSION['logged'] == false || $_SESSION['type'] != 'R'){
+    header('Location: Restrict');
+}
+else{
+    if (isset($_GET['logout']) && $_GET['logout'] == 1){
+        $_SESSION = array();
+        $_SESSIONG['logged'] = false;
+        session_destroy();
+        header('Location: index.php');
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>

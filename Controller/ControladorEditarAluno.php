@@ -17,7 +17,7 @@
             $this->aln->setEmail($_POST['email']);
             $this->aln->setPhone($_POST['phone']);
             $this->aln->editarAluno();
-            require "View/tela_funcionario_principal.php";
+            require "View/tela_responsavel_principal.php";
         }
     }
 ?>

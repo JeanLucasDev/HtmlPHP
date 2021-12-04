@@ -36,7 +36,6 @@ else{
         <h2 style="text-align: center;">
         Editar funcionario
       </h2>
-      <p><?php echo $_POST['id'] ?></p>
       <div class="input">
         <input type="hidden" name="id" value= <?php echo $_POST['id'] ?> required>
       </div>

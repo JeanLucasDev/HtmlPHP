@@ -23,7 +23,6 @@ if($_SESSION['logged'] == false || $_SESSION['type'] != 'R'){
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
 </head>
-
 <body style="background: #101010;">
     <header>
         <div class="menu_desktop">
@@ -60,27 +59,26 @@ if($_SESSION['logged'] == false || $_SESSION['type'] != 'R'){
             </div>
             <div class="container">
                 <div class="row" style="margin:10vh 0;">
-                    <div class="col-md-3">
                         <?php for($i=0;$i<count($listaAlunos);$i++){ ?>
-                        <div class="card">
-                            <img src="img/Aluno.png" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Nome: <?php echo $listaAlunos[$i]->getLogin(); ?></h5>
-                                <h6 class="card-subtitle mb-2 text-muted ">Matricula: <?php echo "Matricula: ".$listaAlunos[$i]->getmatricula(); ?></h6>
-                                <form method="post" action="">
-                                     <p><?php echo $listaAlunos[$i]->getId() ?></p>
-                                    <input type="hidden" name="id" value= <?php echo $listaAlunos[$i]->getId()?> /> 
-                                    <input type="hidden" name="qtd" value= <?php echo $listaAlunos[$i]->getsaldo()?> /> 
-                                    <button class="btn btn-light" formaction="tela_responsavel_controle.php">Restringir produtos</button>
-                                    <button class="btn btn-light" formaction="tela_responsavel_add_saldo.php">Adicionar saldo</button>
-                                    <button class="btn btn-light"formaction="tela_responsavel_historico.php">Historicos</button>
-                                    <button class="btn btn-light"formaction="editar_aluno.php">Editar aluno</button>
-                                    <button class="btn btn-light"formaction="removerAluno">Remover aluno</button>
-                                </form>
+                            <div class="col-md-3">
+                                <div class="card">
+                                    <img src="img/Aluno.png" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Nome: <?php echo $listaAlunos[$i]->getLogin(); ?></h5>
+                                        <h6 class="card-subtitle mb-2 text-muted ">Matricula: <?php echo $listaAlunos[$i]->getmatricula(); ?></h6>
+                                        <form method="post" action="">
+                                            <input type="hidden" name="id" value= <?php echo $listaAlunos[$i]->getId()?> /> 
+                                            <input type="hidden" name="qtd" value= <?php echo $listaAlunos[$i]->getsaldo()?> /> 
+                                            <button class="btn btn-light" formaction="tela_responsavel_controle.php">Restringir produtos</button>
+                                            <button class="btn btn-light" formaction="tela_responsavel_add_saldo.php">Adicionar saldo</button>
+                                            <button class="btn btn-light"formaction="tela_responsavel_historico.php">Historicos</button>
+                                            <button class="btn btn-light"formaction="editar_aluno.php">Editar aluno</button>
+                                            <button class="btn btn-light"formaction="removerAluno">Remover aluno</button>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
                         <?php } ?>
-                    </div>
                 </div>
                 <div class="row">
                     <div style="margin: 0 auto;" class="col-md-3">

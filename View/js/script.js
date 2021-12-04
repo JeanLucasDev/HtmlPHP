@@ -22,3 +22,4 @@ var input  = document.getElementById('number');
 function addSaldo(){
     saldo.innerHTML =   number.value;
 }
+

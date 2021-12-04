@@ -55,54 +55,41 @@ if($_SESSION['logged'] == false || $_SESSION['type'] != 'E'){
         </div>
     </header>
     <main>
-        <section class="meus_filhos_section">
+        <section class="func_produtos_section">
             <div class="title">
                 <h2>Meus Funcionarios</h2>
-            </div>
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                    <?php for($i=0;$i<count($listaFuncionarios);$i++){ ?>
-                    <td>   
-                        <div class="container">
+            </div>  
+                    <div class="container">
                         <div class="row" style="margin:10vh 0;">
-                            <div class="col-md-3">
-                                <div class="card" style="width:18rem;">
-                                <img src="img/Funcionario.png" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <h5 class="card-title"><?php echo $listaFuncionarios[$i]->getLogin(); ?></h5>
-                                        <h6 class="card-subtitle mb-2 text-muted ">CPF: <?php echo $listaFuncionarios[$i]->getcpf(); ?></h6>
-                                        <p class="card-text">
-                                            <p>Email:<?php echo $listaFuncionarios[$i]->getEmail(); ?></p>
-                                            <p>Telefone:<?php echo $listaFuncionarios[$i]->getPhone(); ?></p>
-                                        </p>
-                                        <form method="post" action="editarFuncionario">
-                                            <input type="hidden" name="id" value= <?php echo $listaFuncionarios[$i]->getId();?>>
-                                            <button type="submit" class="btn btn-light" formaction="editar_funcionario.php">Editar</button>
-                                        </form>
+                            <?php for($i=0;$i<count($listaFuncionarios);$i++){ ?>
+                                    <div class="col-md-3">
+                                        <div class="card" style="width:18rem;">
+                                        <img src="img/Funcionario.png" class="card-img-top" alt="...">
+                                            <div class="card-body">
+                                                <h5 class="card-title"><?php echo $listaFuncionarios[$i]->getLogin(); ?></h5>
+                                                <h6 class="card-subtitle mb-2 text-muted ">CPF: <?php echo $listaFuncionarios[$i]->getcpf(); ?></h6>
+                                                <p class="card-text">
+                                                    <p>Email:<?php echo $listaFuncionarios[$i]->getEmail(); ?></p>
+                                                    <p>Telefone:<?php echo $listaFuncionarios[$i]->getPhone(); ?></p>
+                                                </p>
+                                                <form method="post" action="editarFuncionario">
+                                                    <input type="hidden" name="id" value= <?php echo $listaFuncionarios[$i]->getId();?>>
+                                                    <button type="submit" class="btn btn-light" formaction="editar_funcionario.php">Editar</button>
+                                                </form>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
+                            <?php } ?>
+                        </div>
+                        <div class="row">
+                            <div style="margin: 0 auto;" class="col-md-3">
+                                <a style="color: #e1e1e1;" href="cadastro_funcionario.php">
+                                    <p class="text-center" style="font-size:1.5rem">Adicionar funcionarios</p>
+                                    <img src="img/add.png" class="card-img-top" alt="...">
+                                </a>
                             </div>
                         </div>
-                        </div>
-                    </td> 
-                    <?php } ?>
-                </tbody>
-            </table>
-                <div class="row">
-                    <div style="margin: 0 auto;" class="col-md-3">
-                        <a style="color: #e1e1e1;" href="cadastro_funcionario.php">
-                            <p class="text-center" style="font-size:1.5rem">Adicionar funcionarios</p>
-                            <img src="img/add.png" class="card-img-top" alt="...">
-                        </a>
                     </div>
-                </div>
             </div>
         </section>
     </main>

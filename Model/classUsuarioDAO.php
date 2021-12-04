@@ -142,7 +142,7 @@ class classUsuarioDAO{
                         $_SESSION['sch_location'] = $info['location'];
                         $_SESSION['sch_phone'] = $info['phone'];
                         $_SESSION['sch_email'] = $info['email'];
-                        header('location:tela_aluno_principal.php');
+                        header('location:tela_aluno_principal.php',true,302);
                     }
                 }
                 else if ($type == 'R'){
@@ -228,6 +228,7 @@ class classUsuarioDAO{
             unset ($_SESSION['cpf']);
             unset ($_SESSION['email']);
             session_destroy();
+            session_unset();
             header('Location: index.php');
      }
     

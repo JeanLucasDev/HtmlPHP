@@ -12,6 +12,7 @@ class ControladorRemoveSaldo implements IControlador{
          $this->aln->setId($_SESSION['id']);
          $valor = $_POST['qtd'];
          $this->aln->removeSaldo($valor);
+         unserialize($_SESSION['carrinho2']);
          unset($_SESSION['carrinho2']);
          require "View/tela_aluno_carrinho.php";
     }

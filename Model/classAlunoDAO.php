@@ -243,7 +243,6 @@ class classAlunoDAO{
 
     public function removeSaldo($aln, $valor){
         try{
-            echo "VALOR: ".$valor;
             echo "ID ALUNO: ".$aln->getId();
             $minhaConexao = Conexao::getConexao();
             $sql = $minhaConexao->prepare("select student.balance from bd_cantinaon.student where idUser=:id;");
@@ -252,10 +251,16 @@ class classAlunoDAO{
             $sql->execute();
             echo "ENTROU AQUI 2";
             $saldoAtual = $sql->fetch();
-            echo "O saldo atual é: ".$saldoAtual['balance'];
-            if($valor < $saldoAtual['balance']){
+            echo "SALDO ATUAL: ".$saldoAtual['balance'];
+            $valor = str_replace(',','.',$valor);
+            $valor = intval($valor);
+            echo "VALOR: ".$valor;
+            if($valor <= $saldoAtual['balance']){
                 echo "VALOR É MENOR QUE O SALDO";
-                $balance = $saldoAtual['balance'] - $valor;
+                echo "SALDO ATUAL: ".$saldoAtual['balance'];
+                echo "Valor: ".$valor;
+                $balance = $saldoAtual['balance'] - intval($valor);
+                echo "BALANCE: ".$balance;
                 $_SESSION['balance'] = $balance;
                 $sql = $minhaConexao->prepare("update bd_cantinaon.student set balance=:balance where student.idUser=:id;");
                 $sql->bindParam("id",$id);

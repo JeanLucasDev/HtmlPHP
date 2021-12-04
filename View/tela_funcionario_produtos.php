@@ -90,32 +90,32 @@ else{
                         </div>
                     </div>
                     <?php } ?>
-                <div class="row">
-                    <div style="margin: 0 auto;" class="col-md-3">
-                        <a style="color: #e1e1e1;" href="produto_remove.php">
-                            <p class="text-center" style="font-size:1.5rem">Remove produtos</p>
-                            <img src="img/sub.png" class="card-img-top" alt="...">
-                        </a>
-                    </div>
-                    <div style="margin: 0 auto;" class="col-md-3">
-                        <a style="color: #e1e1e1;" href="produto_cadastro_bebida.php">
-                            <p class="text-center" style="font-size:1.5rem">Adicionar Bebidas</p>
-                            <img src="img/add.png" class="card-img-top" alt="...">
-                        </a>
-                    </div>
-                    <div style="margin: 0 auto;" class="col-md-3">
-                        <a style="color: #e1e1e1;" href="produto_cadastro_comida.php">
-                            <p class="text-center" style="font-size:1.5rem">Adicionar Comidas</p>
-                            <img src="img/add.png" class="card-img-top" alt="...">
-                        </a>
-                    </div>
-                    <div style="margin: 0 auto;" class="col-md-3">
-                        <a style="color: #e1e1e1;" href="produto_desbloquear.php">
-                            <p class="text-center" style="font-size:1.5rem">Desbloquear</p>
-                            <img src="img/desbloquear.png" class="card-img-top" alt="...">
-                        </a>
-                    </div>
-                </div>
+                        <div class="row">
+                            <div style="margin: 0 auto;" class="col-md-3">
+                                <a style="color: #e1e1e1;" href="produto_remove.php">
+                                    <p class="text-center" style="font-size:1.5rem">Remove produtos</p>
+                                    <img src="img/sub.png" class="card-img-top" alt="...">
+                                </a>
+                            </div>
+                            <div style="margin: 0 auto;" class="col-md-3">
+                                <a style="color: #e1e1e1;" href="produto_cadastro_bebida.php">
+                                    <p class="text-center" style="font-size:1.5rem">Adicionar Bebidas</p>
+                                    <img src="img/add.png" class="card-img-top" alt="...">
+                                </a>
+                            </div>
+                            <div style="margin: 0 auto;" class="col-md-3">
+                                <a style="color: #e1e1e1;" href="produto_cadastro_comida.php">
+                                    <p class="text-center" style="font-size:1.5rem">Adicionar Comidas</p>
+                                    <img src="img/add.png" class="card-img-top" alt="...">
+                                </a>
+                            </div>
+                            <div style="margin: 0 auto;" class="col-md-3">
+                                <a style="color: #e1e1e1;" href="produto_desbloquear.php">
+                                    <p class="text-center" style="font-size:1.5rem">Desbloquear</p>
+                                    <img src="img/desbloquear.png" class="card-img-top" alt="...">
+                                </a>
+                            </div>
+                        </div>
             </div>
         </section>
     </main>

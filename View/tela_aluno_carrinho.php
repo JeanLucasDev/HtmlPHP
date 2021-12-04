@@ -63,45 +63,58 @@ if($_SESSION['logged'] == false || $_SESSION['type'] != 'A'){
                 <?php if(isset($itensCarrinho)) { ?>
                 <? } else { ?>
                 <div class ="container">
-                <div class="row" style="padding:5vh 2vh;">
-                <?php foreach($itensCarrinho as $item): ?>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-3"   >
-                            <div class="media">
-                                <div class="card">
-                                    <img src="../<?php echo $item->getProduto()->getfoto(); ?>" height="200px" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <h5 class="card-title"><?php echo $item->getProduto()->getnome()?></h5>
-                                        <h6 class="card-subtitle mb-2 text-muted ">R$ <?php echo $item->getProduto()->getpreco()?></h6>
-                                        <h6>Subtotal: <?php echo number_format($item->getSubTotal(),2,',','.'); ?> R$</h6>
-                                    </div> 
-                                    <form action="CarrinhoAltQuant" method="post">
-                                        <input type="hidden" name="id" value="<?php echo $item->getProduto()->getid(); ?>">
-                                        <input type="text" name="quantidade" value="<?php echo $item->getQuantidade(); ?>" style="margin-bottom:4px;" >
-                                        <button type="submit" class="btn btn-warning" style="margin:4px">Alterar quantidade</button>
-                                    </form>
-                                    <form method="post" action="ApagaItemCarrinho" >
-                                        <input type="hidden" name="id" value="<?php echo $item->getProduto()->getid(); ?>">
-                                        <button type="submit" class="btn btn-danger" style="margin:4px">Remover produto</button>
-                                    </form>
+                        <div class="row" style="padding:5vh 2vh;">
+                            <?php foreach($itensCarrinho as $item): ?>
+                                    <div class="col-md-3"   >
+                                        <div class="media">
+                                                <div class="card">
+                                                    <img src="../<?php echo $item->getProduto()->getfoto(); ?>" height="200px" class="card-img-top" alt="...">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title"><?php echo $item->getProduto()->getnome()?></h5>
+                                                        <h6 class="card-subtitle mb-2 text-muted ">R$ <?php echo $item->getProduto()->getpreco()?></h6>
+                                                        <h6>Subtotal: <?php echo number_format($item->getSubTotal(),2,',','.'); ?> R$</h6>
+                                                    </div> 
+                                                    <form action="CarrinhoAltQuant" method="post">
+                                                        <input type="hidden" name="id" value="<?php echo $item->getProduto()->getid(); ?>">
+                                                        <p>Quantidade: <input type="text" name="quantidade" value="<?php echo $item->getQuantidade(); ?>" style="margin-bottom:4px;" > </p>
+                                                        <button type="submit" class="btn btn-warning" style="margin:4px">Alterar quantidade</button>
+                                                    </form>
+                                                    <form method="post" action="ApagaItemCarrinho" >
+                                                        <input type="hidden" name="saldo" value="<?php echo $_SESSION['balance']; ?>">
+                                                        <input type="hidden" name="id" value="<?php echo $item->getProduto()->getid(); ?>">
+                                                        <button type="submit" class="btn btn-danger" style="margin:4px">Remover produto</button>
+                                                    </form>
+                                                </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
+                            <?php endforeach; ?>
                         </div>
-                    </div>
-                </div>
-                <?php endforeach; ?>
-                <div style="margin-left:70vh"> 
-                    <form method="post" action="removeSaldo" >
-                        <input type="hidden" name="qtd" value="<?php echo $carrinho->getTotal(); ?>">
-                        <h4> Total: <?php echo number_format($carrinho->getTotal(),2,',','.'); ?> </h4>
-                        <button type="submit" class="btn btn-success" style="margin:4px">Confirmar compra</button>
-                    </form>
-                </div>
-                </div>
+                        <?php if($carrinho->getTotal() != 0) { ?>
+                        <div style="margin-left:70vh"> 
+                            <form name="form_action" method="post" action="" >
+                                <input type="hidden" id="saldo" name="saldo" value="<?php echo floatval(number_format($_SESSION['balance'],10,'.',',')); ?>">
+                                <input type="hidden" id="qtd" name="qtd" value="<?php echo floatval(number_format($carrinho->getTotal(),10,'.',',')); ?> ">
+                                <h4> Total: <?php echo number_format($carrinho->getTotal(),2,',','.'); ?> </h4>
+                                <button type="submit" class="btn btn-success" style="margin:4px" onclick="funcao1()"> Confirmar compra</button>
+                            </form>
+                            <script>
+                                function funcao1(){
+                                    var saldo = document.getElementById('saldo').value;
+                                    var valor = document.getElementById('qtd').value;
+                                    if(parseInt(valor) <= parseInt(saldo)){
+                                        alert("Compra realizada");
+                                        document.form_action.action = "removeSaldo";
+                                    }
+                                    else{  
+                                        alert("Saldo insuficiente");
+                                    }
+                                }
+                            </script>
+                        </div>
+                        <?php } ?>
                 <?php } ?>
                 </div>
+            </div>
         </section>
     </main>
     <footer>
