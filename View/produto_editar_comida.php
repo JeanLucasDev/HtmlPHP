@@ -17,7 +17,7 @@
 
 <body>
   <main>
-    <form action="editarComida" method="POST" class="form-validation" id="form-validation">
+    <form action="editarComida" method="POST" class="form-validation" id="form-validation" enctype="multipart/form-data">
       <p class="text-center"><a href="tela_funcionario_principal.php"><img src="img/logo_menu.png" alt="" style="height: 100%; width: 100%; max-width: 200px; max-height: 200px; margin-left: auto; margin-right: auto;"></a></p>
         <h2 style="text-align: center;">
         Editar Comida
@@ -40,8 +40,8 @@
         <label for="ingredientes">Ingredientes</label>
       </div>
       <div class="input">
-        <label for="arquivo">Arquivo</label>  
-        <input  name="arquivo" id="codigo"type="file" data-rules="required"/>
+        <input id="file" name="imagem" type="file" data-rules="required"/>
+        <label for="file">Arquivo</label>
       </div>
       <button type="submit">Editar</button>
       <div class="social_icon" style="margin-top:1vh">

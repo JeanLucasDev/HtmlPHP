@@ -11,7 +11,7 @@
         public function processaRequisicao(){
             $this->resp->setid($_POST['id']);
             $this->resp->removerResponsavel();
-            header('Location: tela_funcionario_principal.php');
+            require "View/tela_funcionario_principal.php";
 
         }
     }

@@ -26,12 +26,12 @@ if($_SESSION['logged'] == false || $_SESSION['type'] != 'R'){
 <body style="background: #101010;">
     <header>
         <div class="menu_desktop">
-            <a href="tela_responsavel_principal.php">
+            <a href="responsavel">
                 <img src="img/logo_menu.png" class="Logo" alt="Logotipo da nossa empresa">
             </a>
             <ul>
-                <li><a href="tela_responsavel_principal.php">Inicio</a></li>
-                <li><a href="tela_responsavel_principal.php">Informações</a></li>
+                <li><a href="responsavel">Inicio</a></li>
+                <li><a href="responsavel">Informações</a></li>
                 <li><a href="listarAlunos">Filhos</a></li>
                 <li><a href="logout" >Sair</a>
             </ul>
@@ -40,12 +40,12 @@ if($_SESSION['logged'] == false || $_SESSION['type'] != 'R'){
             <i class="fa fa-bars" id="open_menu"></i>
             <div class="mobile">
                 <i class="fas fa-times" id="exit_menu"></i>
-                <a href="tela_responsavel_principal.php">
+                <a href="responsavel">
                     <img src="img/logo_menu.png" class="Logo" alt="Logotipo da nossa empresa">
                 </a>
                 <ul>
-                    <li><a href="tela_responsavel_principal.php">Inicio</a></li>
-                    <li><a href="tela_responsavel_principal.php">Informações</a></li>
+                    <li><a href="responsavel">Inicio</a></li>
+                    <li><a href="responsavel">Informações</a></li>
                     <li><a href="listarAlunos">Filhos</a></li>
                     <li><a href="logout" >Sair</a>
                 </ul>
@@ -57,6 +57,7 @@ if($_SESSION['logged'] == false || $_SESSION['type'] != 'R'){
             <div class="title">
                 <h2>Meus fihos</h2>
             </div>
+            <?php if(isset($listaAlunos)) { ?>
             <div class="container">
                 <div class="row" style="margin:10vh 0;">
                         <?php for($i=0;$i<count($listaAlunos);$i++){ ?>
@@ -70,7 +71,7 @@ if($_SESSION['logged'] == false || $_SESSION['type'] != 'R'){
                                             <input type="hidden" name="id" value= <?php echo $listaAlunos[$i]->getId()?> /> 
                                             <input type="hidden" name="qtd" value= <?php echo $listaAlunos[$i]->getsaldo()?> /> 
                                             <button class="btn btn-light" formaction="tela_responsavel_controle.php">Restringir produtos</button>
-                                            <button class="btn btn-light" formaction="tela_responsavel_add_saldo.php">Adicionar saldo</button>
+                                            <button class="btn btn-light" formaction="saldo">Adicionar saldo</button>
                                             <button class="btn btn-light"formaction="tela_responsavel_historico.php">Historicos</button>
                                             <button class="btn btn-light"formaction="editar_aluno.php">Editar aluno</button>
                                             <button class="btn btn-light"formaction="removerAluno">Remover aluno</button>
@@ -80,6 +81,7 @@ if($_SESSION['logged'] == false || $_SESSION['type'] != 'R'){
                             </div>
                         <?php } ?>
                 </div>
+                <?php } ?>
                 <div class="row">
                     <div style="margin: 0 auto;" class="col-md-3">
                         <a style="color: #e1e1e1;" href="cadastro_aluno.php">

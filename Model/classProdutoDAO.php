@@ -121,53 +121,6 @@ class classProdutoDAO{
        }
     }
 
-    public function incluirFuncionario($fun){
-        try{    
-            $minhaConexao = Conexao::getConexao();
-            $sql = $minhaConexao->prepare("select * from bd_cantinaon.user where login =:login");
-            $sql->bindParam("login",$login);
-            $login = $fun->getLogin();
-            $sql->execute();
-            $res = $sql->rowcount();
-            if($res > 0){
-                echo "já cadastrado";
-            }
-            else{
-                $minhaConexao = Conexao::getConexao();
-                $sql = $minhaConexao->prepare("insert into bd_cantinaon.user (email, password, login, phone, type) values (:email, :password, :login, :phone, :type)");
-                $sql->bindParam("login",$login);
-                $sql->bindParam("email",$email);
-                $sql->bindParam("password",$password);
-                $sql->bindParam("phone",$phone);
-                $sql->bindParam("type",$type);
-                $login = $fun->getLogin();
-                $email = $fun->getEmail();
-                $password = $fun->getPassword();
-                $phone = $fun->getPhone(); 
-                $type = 'F';
-                $sql->execute();
-                $last_id = $minhaConexao->lastInsertId();
-                $sql = $minhaConexao->prepare("select * from bd_cantinaon.school where idUser =:idUser ");
-                $sql->bindParam("idUser",$idUser);
-                $idUser = $_SESSION['id'];
-                $sql->execute();
-                $idSchool = $sql->fetch();
-                $sql2 = $minhaConexao->prepare("insert into bd_cantinaon.employee (cpf, idUser, idSchool) values (:cpf, :idUser, :idSchool)");
-                $sql2->bindParam("cpf",$cpf);
-                $sql2->bindParam("idUser",$idUser);
-                $sql2->bindParam("idSchool",$School);
-                $School = $idSchool['id'];
-                $idUser = $last_id;
-                $cpf = $fun->getcpf();
-                $sql2->execute();
-                return $last_id;
-            }
-         }
-         catch(PDOException $e){
-             echo "entrou no catch".$e->getmessage();
-             return 0;
-         }
-     }
 
      public function editarProdutos($prdt){
         try{
@@ -206,7 +159,7 @@ class classProdutoDAO{
             echo "CHEGOU AQUI".$res; 
 
             if($res > 0){
-                echo "CHEGOU AQUI 2";
+                echo "CHEGOU REMOVER COMIDA";
                 $idComida = $sql->fetch();
                 echo "ID DA COMIDA: ".$idComida['id'];
                 $sql = $minhaConexao->prepare("delete from bd_cantinaon.product where code=:code; 
@@ -220,6 +173,7 @@ class classProdutoDAO{
                 $sql->execute();
             }
             else{
+                echo "CHEGOU REMOVER BEBIDA";
                 $sql = $minhaConexao->prepare("select drink.id from bd_cantinaon.drink inner join bd_cantinaon.product on drink.idProduct = product.id where product.code=:code");
                 $sql->bindParam("code",$codigo);
                 $codigo = $prdt->getcodigo();

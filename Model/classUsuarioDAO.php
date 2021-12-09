@@ -113,7 +113,7 @@ class classUsuarioDAO{
                         $_SESSION['password'] = $user['password'];
                         $_SESSION['type'] = $user['type'];
                         $_SESSION['logged'] = true;
-                        header('location:tela_escola_principal.php');
+                        require "View/tela_escola_principal.php";
                    }
                 }
                 else if ($type == 'A'){
@@ -142,7 +142,7 @@ class classUsuarioDAO{
                         $_SESSION['sch_location'] = $info['location'];
                         $_SESSION['sch_phone'] = $info['phone'];
                         $_SESSION['sch_email'] = $info['email'];
-                        header('location:tela_aluno_principal.php',true,302);
+                        require "View/tela_aluno_principal.php";
                     }
                 }
                 else if ($type == 'R'){
@@ -173,7 +173,7 @@ class classUsuarioDAO{
                         $_SESSION['sch_location'] = $info['location'];
                         $_SESSION['sch_phone'] = $info['phone'];
                         $_SESSION['sch_email'] = $info['email'];
-                        header('location:tela_responsavel_principal.php');
+                        require "View/tela_responsavel_principal.php";
                     }
                 }
                 else if ($type == 'F') {
@@ -203,7 +203,7 @@ class classUsuarioDAO{
                         $_SESSION['sch_location'] = $info['location'];
                         $_SESSION['sch_phone'] = $info['phone'];
                         $_SESSION['sch_email'] = $info['email'];
-                        header('location:tela_funcionario_principal.php');
+                        require "View/tela_funcionario_principal.php";
                     }
                 }
             }
@@ -232,23 +232,6 @@ class classUsuarioDAO{
             header('Location: index.php');
      }
     
-
-
-    public function excluirLivro($liv){
-        try{
-            $minhaConexao = Conexao::getConexao();
-            $sql = $minhaConexao->prepare("delete from bd_livraria.livro where codigo=:codigo");
-            $sql->bindParam("codigo",$codigo);
-            $codigo = $liv->getCodigo();
-            
-            $sql->execute();
-            
-         }
-         catch(PDOException $e){
-             echo "entrou no catch".$e->getmessage();
-             exit();
-         }
-     }
 
 
 }

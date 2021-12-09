@@ -116,7 +116,7 @@ class classBebidaDAO{
                 }
     
                 echo "CHEGOU ATE AQUI 2";
-                $sql4 = $minhaConexao->prepare(" select product.id from bd_cantinaon.school inner join bd_cantinaon.user inner join bd_cantinaon.parents inner join bd_cantinaon.product on parents.idUser = user.id where product.id = :idUser;");
+                $sql4 = $minhaConexao->prepare("select * from bd_cantinaon.school inner join bd_cantinaon.employee on employee.idSchool = school.id inner join bd_cantinaon.product on product.idSchool = school.id where product.id = :idUser;");
                 $sql4->bindParam("idUser",$idUser);
                 echo "ID: ".$last_id;
                 $idUser = $last_id;
@@ -167,28 +167,53 @@ class classBebidaDAO{
  
     }    
 
-    public function editarComida($cmd){
+    public function editarBebida($beb){
         try{
             $minhaConexao = Conexao::getConexao();
-            $sql = $minhaConexao->prepare("update bd_cantinaon.product set name=:name,code=:code, price=:price, photo=:photo where product.id=:id;
-            update bd_cantinaon.food set provider=:provider where food.idProduct =: id;");
+            $sql = $minhaConexao->prepare("update bd_cantinaon.product set name=:name,code=:code, price=:price where product.id=:id;
+            update bd_cantinaon.drink set provider=:provider where drink.idProduct =: id;");
             $sql->bindParam("id",$id);
             $sql->bindParam("name",$name);
             $sql->bindParam("code",$codigo);
             $sql->bindParam("price",$preco);
             $sql->bindParam("provider",$fornecedor);
-            $sql->bindParam("photo",$arquivo);
-            $id =  $cmd->getId();
-            $name = $cmd->getnome();
-            $codigo = $cmd->getcodigo();
-            $preco = $cmd->getpreco();
-            $fornecedor = $cmd->getfornecedor();
-            $arquivo = $cmd->getfoto();
+            $id =  $beb->getId();
+            $name = $beb->getnome();
+            $codigo = $beb->getcodigo();
+            $preco = $beb->getpreco();
+            $fornecedor = $beb->getfornecedor();
             $sql->execute();
+            $sql = $minhaConexao->prepare("select product.id from bd_cantinaon.drink inner join bd_cantinaon.product on drink.idProduct = product.id where drink.idProduct = :id");
+            $sql->bindParam("id",$id);
+            $id = $beb->getId();
+            $sql->execute();
+            $idProduct = $sql->fetch();
+            $imagem = $beb->getfoto(); 
+            $last_id = $idProduct['id'];
+            echo "ID: ".$last_id;
+            if($imagem != NULL) {
+                echo "entrou no if da imagem !=null";
+               //defini o nome do novo arquivo, que será o id gerado para o livro
+               $nomeFinal = $last_id.'.jpg';
+               //move o arquivo para a pasta atual com esse novo nome
+               if (move_uploaded_file($imagem['tmp_name'], $nomeFinal)) {
+                   echo "Copiou a imagem";
+                   echo "Nome final: ".$nomeFinal;
+                   echo "ID PRODUTO: ".$last_id;
+                   echo "NOME: ".$imagem['tmp_name'];
+
+                 //atualiza o banco de dados para guardar o nome do arquivo gerado.
+                  $sql = $minhaConexao->prepare("update bd_cantinaon.product set photo = :photo where id=:id");
+                  $sql->bindParam("photo",$nomeFinal);
+                  $sql->bindParam("id",$last_id);
+                  $sql->execute();
+                  echo "atulizou o nome da imagem no bd";
+                  
+                }
+              }
          }
          catch(PDOException $e){
              //echo "entrou no catch".$e->getmessage();
-            
          }
      }
 

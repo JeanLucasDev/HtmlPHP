@@ -20,15 +20,15 @@
   <body style="background: #101010;">
      <header>
         <div class="menu_desktop">
-            <a href="tela_funcionario_principal.php">
+            <a href="funcionario">
                 <img src="img/logo_menu.png" class="Logo" alt="Logotipo da nossa empresa">
             </a>
             <ul>
-                <li><a href="tela_funcionario_principal.php">Inicio</a></li>
-                <li><a href="tela_funcionario_principal.php">Informações</a></li>
+                <li><a href="funcionario">Inicio</a></li>
+                <li><a href="funcionario">Informações</a></li>
                 <li><a href="listarprodutos">Produtos</a></li>
-                <li><a href="pageResp">Responsaveis</a></li>
-                <li><a href="tela_funcionario_alunos.php">Aluno</a></li>
+                <li><a href="responsaveis">Responsaveis</a></li>
+                <li><a href="alunos">Aluno</a></li>
                 <li><a href="login.php">Sair</a></li>
             </ul>
         </div>
@@ -40,11 +40,11 @@
                     <img src="img/logo_menu.png" class="Logo" alt="Logotipo da nossa empresa">
                 </a>
                 <ul>
-                    <li><a href="tela_funcionario_principal.php">Inicio</a></li>
-                    <li><a href="tela_funcionario_principal.php">Informações</a></li>
+                    <li><a href="funcionario">Inicio</a></li>
+                    <li><a href="funcionario">Informações</a></li>
                     <li><a href="listarprodutos">Produtos</a></li>
-                    <li><a href="tela_funcionario_responsaveis.php">Responsaveis</a></li>
-                    <li><a href="tela_funcionario_alunos.php">Aluno</a></li>
+                    <li><a href="responsaveis">Responsaveis</a></li>
+                    <li><a href="alunos">Aluno</a></li>
                     <li><a href="login.php">Sair</a></li>
                 </ul>
             </div>

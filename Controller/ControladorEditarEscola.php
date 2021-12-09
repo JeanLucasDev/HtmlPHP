@@ -15,7 +15,7 @@
             $this->escola->setPhone($_POST['phone']);
             $this->escola->setendereco($_POST['location']);
             $this->escola->editarEscola();
-            header('Location: tela_escola_principal.php');
+            require "View/tela_escola_principal.php";
         }
     }
 ?>

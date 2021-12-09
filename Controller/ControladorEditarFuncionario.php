@@ -16,7 +16,7 @@
             $this->func->setPhone($_POST['phone']);
             $this->func->setcpf($_POST['cpf']);
             $this->func->editarFuncionario();
-            header('Location: tela_escola_principal.php');
+            require "View/tela_escola_principal.php";
         }
     }
 ?>

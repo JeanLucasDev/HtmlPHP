@@ -11,7 +11,7 @@
         public function processaRequisicao(){
             $this->aln->setid($_POST['id']);
             $this->aln->removerAluno();
-            header('Location: tela_responsavel_principal.php');
+            require "View/tela_responsavel_meus_filhos.php";
 
         }
     }

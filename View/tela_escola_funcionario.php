@@ -2,6 +2,14 @@
 if($_SESSION['logged'] == false || $_SESSION['type'] != 'E'){
     header('Location: Restrict');
 }
+else{
+    if (isset($_GET['logout']) && $_GET['logout'] == 1){
+        $_SESSION = array();
+        $_SESSIONG['logged'] = false;
+        session_destroy();
+        header('Location: index.php');
+    }
+}
 ?>
 <!doctype html>
 <html lang="pt-br">
@@ -27,12 +35,12 @@ if($_SESSION['logged'] == false || $_SESSION['type'] != 'E'){
 <body style="background: #101010;">
     <header>
         <div class="menu_desktop">
-            <a href="tela_escola_principal.php">
+            <a href="escola">
                 <img src="img/logo_menu.png" class="Logo" alt="Logotipo da nossa empresa">
             </a>
             <ul>
-                <li><a href="tela_escola_principal.php">Inicio</a></li>
-                <li><a href="tela_escola_principal.php">Informações</a></li>
+                <li><a href="escola">Inicio</a></li>
+                <li><a href="escola">Informações</a></li>
                 <li><a href="listarFuncionarios">Meus funcionarios</a></li>
                 <li><a href="logout" >Sair</a>
             </ul>
@@ -41,12 +49,12 @@ if($_SESSION['logged'] == false || $_SESSION['type'] != 'E'){
             <i class="fa fa-bars" id="open_menu"></i>
             <div class="mobile">
                 <i class="fas fa-times" id="exit_menu"></i>
-                <a href="tela_escola_principal.php">
+                <a href="escola">
                     <img src="img/logo_menu.png" class="Logo" alt="Logotipo da nossa empresa">
                 </a>
                 <ul>
-                    <li><a href="tela_escola_principal.php">Inicio</a></li>
-                    <li><a href="tela_escola_principal.php">Informações</a></li>
+                    <li><a href="escola">Inicio</a></li>
+                    <li><a href="escola">Informações</a></li>
                     <li><a href="listarFuncionarios">Meus funcionarios</a></li>
                     <li><a href="logout" >Sair</a>    
                     </li>
@@ -74,7 +82,7 @@ if($_SESSION['logged'] == false || $_SESSION['type'] != 'E'){
                                                 </p>
                                                 <form method="post" action="editarFuncionario">
                                                     <input type="hidden" name="id" value= <?php echo $listaFuncionarios[$i]->getId();?>>
-                                                    <button type="submit" class="btn btn-light" formaction="editar_funcionario.php">Editar</button>
+                                                    <button type="submit" class="btn btn-light" formaction="editFuncionario">Editar</button>
                                                 </form>
                                             </div>
                                         </div>

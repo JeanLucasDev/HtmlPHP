@@ -15,7 +15,7 @@
             $this->responsavel->setEmail($_POST['email']);
             $this->responsavel->setPhone($_POST['phone']);
             $this->responsavel->incluirResponsavel();
-            header('Location: tela_funcionario_principal.php');
+            require "View/tela_funcionario_principal.php";
         }
         
     }

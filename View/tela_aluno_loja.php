@@ -2,6 +2,14 @@
 if($_SESSION['logged'] == false || $_SESSION['type'] != 'A'){
     header('Location: Restrict');
 }
+else{
+    if (isset($_GET['logout']) && $_GET['logout'] == 1){
+        $_SESSION = array();
+        $_SESSIONG['logged'] = false;
+        session_destroy();
+        header('Location: index.php');
+    }
+}
 ?>
 <!doctype html>
 <html lang="pt-br">
@@ -26,12 +34,12 @@ if($_SESSION['logged'] == false || $_SESSION['type'] != 'A'){
 <body style="background: #101010;">
     <header>
         <div class="menu_desktop">
-            <a href="tela_aluno_principal.php">
+            <a href="aluno">
                 <img src="img/logo_menu.png" class="Logo" alt="Logotipo da nossa empresa">
             </a>
             <ul>
-                <li><a href="tela_aluno_principal.php">Inicio</a></li>
-                <li><a href="tela_aluno_principal.php">Informações</a></li>
+                <li><a href="aluno">Inicio</a></li>
+                <li><a href="aluno">Informações</a></li>
                 <li><a href="listarLoja">Loja</a></li>
                 <li><a href="tela_aluno_historico.php">Historicos</a></li>
                 <li><a href="carrinho"><i class="fas fa-shopping-cart"></i></a></li>
@@ -42,12 +50,12 @@ if($_SESSION['logged'] == false || $_SESSION['type'] != 'A'){
             <i class="fa fa-bars" id="open_menu"></i>
             <div class="mobile">
                 <i class="fas fa-times" id="exit_menu"></i>
-                <a href="tela_aluno_principal.php">
+                <a href="aluno">
                     <img src="img/logo_menu.png" class="Logo" alt="Logotipo da nossa empresa">
                 </a>
                 <ul>
-                    <li><a href="index.php">Inicio</a></li>
-                    <li><a href="tela_aluno_principal.php">Informações</a></li>
+                    <li><a href="aluno">Inicio</a></li>
+                    <li><a href="aluno">Informações</a></li>
                     <li><a href="listarLoja">Loja</a></li>
                     <li><a href="tela_aluno_historico.php">Historicos</a></li>
                     <li><a href="carrinho"><i class="fas fa-shopping-cart"></i></a></li>

@@ -9,12 +9,10 @@
         }
 
         public function processaRequisicao(){
-            echo "entrou aqui";
             echo "Codigo: ".$_POST['codigo'];
             $this->prdt->setcodigo($_POST['codigo']);
             $this->prdt->removerProduto();
             require "View/produto_remove.php";
-
         }
     }
 ?>

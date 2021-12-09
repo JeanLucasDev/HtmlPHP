@@ -35,15 +35,15 @@ else{
 <body style="background: #101010;">
     <header>
         <div class="menu_desktop">
-            <a href="tela_funcionario_principal.php">
+            <a href="funcionario">
                 <img src="img/logo_menu.png" class="Logo" alt="Logotipo da nossa empresa">
             </a>
             <ul>
-                <li><a href="tela_funcionario_principal.php">Inicio</a></li>
-                <li><a href="tela_funcionario_principal.php">Informações</a></li>
+                <li><a href="funcionario">Inicio</a></li>
+                <li><a href="funcionario">Informações</a></li>
                 <li><a href="listarprodutos">Produtos</a></li>
-                <li><a href="tela_funcionario_responsaveis.php">Responsaveis</a></li>
-                <li><a href="tela_funcionario_alunos.php">Aluno</a></li>
+                <li><a href="responsaveis">Responsaveis</a></li>
+                <li><a href="alunos">Aluno</a></li>
                 <li><a href="logout" >Sair</a>
             </ul>
         </div>
@@ -51,15 +51,15 @@ else{
             <i class="fa fa-bars" id="open_menu"></i>
             <div class="mobile">
                 <i class="fas fa-times" id="exit_menu"></i>
-                <a href="tela_funcionario_principal.php">
+                <a href="funcionario">
                     <img src="img/logo_menu.png" class="Logo" alt="Logotipo da nossa empresa">
                 </a>
                 <ul>
-                    <li><a href="tela_funcionario_principal.php">Inicio</a></li>
-                    <li><a href="tela_funcionario_principal.php">Informações</a></li>
+                    <li><a href="funcionario">Inicio</a></li>
+                    <li><a href="funcionario">Informações</a></li>
                     <li><a href="listarprodutos">Produtos</a></li>
-                    <li><a href="pageResp">Responsaveis</a></li>
-                    <li><a href="tela_funcionario_alunos.php">Aluno</a></li>
+                    <li><a href="responsaveis">Responsaveis</a></li>
+                    <li><a href="alunos">Aluno</a></li>
                     <li><a href="logout" >Sair</a>
                 </ul>
             </div>
@@ -111,7 +111,7 @@ else{
                             </div>
                             <div style="margin: 0 auto;" class="col-md-3">
                                 <a style="color: #e1e1e1;" href="produto_desbloquear.php">
-                                    <p class="text-center" style="font-size:1.5rem">Desbloquear</p>
+                                    <p class="text-center" style="font-size:1.5rem">Bloquear/Desbloquear</p>
                                     <img src="img/desbloquear.png" class="card-img-top" alt="...">
                                 </a>
                             </div>

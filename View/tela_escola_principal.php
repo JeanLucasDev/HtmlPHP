@@ -1,7 +1,14 @@
 <?php
-session_start();
-if($_SESSION['logged'] == false || $_SESSION['type'] != 'E'){
+if($_SESSION['logged'] == false || $_SESSION['type'] != 'F'){
     header('Location: Restrict');
+}
+else{
+    if (isset($_GET['logout']) && $_GET['logout'] == 1){
+        $_SESSION = array();
+        $_SESSIONG['logged'] = false;
+        session_destroy();
+        header('Location: index.php');
+    }
 }
 ?>
 <!doctype html>
@@ -26,12 +33,12 @@ if($_SESSION['logged'] == false || $_SESSION['type'] != 'E'){
   <body style="background: #101010;">
      <header>
         <div class="menu_desktop">
-            <a href="tela_escola_principal.php">
+            <a href="escola">
                 <img src="img/logo_menu.png" class="Logo" alt="Logotipo da nossa empresa">
             </a>
             <ul>
-                <li><a href="tela_escola_principal.php">Inicio</a></li>
-                <li><a href="tela_escola_principal.php">Informações</a></li>
+                <li><a href="escola">Inicio</a></li>
+                <li><a href="escola">Informações</a></li>
                 <li><a href="listarFuncionarios">Meus funcionarios</a></li>
                 <li><a href="logout" >Sair</a>
             </ul>
@@ -40,13 +47,13 @@ if($_SESSION['logged'] == false || $_SESSION['type'] != 'E'){
             <i class="fa fa-bars" id="open_menu"></i>
             <div class="mobile">
                 <i class="fas fa-times" id="exit_menu"></i>
-                <a href="tela_escola_principal.php">
+                <a href="escola">
                     <img src="img/logo_menu.png" class="Logo" alt="Logotipo da nossa empresa">
                 </a>
                 <ul>
-                    <li><a href="tela_escola_principal.php">Inicio</a></li>
-                    <li><a href="tela_escola_principal.php">Informações</a></li>
-                    <li><a href="tela_escola_funcionario">Meus funcionarios</a></li>
+                    <li><a href="escola">Inicio</a></li>
+                    <li><a href="escola">Informações</a></li>
+                    <li><a href="listarFuncionarios">Meus funcionarios</a></li>
                     <li><a href="logout" >Sair</a>
                 </ul>
             </div>
@@ -69,7 +76,7 @@ if($_SESSION['logged'] == false || $_SESSION['type'] != 'E'){
                             <p>Telefone: <?php echo $_SESSION['phone']?></p>
                             <p>Localização: <?php echo $_SESSION['location']?></p>
                         </div>
-                        <a href="editar_escola.php" style="color:#e1e1e1;font-size:1.5rem">Editar cadastro da escola</a>
+                        <a href="editEscola" style="color:#e1e1e1;font-size:1.5rem">Editar cadastro da escola</a>
                     </div>                      
                 </div>
             </div>

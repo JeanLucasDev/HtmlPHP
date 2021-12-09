@@ -26,12 +26,12 @@ if($_SESSION['logged'] == false || $_SESSION['type'] != 'R'){
 <body style="background: #101010;">
     <header>
         <div class="menu_desktop">
-            <a href="tela_responsavel_principal.php">
+            <a href="responsavel">
                 <img src="img/logo_menu.png" class="Logo" alt="Logotipo da nossa empresa">
             </a>
             <ul>
-                <li><a href="tela_responsavel_principal.php">Inicio</a></li>
-                <li><a href="tela_responsavel_principal.php">Informações</a></li>
+                <li><a href="responsavel">Inicio</a></li>
+                <li><a href="responsavel">Informações</a></li>
                 <li><a href="listarAlunos">Filhos</a></li>
                 <li><a href="tela_responsavel_historico.php">Historicos</a></li>
                 <li><a href="logout" >Sair</a>
@@ -41,12 +41,12 @@ if($_SESSION['logged'] == false || $_SESSION['type'] != 'R'){
             <i class="fa fa-bars" id="open_menu"></i>
             <div class="mobile">
                 <i class="fas fa-times" id="exit_menu"></i>
-                <a href="tela_responsavel_principal.php">
+                <a href="responsavel">
                     <img src="img/logo_menu.png" class="Logo" alt="Logotipo da nossa empresa">
                 </a>
                 <ul>
-                    <li><a href="tela_responsavel_principal.php">Inicio</a></li>
-                    <li><a href="tela_responsavel_principal.php">Informações</a></li>
+                    <li><a href="responsavel">Inicio</a></li>
+                    <li><a href="responsavel">Informações</a></li>
                     <li><a href="listarAlunos">Filhos</a></li>
                     <li><a href="tela_responsavel_historico.php">Historicos</a></li>
                     <li><a href="logout" >Sair</a>

@@ -4,6 +4,45 @@
         $url = strtoupper($_GET['url']);
         echo "url= ".$url;
         switch($url){
+            case "VIEW/ESCOLA":
+                require "Controller/ControladorEscola.php";    
+                $controlador = new ControladorEscola();
+                $controlador->processaRequisicao();
+                break;
+            case "VIEW/EDITESCOLA":
+                require "Controller/ControladorEditEscola.php";    
+                $controlador = new ControladorEditEscola();
+                $controlador->processaRequisicao();
+                break;
+            case "VIEW/EDITFUNCIONARIO":
+                require "Controller/ControladorEditFuncionario.php";    
+                $controlador = new ControladorEditFuncionario();
+                $controlador->processaRequisicao();
+                break;
+            case "VIEW/ALUNO":
+                require "Controller/ControladorAluno.php";    
+                $controlador = new ControladorAluno();
+                $controlador->processaRequisicao();
+                break;
+            case "VIEW/FUNCIONARIO":
+                require "Controller/ControladorFuncionario.php";    
+                $controlador = new ControladorFuncionario();
+                $controlador->processaRequisicao();
+                break;
+            case "VIEW/RESPONSAVEIS":
+                require_once "View/tela_funcionario_responsaveis.php";    
+                break;
+            case "VIEW/ALUNOS":
+                require_once "View/tela_funcionario_alunos.php";    
+                break;
+
+            case "VIEW/RESPONSAVEL":
+                require "Controller/ControladorResponsavel.php";    
+                $controlador = new ControladorResponsavel();
+                $controlador->processaRequisicao();
+                break;
+
+
             case "VIEW/INCLUIRESCOLA":
                 require "Controller/ControladorNovaEscola.php";    
                 $controlador = new ControladorNovaEscola();
@@ -102,6 +141,10 @@
                 $controlador = new ControladorAddSaldo();
                 $controlador->processaRequisicao();
                 break; 
+                
+            case "VIEW/SALDO":
+                require_once "View/tela_responsavel_add_saldo.php";    
+                break;
 
             
 

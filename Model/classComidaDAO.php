@@ -3,7 +3,6 @@ require_once "Conexao.php";
 class classComidaDAO{
 
 
-
     public function incluirComida($cmd){
         echo "Testando".$_SESSION['id'];
         try{    
@@ -41,10 +40,9 @@ class classComidaDAO{
                 $price = $cmd->getpreco();
                 $blocked = true;
                 $idSchool = $idEscola['idSchool'];
-                echo "ID ESCOLA: ".$idSchool;
                 $sql3->execute();
                 $last_id = $minhaConexao->lastInsertId();
-                echo "Aaaaaaaaaaaaaaa ".$idSchool;
+                echo "LAST ID: ".$last_id;
                 $imagem = $cmd->getfoto();  
                 if($imagem != NULL) {
                   echo "entrou no if da imagem !=null";
@@ -69,19 +67,21 @@ class classComidaDAO{
 
                 echo "Last id: ".$last_id;
                 echo "CHEGOU ATE AQUI 2";
-                $sql4 = $minhaConexao->prepare(" select product.id from bd_cantinaon.school inner join bd_cantinaon.user inner join bd_cantinaon.parents inner join bd_cantinaon.product on parents.idUser = user.id where product.id = :idUser;");
+                $sql4 = $minhaConexao->prepare("select * from bd_cantinaon.school inner join bd_cantinaon.employee on employee.idSchool = school.id inner join bd_cantinaon.product on product.idSchool = school.id where product.id = :idUser;");
                 $sql4->bindParam("idUser",$idUser);
                 echo "ID: ".$last_id;
                 $idUser = $last_id;
                 $sql4->execute();
                 echo "CHEGOU ATE AQUI 3";
                 $idProduct = $sql4->fetch();
+                echo "CHEGOU ATE AQUI 4";
                 $sql = $minhaConexao->prepare("insert into bd_cantinaon.food (idProduct, ingredients) values (:idProduct, :ingredients);");
                 $sql->bindParam("idProduct",$idProduto);
                 $sql->bindParam("ingredients",$ingredients);
                 $ingredients = $cmd->getingredientes();
                 $idProduto = $idProduct['id'];
                 $sql->execute();
+                echo "ID DO PRODUTO: ".$idProduto;
                 return $id;
             }
          }
@@ -90,101 +90,58 @@ class classComidaDAO{
              return 0;
          }
      }
-
-     public function loginAluno($aln){
-        try{
-            $minhaConexao = Conexao::getConexao();
-            $sql = $minhaConexao->prepare("select * from bd_cantinaon.user where login =:login and password =:password and type =:type ");
-            $sql->bindParam("login",$login);
-            $sql->bindParam("password",$password);
-            $sql->bindParam("type",$type);
-            $login = $aln->getLogin();
-            $password = $aln->getPassword();
-            $type = 'A';
-            $sql->execute();
-            $res = $sql->rowcount();
-            if($res > 0){
-                $_SESSION['login'] = $login;
-                $_SESSION['password'] = $password;
-                header('location:tela_aluno_principal.php');
-            }
-            else{
-                unset ($_SESSION['login']);
-                unset ($_SESSION['password']);
-                header('location:login.php');
-            }
-        }
-        catch(PDOException $e){
-          return 0;
-        }
- 
-    }    
+   
 
     public function editarComida($cmd){
         try{
             $minhaConexao = Conexao::getConexao();
-            $sql = $minhaConexao->prepare("update bd_cantinaon.product set name=:name,code=:code, price=:price, photo=:photo where product.id=:id;
+            $sql = $minhaConexao->prepare("update bd_cantinaon.product set name=:name,code=:code, price=:price where product.id=:id;
             update bd_cantinaon.food set ingredients=:ingredients where food.idProduct =: id;");
             $sql->bindParam("id",$id);
             $sql->bindParam("name",$name);
             $sql->bindParam("code",$codigo);
             $sql->bindParam("price",$preco);
             $sql->bindParam("ingredients",$ingredientes);
-            $sql->bindParam("photo",$arquivo);
             $id =  $cmd->getId();
             $name = $cmd->getnome();
             $codigo = $cmd->getcodigo();
             $preco = $cmd->getpreco();
             $ingredientes = $cmd->getingredientes();
-            $arquivo = $cmd->getfoto();
+            $sql->execute(); 
+            $sql = $minhaConexao->prepare("select product.id from bd_cantinaon.food inner join bd_cantinaon.product on food.idProduct = product.id where food.idProduct = :id");
+            $sql->bindParam("id",$id);
+            $id = $cmd->getId();
             $sql->execute();
+            $idProduct = $sql->fetch();
+            $imagem = $cmd->getfoto(); 
+            $last_id = $idProduct['id'];
+            echo "ID: ".$last_id;
+            echo "ID FOOD: ".$cmd->getId();
+            if($imagem != NULL) {
+                echo "entrou no if da imagem !=null";
+               //defini o nome do novo arquivo, que será o id gerado para o livro
+               $nomeFinal = $last_id.'.jpg';
+               //move o arquivo para a pasta atual com esse novo nome
+               if (move_uploaded_file($imagem['tmp_name'], $nomeFinal)) {
+                   echo "Copiou a imagem";
+                   echo "Nome final: ".$nomeFinal;
+                   echo "ID PRODUTO: ".$last_id;
+                   echo "NOME: ".$imagem['tmp_name'];
+
+                 //atualiza o banco de dados para guardar o nome do arquivo gerado.
+                  $sql = $minhaConexao->prepare("update bd_cantinaon.product set photo = :photo where id=:id");
+                  $sql->bindParam("photo",$nomeFinal);
+                  $sql->bindParam("id",$last_id);
+                  $sql->execute();
+                  echo "atulizou o nome da imagem no bd";
+                  
+                }
+              }
          }
          catch(PDOException $e){
              //echo "entrou no catch".$e->getmessage();
          }
      }
-
-    public function excluirLivro($aln){
-        try{
-            $minhaConexao = Conexao::getConexao();
-            $sql = $minhaConexao->prepare("delete from bd_cantinaon.student where codigo=:codigo");
-            $sql->bindParam("codigo",$codigo);
-            $codigo = $aln->getCodigo();
-            $sql->execute();
-            
-         }
-         catch(PDOException $e){
-             echo "entrou no catch".$e->getmessage();
-             exit();
-         }
-     }
-
-
-
-     public function AddSaldo($aln){
-        try{
-            echo "QTD = ".$_POST['qtd'];
-            echo "ID = ".$aln->getId();
-            echo "SALDO = ".$aln->getsaldo();
-            $minhaConexao = Conexao::getConexao();
-            $sql = $minhaConexao->prepare("update bd_cantinaon.student set balance=:balance where id=:id;");
-            $sql->bindParam("id",$id);
-            $sql->bindParam("balance",$balance);
-            $id = $aln->getId(); 
-            $aln->setSaldo($aln->getsaldo() + $_POST['qtd']);
-            $balance =
-            $sql->execute();
-            echo "QTD = ".$_POST['qtd'];
-            echo "ID = ".$aln->getId();
-            echo "BALANCE: ".$balance;
-            return $balance;
-        }
-        catch(PDOException $e){
-          return 0;
-        }
-    }
-     
-
 
 }
 

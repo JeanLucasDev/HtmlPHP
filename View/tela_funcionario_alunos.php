@@ -1,16 +1,15 @@
 <?php
-session_start();
-if($_SESSION['logged'] == false || $_SESSION['type'] != 'F'){
+   if($_SESSION['logged'] == false || $_SESSION['type'] != 'F'){
     header('Location: Restrict');
-}
-else{
-    if (isset($_GET['logout']) && $_GET['logout'] == 1){
-        $_SESSION = array();
-        $_SESSIONG['logged'] = false;
-        session_destroy();
-        header('Location: index.php');
     }
-}
+    else{
+        if (isset($_GET['logout']) && $_GET['logout'] == 1){
+            $_SESSION = array();
+            $_SESSIONG['logged'] = false;
+            session_destroy();
+            header('Location: index.php');
+        }
+    }
 ?>
 <!doctype html>
 <html lang="pt-br">
@@ -36,15 +35,15 @@ else{
 <body style="background: #101010;">
     <header>
         <div class="menu_desktop">
-            <a href="tela_funcionario_principal.php">
+            <a href="funcionario">
                 <img src="img/logo_menu.png" class="Logo" alt="Logotipo da nossa empresa">
             </a>
             <ul>
-                <li><a href="tela_funcionario_principal.php">Inicio</a></li>
-                <li><a href="tela_funcionario_principal.php">Informações</a></li>
+                <li><a href="funcionario">Inicio</a></li>
+                <li><a href="funcionario">Informações</a></li>
                 <li><a href="listarprodutos">Produtos</a></li>
-                <li><a href="tela_funcionario_responsaveis.php">Responsaveis</a></li>
-                <li><a href="tela_funcionario_alunos.php">Aluno</a></li>
+                <li><a href="responsaveis">Responsaveis</a></li>
+                <li><a href="alunos">Aluno</a></li>
                 <li><a href="logout" >Sair</a>
             </ul>
         </div>
@@ -52,15 +51,15 @@ else{
             <i class="fa fa-bars" id="open_menu"></i>
             <div class="mobile">
                 <i class="fas fa-times" id="exit_menu"></i>
-                <a href="tela_funcionario_principal.php">
+                <a href="funcionario">
                     <img src="img/logo_menu.png" class="Logo" alt="Logotipo da nossa empresa">
                 </a>
                 <ul>
-                    <li><a href="tela_funcionario_principal.php">Inicio</a></li>
-                    <li><a href="tela_funcionario_principal.php">Informações</a></li>
+                    <li><a href="funcionario">Inicio</a></li>
+                    <li><a href="funcionario">Informações</a></li>
                     <li><a href="listarprodutos">Produtos</a></li>
-                    <li><a href="pesquisarResponsavel">Responsaveis</a></li>
-                    <li><a href="tela_funcionario_alunos.php">Aluno</a></li>
+                    <li><a href="responsaveis">Responsaveis</a></li>
+                    <li><a href="alunos">Aluno</a></li>
                     <li><a href="logout" >Sair</a>
                 </ul>
             </div>
@@ -85,6 +84,11 @@ else{
                 </div>
                 <div class="container">
                 <?php if (isset($aluno)) { ?>
+                    <?php if($aluno->getLogin() == NULL){ ?>
+                        <script>
+                                alert("Não Encontrado");
+                        </script>
+                    <?php } else{?> 
                     <div class="row" style=" margin:10vh 0; position:relative; left:57vh;">
                     <div class="col-md-3">
                         <div class="card">
@@ -97,6 +101,7 @@ else{
                         </div>
                     </div>
                     </div>
+                <?php } ?>
                 <?php }  ?>
                 </div>
         </section>

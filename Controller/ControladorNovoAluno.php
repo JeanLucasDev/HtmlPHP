@@ -19,7 +19,7 @@
             $this->aluno->setsaldo(0);
             $this->aluno->incluirAluno();
             $id = $this->aluno->incluirAluno();
-            header('Location: tela_responsavel_principal.php');
+            require "View/tela_responsavel_principal.php";
         }
         
     }
