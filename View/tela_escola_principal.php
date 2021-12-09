@@ -76,7 +76,7 @@ else{
                             <p>Telefone: <?php echo $_SESSION['phone']?></p>
                             <p>Localização: <?php echo $_SESSION['location']?></p>
                         </div>
-                        <a href="editEscola" style="color:#e1e1e1;font-size:1.5rem">Editar cadastro da escola</a>
+                        <a href="editar_escola.php" style="color:#e1e1e1;font-size:1.5rem">Editar cadastro da escola</a>
                     </div>                      
                 </div>
             </div>

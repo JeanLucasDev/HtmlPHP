@@ -2,56 +2,7 @@
 require_once "Conexao.php";
 class classBebidaDAO{
 
-    public function listarAlunos(){
-        //vai ao banco de dados e pega todos os livros
-        try{
-            $minhaConexao = Conexao::getConexao();
-            $sql = $minhaConexao->prepare("select student.id, user.login, student.class,student.registration, student.balance from bd_cantinaon.student inner join bd_cantinaon.user on user.id = student.idUser inner join bd_cantinaon.parents on parents.id = student.idParents where parents.idUser = :idUser;");
-            $sql->bindParam("idUser",$idUser);
-            $idUser = $_SESSION['id']; 
-            $sql->execute();
-            $result = $sql->setFetchMode(PDO::FETCH_ASSOC);
-            $listaAln=array();
-            $i=0;
-            while ($linha = $sql->fetch(PDO::FETCH_ASSOC) ) {
-                $aln = new classAluno();
-                $aln->setId($linha['id']);
-                $aln->setLogin($linha['login']);
-                $aln->setmatricula($linha['registration']);
-                $aln->setturma($linha['class']);
-                $aln->setsaldo($linha['balance']);
-                $listaAln[$i] = $aln;
-                $i++;
-            }
-            return $listaAln;
-        }
-       catch(PDOException $e){
-        return array();
-       }
-    }
 
-    public function pesquisaLivro($aln){
-        //vai ao banco de dados e pega todos os livros
-        try{
-            $minhaConexao = Conexao::getConexao();
-            $sql = $minhaConexao->prepare("select * from bd_cantinaon.student where codigo=:codigo");
-            $sql->bindParam("codigo",$codigo);
-            $codigo = $aln->getCodigo();
-                
-           $sql->execute();
-           $result = $sql->setFetchMode(PDO::FETCH_ASSOC);
-           
-           while ($linha = $sql->fetch(PDO::FETCH_ASSOC)) {
-            $aln->setTitulo($linha['nome']);
-            $aln->setEdicao($linha['edicao']);
-            $aln->setAno($linha['ano']);
-          }
-        
-       }
-       catch(PDOException $e){
-        
-       }
-    }
 
     public function incluirBebida($beb){
         echo "Testando".$_SESSION['id'];
@@ -138,34 +89,6 @@ class classBebidaDAO{
          }
      }
 
-     public function loginAluno($aln){
-        try{
-            $minhaConexao = Conexao::getConexao();
-            $sql = $minhaConexao->prepare("select * from bd_cantinaon.user where login =:login and password =:password and type =:type ");
-            $sql->bindParam("login",$login);
-            $sql->bindParam("password",$password);
-            $sql->bindParam("type",$type);
-            $login = $aln->getLogin();
-            $password = $aln->getPassword();
-            $type = 'A';
-            $sql->execute();
-            $res = $sql->rowcount();
-            if($res > 0){
-                $_SESSION['login'] = $login;
-                $_SESSION['password'] = $password;
-                header('location:tela_aluno_principal.php');
-            }
-            else{
-                unset ($_SESSION['login']);
-                unset ($_SESSION['password']);
-                header('location:login.php');
-            }
-        }
-        catch(PDOException $e){
-          return 0;
-        }
- 
-    }    
 
     public function editarBebida($beb){
         try{

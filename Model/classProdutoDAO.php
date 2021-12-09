@@ -5,6 +5,8 @@ require_once "Model/itemCarrinho.php";
 require_once "Conexao.php";
 
 class classProdutoDAO{
+
+
     public function listarProdutos(){
         //vai ao banco de dados e pega todos os livros
         try{
@@ -131,11 +133,9 @@ class classProdutoDAO{
             $sql->execute(); 
             $res = $sql->rowcount();
             if($res > 0){
-                echo "entrou comida";
                 return 1;
             }
             else{
-                echo "entrou bebida";
                 return 0;
             }            
          }

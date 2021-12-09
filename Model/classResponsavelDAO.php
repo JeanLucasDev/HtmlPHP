@@ -1,34 +1,8 @@
 <?php
 require "Conexao.php";
 class classResponsavelDAO{
-    public function listarTodos(){
-        //vai ao banco de dados e pega todos os livros
-        try{
-            $minhaConexao = Conexao::getConexao();
-            $sql = $minhaConexao->prepare("select * from bd_cantinaon.school ");
-        
 
-           $sql->execute();
-           $result = $sql->setFetchMode(PDO::FETCH_ASSOC);
-           
-           $listaSch=array();
-           $i=0;
 
-           while ($linha = $sql->fetch(PDO::FETCH_ASSOC)) {
-            $escola = new classEscola();
-            $escola->setCodigo($linha['codigo']);
-            $escola->setTitulo($linha['nome']);
-            $escola->setEdicao($linha['edicao']);
-            $escola->setAno($linha['ano']);
-            $listaLiv[$i] = $livro;
-            $i++;
-          }
-        return $listaLiv;
-       }
-       catch(PDOException $e){
-        return array();
-       }
-    }
 
     public function pesquisarResponsavel($resp){
         //vai ao banco de dados e pega todos os livros

@@ -1,4 +1,5 @@
 <?php
+session_start();
 if($_SESSION['logged'] == false || $_SESSION['type'] != 'E'){
     header('Location: Restrict');
 }

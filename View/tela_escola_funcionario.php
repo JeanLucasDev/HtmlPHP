@@ -82,7 +82,7 @@ else{
                                                 </p>
                                                 <form method="post" action="editarFuncionario">
                                                     <input type="hidden" name="id" value= <?php echo $listaFuncionarios[$i]->getId();?>>
-                                                    <button type="submit" class="btn btn-light" formaction="editFuncionario">Editar</button>
+                                                    <button type="submit" class="btn btn-light" formaction="editar_funcionario.php">Editar</button>
                                                 </form>
                                             </div>
                                         </div>

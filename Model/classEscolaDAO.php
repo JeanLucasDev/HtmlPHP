@@ -1,6 +1,8 @@
 <?php
 require_once "Conexao.php";
 class classEscolaDAO{
+
+    
     public function listarEscola(){
         //vai ao banco de dados e pega todos os livros
         echo "entrei aqui";
@@ -27,28 +29,6 @@ class classEscolaDAO{
        }
     }
 
-    public function pesquisaEscola($sch){
-        //vai ao banco de dados e pega todos os livros
-        try{
-            $minhaConexao = Conexao::getConexao();
-            $sql = $minhaConexao->prepare("select * from bd_livraria.livro where codigo=:codigo");
-            $sql->bindParam("codigo",$codigo);
-            $codigo = $liv->getCodigo();
-                
-           $sql->execute();
-           $result = $sql->setFetchMode(PDO::FETCH_ASSOC);
-           
-           while ($linha = $sql->fetch(PDO::FETCH_ASSOC)) {
-            $liv->setTitulo($linha['nome']);
-            $liv->setEdicao($linha['edicao']);
-            $liv->setAno($linha['ano']);
-          }
-        
-       }
-       catch(PDOException $e){
-        
-       }
-    }
 
     public function incluirEscola($sch){
        try{
@@ -118,29 +98,10 @@ class classEscolaDAO{
             $_SESSION['location'] = $location;
          }
          catch(PDOException $e){
-             echo "entrou no catch".$e->getmessage();
+             //echo "entrou no catch".$e->getmessage();
             
          }
      }
-
-
-    public function excluirLivro($liv){
-        try{
-            $minhaConexao = Conexao::getConexao();
-            $sql = $minhaConexao->prepare("delete from bd_livraria.livro where codigo=:codigo");
-            $sql->bindParam("codigo",$codigo);
-            $codigo = $liv->getCodigo();
-            
-            $sql->execute();
-            
-         }
-         catch(PDOException $e){
-             echo "entrou no catch".$e->getmessage();
-             exit();
-         }
-     }
-     
-
 
 }
 

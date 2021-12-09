@@ -32,7 +32,7 @@ else{
 <body>
   <main>
     <form name="cadastro_responsavel" method="post" class="form-validation" action="incluirResponsavel">
-      <p class="text-center"><a href="tela_funcionario_principal.php"><img src="img/logo_menu.png" alt="" style="height: 100%; width: 100%; max-width: 200px; max-height: 200px; margin-left: auto; margin-right: auto;"></a></p>
+      <p class="text-center"><a href="funcionario"><img src="img/logo_menu.png" alt="" style="height: 100%; width: 100%; max-width: 200px; max-height: 200px; margin-left: auto; margin-right: auto;"></a></p>
         <h2 style="text-align: center;">
         Cadastro Responsavel
       </h2>

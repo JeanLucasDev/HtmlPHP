@@ -1,6 +1,9 @@
 <?php
 require_once "Conexao.php";
 class classUsuarioDAO{
+
+
+
     public function listarTodos(){
         //vai ao banco de dados e pega todos os livros
         try{
@@ -30,6 +33,8 @@ class classUsuarioDAO{
        }
     }
 
+
+
     public function pesquisarUsuario($usr){
         //vai ao banco de dados e pega todos os livros
         try{
@@ -48,6 +53,8 @@ class classUsuarioDAO{
             echo "entrou no catch".$e->getmessage();
         }
     }
+
+
 
     public function incluirResponsavel($rsp){
         try{
@@ -83,6 +90,8 @@ class classUsuarioDAO{
              return 0;
          }
      }
+
+
 
      public function loginUsuario($usr){
         try{

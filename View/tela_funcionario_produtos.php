@@ -84,7 +84,7 @@ else{
                                 </p>
                                 <form method="POST" action="">
                                     <input type="hidden" name="id" value= <?php echo $listaPrdt[$i]->getId();?>>
-                                    <button class="btn btn-light" formaction='editarProdutos'>Editar</button>
+                                    <button class="btn btn-light" formaction="editarProdutos">Editar</button>
                                 </form>                            
                             </div>
                         </div>

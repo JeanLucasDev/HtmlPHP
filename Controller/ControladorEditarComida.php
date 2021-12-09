@@ -16,7 +16,7 @@
             $this->food->setingredientes($_POST['ingredientes']);
             $this->food->setfoto($_FILES["imagem"]);
             $this->food->editarComida();
-            //require "View/tela_funcionario_principal.php";
+            require "View/tela_funcionario_principal.php";
         }
     }
 ?>

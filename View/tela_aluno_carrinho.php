@@ -102,7 +102,7 @@ else{
                             <form name="form_action" method="post" action="" >
                                 <input type="hidden" id="saldo" name="saldo" value="<?php echo floatval(number_format($_SESSION['balance'],10,'.',',')); ?>">
                                 <input type="hidden" id="qtd" name="qtd" value="<?php echo floatval(number_format($carrinho->getTotal(),10,'.',',')); ?> ">
-                                <h4> Total: <?php echo number_format($carrinho->getTotal(),2,',','.'); ?> </h4>
+                                <h4 style="color:#ffff"> Total: <?php echo number_format($carrinho->getTotal(),2,',','.'); ?> </h4>
                                 <button type="submit" class="btn btn-success" style="margin:4px" onclick="funcao1()"> Confirmar compra</button>
                             </form>
                             <script>

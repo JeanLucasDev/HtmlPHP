@@ -1,3 +1,16 @@
+<?php
+if($_SESSION['logged'] == false || $_SESSION['type'] != 'F'){
+    header('Location: Restrict');
+}
+else{
+    if (isset($_GET['logout']) && $_GET['logout'] == 1){
+        $_SESSION = array();
+        $_SESSIONG['logged'] = false;
+        session_destroy();
+        header('Location: index.php');
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -18,7 +31,7 @@
 <body>
   <main>
     <form action="editarComida" method="POST" class="form-validation" id="form-validation" enctype="multipart/form-data">
-      <p class="text-center"><a href="tela_funcionario_principal.php"><img src="img/logo_menu.png" alt="" style="height: 100%; width: 100%; max-width: 200px; max-height: 200px; margin-left: auto; margin-right: auto;"></a></p>
+      <p class="text-center"><a href="funcionario"><img src="img/logo_menu.png" alt="" style="height: 100%; width: 100%; max-width: 200px; max-height: 200px; margin-left: auto; margin-right: auto;"></a></p>
         <h2 style="text-align: center;">
         Editar Comida
       </h2>
